@@ -371,7 +371,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def monthlycost_f_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية  للطابق الول: {float(parsed_data['monthlycost_f'])} جنيه\n"
+                f"التكلفة الشهرية  للطابق الاول: {float(parsed_data['monthlycost_f'])} جنيه\n"
             )
 
         @staticmethod
@@ -521,25 +521,25 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def gen1_object_feed1_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الاول للمولد رقم 1: {parsed_data['gen1_object_feed1']}كيلو وات\n"
+                f"التغذية الكربائيه للدور الاول للمولد رقم 1: {parsed_data['gen1_object_feed1']} كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen1_object_feed2_info(parsed_data: dict) -> str:
             return (
-                f"لتغذية الكربائيه للدور الثاني للمولد رقم 1: {parsed_data['gen1_object_feed2']}\n"
+                f"لتغذية الكربائيه للدور الثاني للمولد رقم 1: {parsed_data['gen1_object_feed2']}كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen1_object_feed3_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الثالث للمولد رقم 1: {parsed_data['gen1_object_feed3']}\n"
+                f"التغذية الكربائيه للدور الثالث للمولد رقم 1: {parsed_data['gen1_object_feed3']}كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen1_rated_feed_info(parsed_data: dict) -> str:
             return (
-                f"التغذية المقدرة للمولد رقم 1: {parsed_data['gen1_rated_feed']}\n"
+                f"التغذية المقدرة للمولد رقم 1: {parsed_data['gen1_rated_feed']}كيلووات ساعه\n"
             )
 
         @staticmethod
@@ -728,8 +728,6 @@ class SuezMedicalComplexConfigurator(object):
                 f"عدد ساعات صيانة المبرد رقم 4: {float(parsed_data['chiller4_maintenance_hours'])} ساعات\n"
             )
         
-
-
         @staticmethod
         def daily_index_info(parsed_data: dict) -> str:
             return (
@@ -751,13 +749,13 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def random_MVSG_2_energy_info(parsed_data: dict) -> str:
             return (
-                f"طاقة MVSG 2 العشوائية: {float(parsed_data['random_MVSG_2_energy'])} \n"
+                f"العشوائيه MVSG 2 طاقه: {float(parsed_data['random_MVSG_2_energy'])}كيلووات ساعه  \n"
             )
 
         @staticmethod
         def random_MVSG_3_energy(parsed_data: dict) -> str:
             return (
-                f"طاقة MVSG 3 العشوائية: {float(parsed_data['random_MVSG_3_energy'])} \n"
+                f"العشوائيه  MVSG 3 طاقه: {float(parsed_data['random_MVSG_3_energy'])} كيلووات ساعه\n"
             )
 
         @staticmethod
@@ -817,25 +815,25 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def gen2_object_feed1_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الاول للمولد رقم 2: {parsed_data['gen2_object_feed1']}كيلو وات\n"
+                f"التغذية الكربائيه للدور الاول للمولد رقم 2: {parsed_data['gen2_object_feed1']}كيلووات ساعه \n"
             )
 
         @staticmethod
         def gen2_object_feed2_info(parsed_data: dict) -> str:
             return (
-                f"لتغذية الكربائيه للدور الثاني للمولد رقم 2: {parsed_data['gen2_object_feed2']}\n"
+                f"لتغذية الكربائيه للدور الثاني للمولد رقم 2: {parsed_data['gen2_object_feed2']}كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen2_object_feed3_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الثالث للمولد رقم 2: {parsed_data['gen2_object_feed3']}\n"
+                f"التغذية الكربائيه للدور الثالث للمولد رقم 2: {parsed_data['gen2_object_feed3']}كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen2_rated_feedv(parsed_data: dict) -> str:
             return (
-                f"التغذية المقدرة للمولد رقم 2: {parsed_data['gen2_rated_feed']}\n"
+                f"التغذية المقدرة للمولد رقم 2: {parsed_data['gen2_rated_feed']}كيلووات ساعه\n"
             )
 
         @staticmethod
@@ -883,7 +881,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def no_of_xrays_month_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأشعة السينية في الشهر: {int(parsed_data['no_of_xrays_month'])} اشعات\n"
+                f"عدد الأشعة السينية في الشهر: {int(parsed_data['no_of_xrays_month'])} اشاعات\n"
             )
 
         @staticmethod
@@ -961,13 +959,13 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def daily_carbon_foot_print_info(parsed_data: dict) -> str:
             return (
-                f"البصمة الكربونية اليومية: {float(parsed_data['daily_carbon_foot_print'])} \n"
+                f"البصمة الكربونية اليومية: {float(parsed_data['daily_carbon_foot_print'])} كيلوجرام /متر مربع\n"
             )
 
         @staticmethod
         def monthly_carbon_foot_print_info(parsed_data: dict) -> str:
             return (
-                f"البصمة الكربونية الشهرية: {float(parsed_data['daily_carbon_foot_print'])} \n"
+                f"البصمة الكربونية الشهرية: {float(parsed_data['daily_carbon_foot_print'])} كيلوجرام / متر مربع\n"
             )
 
                 
