@@ -834,7 +834,6 @@ async def request_handler(stations_data, voice_file):
     os.remove(_)
     return audio_data
 
-
 @app.post("/voice/main")
 async def voice_endpoint(upload_file: UploadFile = File(...), stations_data: str = Form(...)):
     audio_data = await request_handler(stations_data, upload_file) 
@@ -847,4 +846,3 @@ async def voice_endpoint(upload_file: UploadFile = File(...), complex_data: str 
 
 if __name__ == "__main__":
     uvicorn.run("__main__:app", host="0.0.0.0", port=8000, reload=True)
-    
