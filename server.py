@@ -1240,8 +1240,6 @@ suez_medical_complex_classifier = ChainClassifier(
 
 
           
-
-
     ],
     descriptions="""When asked generally about the bed occupancy rate, return 'Beds_Occupancy_Rate'.
                     When asked about the non-Patients usage of beds or Inpatient beds used,
