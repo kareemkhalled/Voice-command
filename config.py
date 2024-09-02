@@ -8,57 +8,57 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def return_Beds_occupancy_rate_info(parsed_data: dict) -> str:
             return (
-                f" معدل اشغال الاسره في المستشفي: {int(float(parsed_data['Beds_Occupancy_Rate']))} في المائة\n"
+                f" معدل اشغال الاسرة في المستشفي: {int(float(parsed_data['Beds_Occupancy_Rate']))} في المائة\n"
             )
         @staticmethod
         def return_Inpatient_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_used']))} اسره\n"
+                f"عدد الاسرة المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_Inpatient_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره غير المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_unused']))} اسره\n"
+                f"عدد الاسرة غير المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_unused']))} اسرة\n"
             )
         @staticmethod
         def return_ICU_CCU_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_used']))} اسره\n"
+                f"عدد الاسرة المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_ICU_CCU_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره الغير المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_unused']))} اسره\n"
+                f"عدد الاسرة الغير المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_unused']))} اسرة\n"
             )
         @staticmethod
         def return_Emergency_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسره الطوارئ المستخدمه: {int(float(parsed_data['Emergency_Beds_used']))} اسره\n"
+                f"عدد اسرة الطوارئ المستخدمه: {int(float(parsed_data['Emergency_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_Emergency_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسره الطوارئ الغير المستخدمه:: {int(float(parsed_data['Emergency_Beds_Unused']))} اسره\n"
+                f"عدد اسرة الطوارئ الغير المستخدمه:: {int(float(parsed_data['Emergency_Beds_Unused']))} اسرة\n"
             )
         @staticmethod
         def return_Incubators_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسره الحضانات المستخدمه: {int(float(parsed_data['Incubators_Beds_used']))} اسره\n"
+                f"عدد اسرة الحضانات المستخدمه: {int(float(parsed_data['Incubators_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_Incubators_Beds_unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسره الحضانات الغير المستخدمه: {int(float(parsed_data['Incubators_Beds_unused']))} اسره\n"
+                f"عدد اسرة الحضانات الغير المستخدمه: {int(float(parsed_data['Incubators_Beds_unused']))} اسرة\n"
             )
         @staticmethod
         def return_Total_Hospital_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد جميع الاسره المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_used']))} اسره\n"
+                f"عدد جميع الاسرة المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_Total_Hospital_Beds_unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد جميع الاسره الغير المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_unused']))} اسره\n"
+                f"عدد جميع الاسرة الغير المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_unused']))} اسرة\n"
             )
         @staticmethod
         def return_monthlycost_sg_info(parsed_data: dict) -> str:
@@ -149,7 +149,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def HVAC_alarm_info(parsed_data: dict) -> str:
             return (
-                f"hvac الكشف عن وجود تنبيه في نظام : {int(float(parsed_data['HVAC_alarm']))} مرات\n"
+                f" الكشف عن وجود تنبيه في نظام التكيف المركزي: {int(float(parsed_data['HVAC_alarm']))} مرات\n"
             )
 
         @staticmethod
@@ -371,7 +371,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def monthlycost_f_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية  للطابق الول: {float(parsed_data['monthlycost_f'])} جنيه\n"
+                f"التكلفة الشهرية  للطابق الاول: {float(parsed_data['monthlycost_f'])} جنيه\n"
             )
 
         @staticmethod
@@ -485,7 +485,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def gen1_solar_info(parsed_data: dict) -> str:
             return (
-                f"مخزون الطاقه الشمسيه للمولد رقم 1: {float(parsed_data['gen1_solar'])} كيلووات\n"
+                f"مخزون السولار  للمولد رقم 1: {float(parsed_data['gen1_solar'])} كيلووات\n"
             )
 
         @staticmethod
@@ -521,25 +521,25 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def gen1_object_feed1_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الاول للمولد رقم 1: {parsed_data['gen1_object_feed1']}كيلو وات\n"
+                f"التغذية الكربائيه  للمولد رقم 1 للطابق الاول: {parsed_data['gen1_object_feed1']} كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen1_object_feed2_info(parsed_data: dict) -> str:
             return (
-                f"لتغذية الكربائيه للدور الثاني للمولد رقم 1: {parsed_data['gen1_object_feed2']}\n"
+                f"التغذية الكربائيه  للمولد رقم 1 للطابق الثاني : {parsed_data['gen1_object_feed2']}كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen1_object_feed3_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الثالث للمولد رقم 1: {parsed_data['gen1_object_feed3']}\n"
+                f"التغذية الكربائيه  للمولد رقم 1 للطابق الثالث: {parsed_data['gen1_object_feed3']}كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen1_rated_feed_info(parsed_data: dict) -> str:
             return (
-                f"التغذية المقدرة للمولد رقم 1: {parsed_data['gen1_rated_feed']}\n"
+                f"التغذية المقدرة للمولد رقم 1: {parsed_data['gen1_rated_feed']}كيلووات ساعه\n"
             )
 
         @staticmethod
@@ -728,8 +728,6 @@ class SuezMedicalComplexConfigurator(object):
                 f"عدد ساعات صيانة المبرد رقم 4: {float(parsed_data['chiller4_maintenance_hours'])} ساعات\n"
             )
         
-
-
         @staticmethod
         def daily_index_info(parsed_data: dict) -> str:
             return (
@@ -751,13 +749,13 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def random_MVSG_2_energy_info(parsed_data: dict) -> str:
             return (
-                f"طاقة MVSG 2 العشوائية: {float(parsed_data['random_MVSG_2_energy'])} \n"
+                f"طاقه المصدر الكهربائي الثاني العشوائيه: {float(parsed_data['random_MVSG_2_energy'])}كيلووات ساعه  \n"
             )
 
         @staticmethod
         def random_MVSG_3_energy(parsed_data: dict) -> str:
             return (
-                f"طاقة MVSG 3 العشوائية: {float(parsed_data['random_MVSG_3_energy'])} \n"
+                f"طاقه المصدر الكهربائي الثالث العشوائيه: {float(parsed_data['random_MVSG_3_energy'])} كيلووات ساعه\n"
             )
 
         @staticmethod
@@ -817,25 +815,25 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def gen2_object_feed1_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الاول للمولد رقم 2: {parsed_data['gen2_object_feed1']}كيلو وات\n"
+                f"التغذية الكربائيه للدور الاول للمولد رقم 2: {parsed_data['gen2_object_feed1']}كيلووات ساعه \n"
             )
 
         @staticmethod
         def gen2_object_feed2_info(parsed_data: dict) -> str:
             return (
-                f"لتغذية الكربائيه للدور الثاني للمولد رقم 2: {parsed_data['gen2_object_feed2']}\n"
+                f"لتغذية الكربائيه للطابق الثاني للمولد رقم 2: {parsed_data['gen2_object_feed2']}كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen2_object_feed3_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الثالث للمولد رقم 2: {parsed_data['gen2_object_feed3']}\n"
+                f"التغذية الكربائيه للطابق الثالث للمولد رقم 2: {parsed_data['gen2_object_feed3']}كيلووات ساعه\n"
             )
 
         @staticmethod
         def gen2_rated_feedv(parsed_data: dict) -> str:
             return (
-                f"التغذية المقدرة للمولد رقم 2: {parsed_data['gen2_rated_feed']}\n"
+                f"التغذية المقدرة للمولد رقم 2: {parsed_data['gen2_rated_feed']}كيلووات ساعه\n"
             )
 
         @staticmethod
@@ -883,55 +881,55 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def no_of_xrays_month_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأشعة السينية في الشهر: {int(parsed_data['no_of_xrays_month'])} اشعات\n"
+                f"عدد الأشعة السينية في الشهر: {int(parsed_data['no_of_xrays_month'])} اشاعات\n"
             )
 
         @staticmethod
         def Inpatient_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_used_monthly'])} اسره\n"
+                f"عدد الأسرة المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_used_monthly'])} اسرة\n"
             )
 
         @staticmethod
         def Inpatient_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_unused_monthly'])}اسره \n"
+                f"عدد الأسرة غير المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_unused_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def ICU_CCU_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره المستخدمه بالعنايه المركزي لمرضي القلب شهرياً: {int(parsed_data['ICU_CCU_Beds_used_monthly'])}اسره \n"
+                f"عدد الاسره المستخدمه بالعنايه المركزي لمرضي القلب شهرياً: {int(parsed_data['ICU_CCU_Beds_used_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def ICU_CCU_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره الغير مستخدمه بالعنايه المركزي لمرضي القلب شهريا: {int(parsed_data['ICU_CCU_Beds_unused_monthly'])} اسره\n"
+                f"عدد الاسره الغير مستخدمه بالعنايه المركزي لمرضي القلب شهريا: {int(parsed_data['ICU_CCU_Beds_unused_monthly'])} اسرة\n"
             )
 
         @staticmethod
         def Emergency_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_used_monthly'])}اسره \n"
+                f"عدد الأسرة المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_used_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def Emergency_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_unused_monthly'])}اسره \n"
+                f"عدد الأسرة غير المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_unused_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def Incubators_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_unused_monthly'])}اسره \n"
+                f"عدد الأسرة غير المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_unused_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def Incubators_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_used_monthly'])}اسره \n"
+                f"عدد الأسرة المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_used_monthly'])}اسرة\n"
             )
 
         @staticmethod
@@ -961,13 +959,22 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def daily_carbon_foot_print_info(parsed_data: dict) -> str:
             return (
-                f"البصمة الكربونية اليومية: {float(parsed_data['daily_carbon_foot_print'])} \n"
+                f"البصمة الكربونية اليومية: {float(parsed_data['daily_carbon_foot_print'])} كيلوجرام /متر مربع\n"
             )
 
         @staticmethod
         def monthly_carbon_foot_print_info(parsed_data: dict) -> str:
             return (
-                f"البصمة الكربونية الشهرية: {float(parsed_data['daily_carbon_foot_print'])} \n"
+                f"البصمة الكربونية الشهرية: {float(parsed_data['daily_carbon_foot_print'])} كيلوجرام / متر مربع\n"
+            )
+        
+        @staticmethod
+        def invoices_information_info(parsed_data: dict) -> str:
+            return (
+                f" معلومات الفواتير الشهريه:\n"
+                f" تكلفه المياه الشهريه  : {int(float(parsed_data['monthly_water_cost']))} جنيها\n"
+                f" تكلفه الاكسجين الشهريه : {int(float(parsed_data['monthly_oxygen_cost']))} جنيها\n\n"
+                f" تكلفه الكهرباء الشهريه  : {int(float(parsed_data['monthlycost_sg']))} جنيها\n\n"
             )
 
                 
@@ -1141,186 +1148,14 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.no_of_pepole_cam4_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.daily_carbon_foot_print_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthly_carbon_foot_print_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.invoices_information_info(parsed_data)
 
 
 
             return report
         
-        def return_station_report(parsed_data: dict) -> str:
-            report =(
-                SuezMedicalComplexConfigurator.Home.return_Beds_occupancy_rate_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_used_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_Unused_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_ICU_CCU_Beds_used_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_ICU_CCU_Beds_Unused_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Emergency_Beds_used_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Emergency_Beds_Unused_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Incubators_Beds_used_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Incubators_Beds_unused_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Total_Hospital_Beds_used_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Total_Hospital_Beds_unused_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_monthlycost_sg_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_monthly_water_cost_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_monthly_oxygen_cost_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.return_Hospital_Occupancy_Rate_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.return_Clinic_Occupancy_Rate_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.Mask_Policy_Violations_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.Social_Distance_Violations_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.NuOF_Detected_Falls_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.transformer_on_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.transformer_Off_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.generator_on_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.generator_off_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.Elevator_on_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthly_total_cost_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.HVAC_alarm_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.medical_gas_alarm_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.fire_fighting_alarm_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.transformer_alarm_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.elevator_alarm_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.F_AHU_ON_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.F_AHU_OFF_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller_on_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller_off_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_MVSG_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.vaccum_press_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.air_4bar_press_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.air_7bar_press_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.oxygen_press_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_MVSG_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_MVSG_incoming2_energy_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_MVSG_incoming3_energy_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_Hospital_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_Clinics_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_Utilities_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_ele_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_chillers_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_AHU_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailyenergy_Boilers_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_MVSG_incoming2_energy_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_MVSG_incoming3_energy_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_Hospital_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_Clinics_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_Utilities_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_ele_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_chillers_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_AHU_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_Boilers_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.dailycost_sg_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.yearlyenergy_MVSG_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.yearlycost_sg_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlycost_g_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlycost_f_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlycost_s_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlycost_th_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlycost_roof_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlycost_Hospital_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlycost_clinic_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlycost_Utilities_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.daily_water_consumption_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthly_water_consumption_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.daily_water_cost_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.yearly_water_consumption_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.yearly_water_cost_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.daily_oxygen_consumption_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthly_oxygen_consumption_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.daily_oxygen_cost_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.yearly_oxygen_consumption_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.yearly_oxygen_cost_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_status_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_engine_runtime_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_solar_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_last_op_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_bv_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_volt_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_curr_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_energy_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_object_feed1_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_object_feed2_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_object_feed3_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_rated_feed_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen1_estimated_feed_time_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller1_status_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller1_supply_temp_info(parsed_data) +
-                # SuezMedicalComplexConfigurator.Home.chiller1_temp_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller2_status_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller2_supply_temp_info(parsed_data) +
-                # SuezMedicalComplexConfigurator.Home.chiller2_temp_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller3_status_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller3_supply_temp_info(parsed_data) +
-                # SuezMedicalComplexConfigurator.Home.chiller3_temp_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller4_status_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller4_supply_temp_info(parsed_data) +
-                # SuezMedicalComplexConfigurator.Home.chiller4_temp_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chillers_op_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller1_op_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller2_op_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller3_op_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller4_op_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller1_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller2_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller3_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller4_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.in_Patients_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.out_Patients_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chillers_sys_operation_cost_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.main_temp_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.main_supply_temp_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller1_maintenance_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller2_maintenance_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller3_maintenance_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.chiller4_maintenance_hours_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.daily_index_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.yearly_index_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.monthly_index_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.random_MVSG_2_energy_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.random_MVSG_3_energy_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.updated_at_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen2_status_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen2_engine_runtime_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen2_solar_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen2_last_op_info(parsed_data) +
-                # SuezMedicalComplexConfigurator.Home.index_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen2_bv_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen2_volt_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen2_curr_info(parsed_data) +
-                SuezMedicalComplexConfigurator.Home.gen2_energy_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.gen2_object_feed1_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.gen2_object_feed2_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.gen2_object_feed3_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.gen2_estimated_feed_time_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.air_4bar_percentage_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.air_7bar_percentage_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.vaccum_percentage_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.oxygen_percentage_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.no_of_surgry_month_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.no_of_dialysis_month_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.no_of_xrays_month_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.Inpatient_Beds_used_monthly_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.Inpatient_Beds_unused_monthly_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.ICU_CCU_Beds_used_monthly_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.ICU_CCU_Beds_unused_monthly_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.Emergency_Beds_used_monthly_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.Emergency_Beds_unused_monthly_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.Incubators_Beds_unused_monthly_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.Incubators_Beds_used_monthly_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.no_of_pepole_cam1_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.no_of_pepole_cam2_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.no_of_pepole_cam3_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.no_of_pepole_cam4_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.daily_carbon_foot_print_info(parsed_data)+
-                SuezMedicalComplexConfigurator.Home.monthly_carbon_foot_print_info(parsed_data)
-
-               
-
-            )
-            return report
        
-                
 
-            
-        
-        
 
 
 class CommonConfigurator(object):

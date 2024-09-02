@@ -389,11 +389,20 @@ suez_medical_complex_classifier = ChainClassifier(
            "vaccum_percentage","oxygen_percentage", "no_of_surgry_month","no_of_dialysis_month", "no_of_xrays_month","Inpatient_Beds_used_monthly","Inpatient_Beds_unused_monthly",
            "ICU_CCU_Beds_used_monthly","ICU_CCU_Beds_unused_monthly","Emergency_Beds_used_monthly","Emergency_Beds_unused_monthly",
            "Incubators_Beds_unused_monthly", "Incubators_Beds_used_monthly", "no_of_pepole_cam1","no_of_pepole_cam2", "no_of_pepole_cam3", "no_of_pepole_cam4",
+ updating2
+           "daily_carbon_foot_print","monthly_carbon_foot_print","invoices_information" 'report', 'zeeta', 'other'
+    
+           
+
+
+        
+
            "daily_carbon_foot_print","monthly_carbon_foot_print",'report', 'zeeta', 'other'
 
 
           
 
+ main
 
     ],
     descriptions="""When asked generally about the bed occupancy rate, return 'Beds_Occupancy_Rate'.
@@ -548,6 +557,9 @@ suez_medical_complex_classifier = ChainClassifier(
                     When asked about number of people seen by camera 4, return 'no_of_pepole_cam4'
                     When asked about daily carbon footprint across the whole complex, return'daily_carbon_foot_print'
                     When asked about Monthly carbon footprint across the whole complex, return'monthly_carbon_foot_print'
+ updating2
+                    when asked about invoices information,return 'invoices_information'
+=======
 
 
 
@@ -555,6 +567,7 @@ suez_medical_complex_classifier = ChainClassifier(
 
 
 
+ main
                     Return 'report' when asked about a report about the The complex information.
                     """,
     llm=ChatOpenAI,
@@ -727,9 +740,13 @@ suez_medical_complex_mapper = {
     'no_of_pepole_cam4': SuezMedicalComplexConfigurator.Home.no_of_pepole_cam4_info,
     'daily_carbon_foot_print': SuezMedicalComplexConfigurator.Home.daily_carbon_foot_print_info,
     'monthly_carbon_foot_print': SuezMedicalComplexConfigurator.Home.monthly_carbon_foot_print_info,
+ updating2
+    'invoices_information' :SuezMedicalComplexConfigurator.Home.invoices_information_info,
+=======
     
 
 
+ main
     'report': SuezMedicalComplexConfigurator.Home.return_complex_report_info,
     'zeeta': CommonConfigurator.zeeta_info, 
     'other': CommonConfigurator.return_other_message
