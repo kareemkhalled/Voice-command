@@ -13,52 +13,52 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def return_Inpatient_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسرة المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_used']))} اسره\n"
+                f"عدد الاسرة المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_Inpatient_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسرة غير المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_unused']))} اسره\n"
+                f"عدد الاسرة غير المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_unused']))} اسرة\n"
             )
         @staticmethod
         def return_ICU_CCU_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسرة المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_used']))} اسره\n"
+                f"عدد الاسرة المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_ICU_CCU_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسرة الغير المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_unused']))} اسره\n"
+                f"عدد الاسرة الغير المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_unused']))} اسرة\n"
             )
         @staticmethod
         def return_Emergency_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسرة الطوارئ المستخدمه: {int(float(parsed_data['Emergency_Beds_used']))} اسره\n"
+                f"عدد اسرة الطوارئ المستخدمه: {int(float(parsed_data['Emergency_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_Emergency_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسرة الطوارئ الغير المستخدمه:: {int(float(parsed_data['Emergency_Beds_Unused']))} اسره\n"
+                f"عدد اسرة الطوارئ الغير المستخدمه:: {int(float(parsed_data['Emergency_Beds_Unused']))} اسرة\n"
             )
         @staticmethod
         def return_Incubators_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسرة الحضانات المستخدمه: {int(float(parsed_data['Incubators_Beds_used']))} اسره\n"
+                f"عدد اسرة الحضانات المستخدمه: {int(float(parsed_data['Incubators_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_Incubators_Beds_unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسرة الحضانات الغير المستخدمه: {int(float(parsed_data['Incubators_Beds_unused']))} اسره\n"
+                f"عدد اسرة الحضانات الغير المستخدمه: {int(float(parsed_data['Incubators_Beds_unused']))} اسرة\n"
             )
         @staticmethod
         def return_Total_Hospital_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد جميع الاسرة المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_used']))} اسره\n"
+                f"عدد جميع الاسرة المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_used']))} اسرة\n"
             )
         @staticmethod
         def return_Total_Hospital_Beds_unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد جميع الاسرة الغير المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_unused']))} اسره\n"
+                f"عدد جميع الاسرة الغير المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_unused']))} اسرة\n"
             )
         @staticmethod
         def return_monthlycost_sg_info(parsed_data: dict) -> str:
@@ -887,49 +887,49 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def Inpatient_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_used_monthly'])} اسره\n"
+                f"عدد الأسرة المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_used_monthly'])} اسرة\n"
             )
 
         @staticmethod
         def Inpatient_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_unused_monthly'])}اسره \n"
+                f"عدد الأسرة غير المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_unused_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def ICU_CCU_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره المستخدمه بالعنايه المركزي لمرضي القلب شهرياً: {int(parsed_data['ICU_CCU_Beds_used_monthly'])}اسره \n"
+                f"عدد الاسره المستخدمه بالعنايه المركزي لمرضي القلب شهرياً: {int(parsed_data['ICU_CCU_Beds_used_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def ICU_CCU_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره الغير مستخدمه بالعنايه المركزي لمرضي القلب شهريا: {int(parsed_data['ICU_CCU_Beds_unused_monthly'])} اسره\n"
+                f"عدد الاسره الغير مستخدمه بالعنايه المركزي لمرضي القلب شهريا: {int(parsed_data['ICU_CCU_Beds_unused_monthly'])} اسرة\n"
             )
 
         @staticmethod
         def Emergency_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_used_monthly'])}اسره \n"
+                f"عدد الأسرة المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_used_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def Emergency_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_unused_monthly'])}اسره \n"
+                f"عدد الأسرة غير المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_unused_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def Incubators_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_unused_monthly'])}اسره \n"
+                f"عدد الأسرة غير المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_unused_monthly'])}اسرة\n"
             )
 
         @staticmethod
         def Incubators_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_used_monthly'])}اسره \n"
+                f"عدد الأسرة المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_used_monthly'])}اسرة\n"
             )
 
         @staticmethod
