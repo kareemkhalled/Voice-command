@@ -1237,8 +1237,6 @@ suez_medical_complex_classifier = ChainClassifier(
            #ubdate_4 
            "invoices_information"
            'report', 'zeeta', 'other'
-
-
           
     ],
     descriptions="""When asked generally about the bed occupancy rate, return 'Beds_Occupancy_Rate'.
