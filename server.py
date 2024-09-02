@@ -393,7 +393,11 @@ suez_medical_complex_classifier = ChainClassifier(
            #ubdate_4 
            "invoices_information"
            'report', 'zeeta', 'other'
+
+
           
+
+
     ],
     descriptions="""When asked generally about the bed occupancy rate, return 'Beds_Occupancy_Rate'.
                     When asked about the non-Patients usage of beds or Inpatient beds used,
@@ -547,9 +551,8 @@ suez_medical_complex_classifier = ChainClassifier(
                     When asked about number of people seen by camera 4, return 'no_of_pepole_cam4'
                     When asked about daily carbon footprint across the whole complex, return'daily_carbon_foot_print'
                     When asked about Monthly carbon footprint across the whole complex, return'monthly_carbon_foot_print'
-
-
                     when asked about invoices information,return 'invoices_information'
+
 
 
 
@@ -729,8 +732,6 @@ suez_medical_complex_mapper = {
     'no_of_pepole_cam4': SuezMedicalComplexConfigurator.Home.no_of_pepole_cam4_info,
     'daily_carbon_foot_print': SuezMedicalComplexConfigurator.Home.daily_carbon_foot_print_info,
     'monthly_carbon_foot_print': SuezMedicalComplexConfigurator.Home.monthly_carbon_foot_print_info,
-
-    
     'invoices_information' :SuezMedicalComplexConfigurator.Home.invoices_information_info,
     
 
@@ -833,6 +834,7 @@ async def request_handler(stations_data, voice_file):
         _, audio_data = await voice_handler.text_to_speech(text_data = output_text + "\n شكرا لاستخدامك منصة زِيتَا \n")
     os.remove(_)
     return audio_data
+
 
 @app.post("/voice/main")
 async def voice_endpoint(upload_file: UploadFile = File(...), stations_data: str = Form(...)):
