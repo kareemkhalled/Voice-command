@@ -967,6 +967,15 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"البصمة الكربونية الشهرية: {float(parsed_data['daily_carbon_foot_print'])} كيلوجرام / متر مربع\n"
             )
+        
+        @staticmethod
+        def invoices_information_info(parsed_data: dict) -> str:
+            return (
+                f" معلومات الفواتير الشهريه:\n"
+                f" تكلفه المياه الشهريه  : {int(float(parsed_data['monthly_water_cost']))} جنيها\n"
+                f" تكلفه الاكسجين الشهريه : {int(float(parsed_data['monthly_oxygen_cost']))} جنيها\n\n"
+                f" تكلفه الكهرباء الشهريه  : {int(float(parsed_data['monthlycost_sg']))} جنيها\n\n"
+            )
 
                 
         @staticmethod
@@ -1139,6 +1148,7 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.no_of_pepole_cam4_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.daily_carbon_foot_print_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthly_carbon_foot_print_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.invoices_information_info(parsed_data)
 
 
 
