@@ -1157,6 +1157,7 @@ class SuezMedicalComplexConfigurator(object):
        
 
 
+
 class CommonConfigurator(object):
 
     @staticmethod
