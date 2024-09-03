@@ -8,448 +8,464 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def return_Beds_occupancy_rate_info(parsed_data: dict) -> str:
             return (
-                f" معدل اشغال الاسرة في المستشفي: {int(float(parsed_data['Beds_Occupancy_Rate']))} في المائة\n"
+                f"مُعَدَّلُ إِشْغَالِ الأَسِرَّةِ فِي المُسْتَشْفَى: {int(float(parsed_data['Beds_Occupancy_Rate']))} فِي المِئَةِ\n"
             )
+
         @staticmethod
         def return_Inpatient_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسرة المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_used']))} اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ لِغَيْرِ المَرْضَى: {int(float(parsed_data['Inpatient_Beds_used']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_Inpatient_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسرة غير المستخدمه لغير المرضه: {int(float(parsed_data['Inpatient_Beds_unused']))} اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ لِغَيْرِ المَرْضَى: {int(float(parsed_data['Inpatient_Beds_unused']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_ICU_CCU_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسرة المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_used']))} اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ لِمَرْضَى القَلْبِ: {int(float(parsed_data['ICU_CCU_Beds_used']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_ICU_CCU_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسرة الغير المستخدمه بالعنايه المركزي لمرضي القلب: {int(float(parsed_data['ICU_CCU_Beds_unused']))} اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ لِمَرْضَى القَلْبِ: {int(float(parsed_data['ICU_CCU_Beds_unused']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_Emergency_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسرة الطوارئ المستخدمه: {int(float(parsed_data['Emergency_Beds_used']))} اسرة\n"
+                f"عَدَدُ أَسِرَّةِ الطَّوَارِئِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Emergency_Beds_used']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_Emergency_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسرة الطوارئ الغير المستخدمه:: {int(float(parsed_data['Emergency_Beds_Unused']))} اسرة\n"
+                f"عَدَدُ أَسِرَّةِ الطَّوَارِئِ غَيْرِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Emergency_Beds_Unused']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_Incubators_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسرة الحضانات المستخدمه: {int(float(parsed_data['Incubators_Beds_used']))} اسرة\n"
+                f"عَدَدُ أَسِرَّةِ الحَضَّانَاتِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Incubators_Beds_used']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_Incubators_Beds_unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد اسرة الحضانات الغير المستخدمه: {int(float(parsed_data['Incubators_Beds_unused']))} اسرة\n"
+                f"عَدَدُ أَسِرَّةِ الحَضَّانَاتِ غَيْرِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Incubators_Beds_unused']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_Total_Hospital_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عدد جميع الاسرة المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_used']))} اسرة\n"
+                f"عَدَدُ جَمِيعِ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي المُسْتَشْفَى: {int(float(parsed_data['Total_Hospital_Beds_used']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_Total_Hospital_Beds_unused_info(parsed_data: dict) -> str:
             return (
-                f"عدد جميع الاسرة الغير المستخدمه في المستشفي: {int(float(parsed_data['Total_Hospital_Beds_unused']))} اسرة\n"
+                f"عَدَدُ جَمِيعِ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي المُسْتَشْفَى: {int(float(parsed_data['Total_Hospital_Beds_unused']))} سَرِيرٍ\n"
             )
+
         @staticmethod
         def return_monthlycost_sg_info(parsed_data: dict) -> str:
             return (
-                f"التكلفه الشهريه للمصدر الكهربائي للمستشفي: {int(float(parsed_data['monthlycost_sg']))} جنيها\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْمَصْدَرِ الكَهْرَبَائِيِّ لِلْمُسْتَشْفَى: {int(float(parsed_data['monthlycost_sg']))} جُنَيْهًا\n"
             )
+
         @staticmethod
         def return_monthly_water_cost_info(parsed_data: dict) -> str:
             return (
-                f"التكلفه الشهريه لاستهلاك المياه: {int(float(parsed_data['monthly_water_cost']))} جنيها\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ المِيَاهِ: {int(float(parsed_data['monthly_water_cost']))} جُنَيْهًا\n"
             )
+
         @staticmethod
         def return_monthly_oxygen_cost_info(parsed_data: dict) -> str:
             return (
-                f"التكلفه الشهريه لاستهلاك الاكسجين: {int(float(parsed_data['monthly_oxygen_cost']))} جنيها\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ الأُكْسُجِينِ: {int(float(parsed_data['monthly_oxygen_cost']))} جُنَيْهًا\n"
             )
+
         @staticmethod
         def return_Hospital_Occupancy_Rate_info(parsed_data: dict) -> str:
             return (
-                f"نسبه معدل الاشغال في المستشفي: {int(float(parsed_data['Hospital_Occupancy_Rate']))} في المائه \n"
+                f"نِسْبَةُ مُعَدَّلِ الإِشْغَالِ فِي المُسْتَشْفَى: {int(float(parsed_data['Hospital_Occupancy_Rate']))} فِي المِئَةِ\n"
             )
+
         @staticmethod
         def return_Clinic_Occupancy_Rate_info(parsed_data: dict) -> str:
             return (
-                f"نسبه معدل الاشغال في العيادات: {int(float(parsed_data['Clinic_Occupancy_Rate']))}  في المائه\n"
+                f"نِسْبَةُ مُعَدَّلِ الإِشْغَالِ فِي العِيَادَاتِ: {int(float(parsed_data['Clinic_Occupancy_Rate']))} فِي المِئَةِ\n"
             )
 
         @staticmethod
         def Mask_Policy_Violations_info(parsed_data: dict) -> str:
             return (
-                f"انتهاكات سياسة ارتداء الكمامات: {int(float(parsed_data['Mask_Policy_Violations']))} مرات\n"
+                f"اِنْتِهَاكَاتُ سِيَاسَةِ اِرْتِدَاءِ الكِمَامَاتِ: {int(float(parsed_data['Mask_Policy_Violations']))} مَرَّةً\n"
             )
-        
+
         @staticmethod
         def Social_Distance_Violations_info(parsed_data: dict) -> str:
             return (
-                f"انتهاكات التباعد الاجتماعي: {int(float(parsed_data['Social_Distance_Violations']))} مرات\n"
+                f"اِنْتِهَاكَاتُ التَّبَاعُدِ الاِجْتِمَاعِيِّ: {int(float(parsed_data['Social_Distance_Violations']))} مَرَّةً\n"
             )
 
         @staticmethod
         def NuOF_Detected_Falls_info(parsed_data: dict) -> str:
             return (
-                f"عدد مرات السقوط المكتشفة: {int(float(parsed_data['NuOF_Detected_Falls']))} مرات\n"
+                f"عَدَدُ مَرَّاتِ السُّقُوطِ المُكْتَشَفَةِ: {int(float(parsed_data['NuOF_Detected_Falls']))} مَرَّةً\n"
             )
 
         @staticmethod
         def transformer_on_info(parsed_data: dict) -> str:
             return (
-                f"عدد المحولات العامله: {int(float(parsed_data['transformer_on']))} مرات\n"
+                f"عَدَدُ المُحَوِّلَاتِ العَامِلَةِ: {int(float(parsed_data['transformer_on']))} مَرَّةً\n"
             )
 
         @staticmethod
         def transformer_Off_info(parsed_data: dict) -> str:
             return (
-                f"عدد المحولات العامله: {int(float(parsed_data['transformer_Off']))} مرات\n"
+                f"عَدَدُ المُحَوِّلَاتِ العَامِلَةِ: {int(float(parsed_data['transformer_Off']))} مَرَّةً\n"
             )
 
         @staticmethod
         def generator_on_info(parsed_data: dict) -> str:
             return (
-                f"عدد المولدات العامله : {int(float(parsed_data['generator_on']))} مرات\n"
+                f"عَدَدُ المُوَلِّدَاتِ العَامِلَةِ: {int(float(parsed_data['generator_on']))} مَرَّةً\n"
             )
 
         @staticmethod
         def generator_off_info(parsed_data: dict) -> str:
             return (
-                f"عدد المولدات  الغير عامله: {int(float(parsed_data['generator_off']))} مرات\n"
+                f"عَدَدُ المُوَلِّدَاتِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['generator_off']))} مَرَّةً\n"
             )
 
         @staticmethod
         def Elevator_on_info(parsed_data: dict) -> str:
             return (
-                f"عدد المصاعد العامله: {int(float(parsed_data['Elevator_on']))} مرات\n"
+                f"عَدَدُ المَصَاعِدِ العَامِلَةِ: {int(float(parsed_data['Elevator_on']))} مَرَّةً\n"
             )
 
         @staticmethod
         def Elevator_off_info(parsed_data: dict) -> str:
             return (
-                f"عدد المصاعد الغير عامله: {int(float(parsed_data['Elevator_on']))} مرات\n"
+                f"عَدَدُ المَصَاعِدِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['Elevator_off']))} مَرَّةً\n"
             )
+
 
         @staticmethod
         def monthly_total_cost_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية الإجمالية: {float(parsed_data['monthly_total_cost'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ الإِجْمَالِيَّةُ: {float(parsed_data['monthly_total_cost'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def HVAC_alarm_info(parsed_data: dict) -> str:
             return (
-                f" الكشف عن وجود تنبيه في نظام التكيف المركزي: {int(float(parsed_data['HVAC_alarm']))} مرات\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي نِظَامِ التَّكْيِيفِ المَرْكَزِيِّ: {int(float(parsed_data['HVAC_alarm']))} مَرَّةً\n"
             )
 
         @staticmethod
         def medical_gas_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكشف عن وجود تنبيه في  الغاز الطبي: {int(float(parsed_data['medical_gas_alarm']))} مرات\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي الغَازِ الطِّبِّيِّ: {int(float(parsed_data['medical_gas_alarm']))} مَرَّةً\n"
             )
 
         @staticmethod
         def fire_fighting_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكشف عن وجود تنبيه في نظام الحريق: {int(float(parsed_data['fire_fighting_alarm']))} مرات\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي نِظَامِ الحَرِيقِ: {int(float(parsed_data['fire_fighting_alarm']))} مَرَّةً\n"
             )
 
         @staticmethod
         def transformer_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكشف عن وجود تنبيه في المولدات: {int(float(parsed_data['transformer_alarm']))} مرات\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي المُحَوِّلَاتِ: {int(float(parsed_data['transformer_alarm']))} مَرَّةً\n"
             )
 
         @staticmethod
         def elevator_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكشف عن وجود تنبيه في المصاعد: {int(float(parsed_data['elevator_alarm']))} مرات\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي المَصَاعِدِ: {int(float(parsed_data['elevator_alarm']))} مَرَّةً\n"
             )
 
         @staticmethod
         def F_AHU_ON_info(parsed_data: dict) -> str:
             return (
-                f"عدد وحدات مناوله الهواء  العامله: {int(float(parsed_data['F_AHU_ON']))} مرات\n"
+                f"عَدَدُ وَحْدَاتِ مُنَاوَلَةِ الهَوَاءِ العَامِلَةِ: {int(float(parsed_data['F_AHU_ON']))} مَرَّةً\n"
             )
 
         @staticmethod
         def F_AHU_OFF_info(parsed_data: dict) -> str:
             return (
-                f"عدد وحدات مناوله الهواء الغير العامله: {int(float(parsed_data['F_AHU_OFF']))} مرات\n"
+                f"عَدَدُ وَحْدَاتِ مُنَاوَلَةِ الهَوَاءِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['F_AHU_OFF']))} مَرَّةً\n"
             )
 
         @staticmethod
         def chiller_on_info(parsed_data: dict) -> str:
             return (
-                f"عدد المبردات المركزيه العامله {int(float(parsed_data['chiller_on']))} مرات\n"
+                f"عَدَدُ المُبَرِّدَاتِ المَرْكَزِيَّةِ العَامِلَةِ: {int(float(parsed_data['chiller_on']))} مَرَّةً\n"
             )
 
         @staticmethod
         def chiller_off_info(parsed_data: dict) -> str:
             return (
-                f"عدد المبردات المركزيه الغير عامله: {int(float(parsed_data['chiller_off']))} مرات\n"
+                f"عَدَدُ المُبَرِّدَاتِ المَرْكَزِيَّةِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['chiller_off']))} مَرَّةً\n"
             )
 
         @staticmethod
         def monthlyenergy_MVSG_info(parsed_data: dict) -> str:
             return (
-                f" معدل استهلاك الطاقة الشهريه للقيمه الرئيسيه للمصدر الكهربائي  : {float(parsed_data['monthlyenergy_MVSG'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْقِيمَةِ الرَّئِيسِيَّةِ لِلْمَصْدَرِ الكَهْرَبَائِيِّ: {float(parsed_data['monthlyenergy_MVSG'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def vaccum_press_info(parsed_data: dict) -> str:
             return (
-                f"مقياس الضغط والشفط: {float(parsed_data['vaccum_press'])} بار\n"
+                f"مِقْيَاسُ الضَّغْطِ وَالشَّفْطِ: {float(parsed_data['vaccum_press'])} بَارٍ\n"
             )
 
         @staticmethod
         def air_4bar_press_info(parsed_data: dict) -> str:
             return (
-                f"ضغط الهواء 4 بار: {float(parsed_data['air_4bar_press'])} بار\n"
+                f"ضَغْطُ الهَوَاءِ 4 بَارٍ: {float(parsed_data['air_4bar_press'])} بَارٍ\n"
             )
 
         @staticmethod
         def air_7bar_press_info(parsed_data: dict) -> str:
             return (
-                f"ضغط الهواء 7 بار: {float(parsed_data['air_7bar_press'])} بار\n"
+                f"ضَغْطُ الهَوَاءِ 7 بَارٍ: {float(parsed_data['air_7bar_press'])} بَارٍ\n"
             )
 
         @staticmethod
         def oxygen_press_info(parsed_data: dict) -> str:
             return (
-                f"ضغط الأكسجين: {float(parsed_data['oxygen_press'])} بار\n"
+                f"ضَغْطُ الأُكْسُجِينِ: {float(parsed_data['oxygen_press'])} بَارٍ\n"
             )
 
         @staticmethod
         def dailyenergy_MVSG_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة اليوميه للقيمه الرئيسيه للمصدر الكهربائي  : {float(parsed_data['dailyenergy_MVSG'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ اليَوْمِيِّ لِلْقِيمَةِ الرَّئِيسِيَّةِ لِلْمَصْدَرِ الكَهْرَبَائِيِّ: {float(parsed_data['dailyenergy_MVSG'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_MVSG_incoming2_energy_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة اليوميه الداخله للمصدر الكهربائي الثاني : {float(parsed_data['dailyenergy_MVSG_incoming2_energy'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ اليَوْمِيِّ الدَّاخِلَةِ لِلْمَصْدَرِ الكَهْرَبَائِيِّ الثَّانِي: {float(parsed_data['dailyenergy_MVSG_incoming2_energy'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_MVSG_incoming3_energy_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة اليوميه الداخله للمصدر الكهربائي الثالث : {float(parsed_data['dailyenergy_MVSG_incoming3_energy'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ اليَوْمِيِّ الدَّاخِلَةِ لِلْمَصْدَرِ الكَهْرَبَائِيِّ الثَّالِثِ: {float(parsed_data['dailyenergy_MVSG_incoming3_energy'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_Hospital_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة اليومية للمستشفى: {float(parsed_data['dailyenergy_Hospital'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ اليَوْمِيِّ لِلْمُسْتَشْفَى: {float(parsed_data['dailyenergy_Hospital'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_Clinics_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة اليومية للعيادات: {float(parsed_data['dailyenergy_Clinics'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ اليَوْمِيِّ لِلْعِيَادَاتِ: {float(parsed_data['dailyenergy_Clinics'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_Utilities_info(parsed_data: dict) -> str:
             return (
-                f"استهلاك الطاقة اليومية للمرافق: {float(parsed_data['dailyenergy_Utilities'])} كيلووات ساعة\n"
+                f"اِسْتِهْلَاكُ الطَّاقَةِ اليَوْمِيُّ لِلْمَرَافِقِ: {float(parsed_data['dailyenergy_Utilities'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_ele_info(parsed_data: dict) -> str:
             return (
-                f"استهلاك الطاقة اليومية للكهرباء: {float(parsed_data['dailyenergy_ele'])} كيلووات ساعة\n"
+                f"اِسْتِهْلَاكُ الطَّاقَةِ اليَوْمِيُّ لِلْكَهْرَبَاءِ: {float(parsed_data['dailyenergy_ele'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_chillers_info(parsed_data: dict) -> str:
             return (
-                f"استهلاك الطاقة اليومية للمبردات: {float(parsed_data['dailyenergy_chillers'])} كيلووات ساعة\n"
+                f"اِسْتِهْلَاكُ الطَّاقَةِ اليَوْمِيُّ لِلْمُبَرِّدَاتِ: {float(parsed_data['dailyenergy_chillers'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_AHU_info(parsed_data: dict) -> str:
             return (
-                f"استهلاك الطاقة اليومية لوحدات مناولة الهواء: {float(parsed_data['dailyenergy_AHU'])} كيلووات ساعة\n"
+                f"اِسْتِهْلَاكُ الطَّاقَةِ اليَوْمِيُّ لِوَحْدَاتِ مُنَاوَلَةِ الهَوَاءِ: {float(parsed_data['dailyenergy_AHU'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailyenergy_Boilers_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة اليومية للغلايات: {float(parsed_data['dailyenergy_Boilers'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ اليَوْمِيِّ لِلْغَلَّايَاتِ: {float(parsed_data['dailyenergy_Boilers'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def monthlyenergy_MVSG_incoming2_energy_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية الداخله للمصدر الكهربائي الثاني : {float(parsed_data['monthlyenergy_MVSG_incoming2_energy'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ الدَّاخِلَةِ لِلْمَصْدَرِ الكَهْرَبَائِيِّ الثَّانِي: {float(parsed_data['monthlyenergy_MVSG_incoming2_energy'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def monthlyenergy_MVSG_incoming3_energy_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية الداخله للمصدر الكهربائي الثاني : {float(parsed_data['monthlyenergy_MVSG_incoming3_energy'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ الدَّاخِلَةِ لِلْمَصْدَرِ الكَهْرَبَائِيِّ الثَّالِثِ: {float(parsed_data['monthlyenergy_MVSG_incoming3_energy'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def monthlyenergy_Hospital_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية للمستشفى: {float(parsed_data['monthlyenergy_Hospital'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْمُسْتَشْفَى: {float(parsed_data['monthlyenergy_Hospital'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def monthlyenergy_Clinics_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية للعيادات: {float(parsed_data['monthlyenergy_Clinics'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْعِيَادَاتِ: {float(parsed_data['monthlyenergy_Clinics'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def monthlyenergy_Utilities_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية للمرافق: {float(parsed_data['monthlyenergy_Utilities'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْمَرَافِقِ: {float(parsed_data['monthlyenergy_Utilities'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def monthlyenergy_ele_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية للكهرباء: {float(parsed_data['monthlyenergy_ele'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْكَهْرَبَاءِ: {float(parsed_data['monthlyenergy_ele'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def monthlyenergy_chillers_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية للمبردات: {float(parsed_data['monthlyenergy_chillers'])} كيلووات ساعة\n"
-            )                                                                                 
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْمُبَرِّدَاتِ: {float(parsed_data['monthlyenergy_chillers'])} كِيلُو وَاتِّ سَاعَةٍ\n"
+            )
 
         @staticmethod
         def monthlyenergy_AHU_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية لوحدات مناولة الهواء: {float(parsed_data['monthlyenergy_AHU'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِوَحْدَاتِ مُنَاوَلَةِ الهَوَاءِ: {float(parsed_data['monthlyenergy_AHU'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def monthlyenergy_Boilers_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهرية للغلايات: {float(parsed_data['monthlyenergy_Boilers'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْغَلَّايَاتِ: {float(parsed_data['monthlyenergy_Boilers'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def dailycost_sg_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة اليومية للمصدر الكهرائي: {float(parsed_data['dailycost_sg'])} جنيه\n"
+                f"التَّكْلِفَةُ اليَوْمِيَّةُ لِلْمَصْدَرِ الكَهْرَبَائِيِّ: {float(parsed_data['dailycost_sg'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def yearlyenergy_MVSG_info(parsed_data: dict) -> str:
             return (
-                f"استهلاك الطاقة السنوية للمصدر الكهربائي: {float(parsed_data['yearlyenergy_MVSG'])} كيلووات ساعة\n"
+                f"اِسْتِهْلَاكُ الطَّاقَةِ السَّنَوِيُّ لِلْمَصْدَرِ الكَهْرَبَائِيِّ: {float(parsed_data['yearlyenergy_MVSG'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def yearlycost_sg_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة السنوية للمصدر الكهربائي: {float(parsed_data['yearlycost_sg'])} جنيه\n"
+                f"التَّكْلِفَةُ السَّنَوِيَّةُ لِلْمَصْدَرِ الكَهْرَبَائِيِّ: {float(parsed_data['yearlycost_sg'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def monthlycost_g_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية  للطابق الارضي: {float(parsed_data['monthlycost_g'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلطَّابِقِ الأَرْضِيِّ: {float(parsed_data['monthlycost_g'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def monthlycost_f_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية  للطابق الاول: {float(parsed_data['monthlycost_f'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلطَّابِقِ الأَوَّلِ: {float(parsed_data['monthlycost_f'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def monthlycost_s_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية للطابق الثاني: {float(parsed_data['monthlycost_s'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلطَّابِقِ الثَّانِي: {float(parsed_data['monthlycost_s'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def monthlycost_th_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية للطابق الثالث: {float(parsed_data['monthlycost_th'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلطَّابِقِ الثَّالِثِ: {float(parsed_data['monthlycost_th'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def monthlycost_roof_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية للسطح : {float(parsed_data['monthlycost_roof'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلسُّطُوحِ: {float(parsed_data['monthlycost_roof'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def monthlycost_Hospital_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية للمستشفى: {float(parsed_data['monthlycost_Hospital'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْمُسْتَشْفَى: {float(parsed_data['monthlycost_Hospital'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def monthlycost_clinic_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية للعيادة: {float(parsed_data['monthlycost_clinic'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْعِيَادَةِ: {float(parsed_data['monthlycost_clinic'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def monthlycost_Utilities_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة الشهرية للمرافق: {float(parsed_data['monthlycost_Utilities'])} جنيه\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْمَرَافِقِ: {float(parsed_data['monthlycost_Utilities'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def daily_water_consumption_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك المياه اليومية: {float(parsed_data['daily_water_consumption'])} متر مكعب\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ المِيَاهِ اليَوْمِيِّ: {float(parsed_data['daily_water_consumption'])} مِتْرٍ مُكَعَّبٍ\n"
             )
 
         @staticmethod
         def monthly_water_consumption_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك المياه الشهرية: {float(parsed_data['monthly_water_consumption'])} متر مكعب\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ المِيَاهِ الشَّهْرِيِّ: {float(parsed_data['monthly_water_consumption'])} مِتْرٍ مُكَعَّبٍ\n"
             )
 
         @staticmethod
         def daily_water_cost_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة اليومية للمياه: {float(parsed_data['daily_water_cost'])} جنيه\n"
+                f"التَّكْلِفَةُ اليَوْمِيَّةُ لِلْمِيَاهِ: {float(parsed_data['daily_water_cost'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def yearly_water_consumption_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك المياه السنوية: {float(parsed_data['yearly_water_consumption'])} متر مكعب\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ المِيَاهِ السَّنَوِيِّ: {float(parsed_data['yearly_water_consumption'])} مِتْرٍ مُكَعَّبٍ\n"
             )
 
         @staticmethod
         def yearly_water_cost_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة السنوية للمياه: {float(parsed_data['yearly_water_cost'])} جنيه\n"
+                f"التَّكْلِفَةُ السَّنَوِيَّةُ لِلْمِيَاهِ: {float(parsed_data['yearly_water_cost'])} جُنَيْهٍ\n"
             )
 
         @staticmethod
         def daily_oxygen_consumption_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الأكسجين اليومي: {float(parsed_data['daily_oxygen_consumption'])} متر مكعب\n"
+                f"مُعدَّل استهلاك الأكسجين اليومي: {float(parsed_data['daily_oxygen_consumption'])} متر مكعب\n"
             )
 
         @staticmethod
         def monthly_oxygen_consumption_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الأكسجين الشهري: {float(parsed_data['monthly_oxygen_consumption'])} متر مكعب\n"
+                f"مُعدَّل استهلاك الأكسجين الشهري: {float(parsed_data['monthly_oxygen_consumption'])} متر مكعب\n"
             )
 
         @staticmethod
@@ -461,7 +477,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def yearly_oxygen_consumption_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الأكسجين السنوي: {float(parsed_data['yearly_oxygen_consumption'])} متر مكعب\n"
+                f"مُعدَّل استهلاك الأكسجين السنوي: {float(parsed_data['yearly_oxygen_consumption'])} متر مكعب\n"
             )
 
         @staticmethod
@@ -473,79 +489,79 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def gen1_status_info(parsed_data: dict) -> str:
             return (
-                f"حالة المولد رقم 1: {parsed_data['gen1_status']}\n"
+                f"حالة المولِّد رقم 1: {parsed_data['gen1_status']}\n"
             )
 
         @staticmethod
         def gen1_engine_runtime_info(parsed_data: dict) -> str:
             return (
-                f"وقت تشغيل محرك المولد رقم 1: {float(parsed_data['gen1_engine_runtime'])} ساعات\n"
+                f"وقت تشغيل محرك المولِّد رقم 1: {float(parsed_data['gen1_engine_runtime'])} ساعات\n"
             )
 
         @staticmethod
         def gen1_solar_info(parsed_data: dict) -> str:
             return (
-                f"مخزون السولار  للمولد رقم 1: {float(parsed_data['gen1_solar'])} كيلووات\n"
+                f"مخزون السولار للمولِّد رقم 1: {float(parsed_data['gen1_solar'])} كيلووات\n"
             )
 
         @staticmethod
         def gen1_last_op_info(parsed_data: dict) -> str:
             return (
-                f"آخر عملية تشغيل للمولد رقم 1: {parsed_data['gen1_last_op']}\n"
+                f"آخر عملية تشغيل للمولِّد رقم 1: {parsed_data['gen1_last_op']}\n"
             )
 
         @staticmethod
         def gen1_bv_info(parsed_data: dict) -> str:
             return (
-                f"معدل جهد البطارية للمولد رقم 1: {float(parsed_data['gen1_bv'])} فولت\n"
+                f"معدل جهد البطارية للمولِّد رقم 1: {float(parsed_data['gen1_bv'])} فولت\n"
             )
 
         @staticmethod
         def gen1_volt_info(parsed_data: dict) -> str:
             return (
-                f"معدل جهد المولد رقم 1: {float(parsed_data['gen1_volt'])} فولت\n"
+                f"معدل جهد المولِّد رقم 1: {float(parsed_data['gen1_volt'])} فولت\n"
             )
 
         @staticmethod
         def gen1_curr_info(parsed_data: dict) -> str:
             return (
-                f"تيار المولد رقم 1: {float(parsed_data['gen1_curr'])} أمبير\n"
+                f"تيار المولِّد رقم 1: {float(parsed_data['gen1_curr'])} أمبير\n"
             )
 
         @staticmethod
         def gen1_energy_info(parsed_data: dict) -> str:
             return (
-                f"طاقة المولد رقم 1: {float(parsed_data['gen1_energy'])} كيلووات ساعة\n"
+                f"طاقة المولِّد رقم 1: {float(parsed_data['gen1_energy'])} كيلووات ساعة\n"
             )
 
         @staticmethod
         def gen1_object_feed1_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه  للمولد رقم 1 للطابق الاول: {parsed_data['gen1_object_feed1']} كيلووات ساعه\n"
+                f"التغذية الكهربائية للمولِّد رقم 1 للطابق الأول: {parsed_data['gen1_object_feed1']} كيلووات ساعة\n"
             )
 
         @staticmethod
         def gen1_object_feed2_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه  للمولد رقم 1 للطابق الثاني : {parsed_data['gen1_object_feed2']}كيلووات ساعه\n"
+                f"التغذية الكهربائية للمولِّد رقم 1 للطابق الثاني: {parsed_data['gen1_object_feed2']} كيلووات ساعة\n"
             )
 
         @staticmethod
         def gen1_object_feed3_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه  للمولد رقم 1 للطابق الثالث: {parsed_data['gen1_object_feed3']}كيلووات ساعه\n"
+                f"التغذية الكهربائية للمولِّد رقم 1 للطابق الثالث: {parsed_data['gen1_object_feed3']} كيلووات ساعة\n"
             )
 
         @staticmethod
         def gen1_rated_feed_info(parsed_data: dict) -> str:
             return (
-                f"التغذية المقدرة للمولد رقم 1: {parsed_data['gen1_rated_feed']}كيلووات ساعه\n"
+                f"التغذية المقدَّرة للمولِّد رقم 1: {parsed_data['gen1_rated_feed']} كيلووات ساعة\n"
             )
 
         @staticmethod
         def gen1_estimated_feed_time_info(parsed_data: dict) -> str:
             return (
-                f"وقت التغذية المتوقع للمولد رقم 1: {parsed_data['gen1_estimated_feed_time']} ساعات\n"
+                f"وقت التغذية المتوقع للمولِّد رقم 1: {parsed_data['gen1_estimated_feed_time']} ساعات\n"
             )
 
         @staticmethod
@@ -579,7 +595,7 @@ class SuezMedicalComplexConfigurator(object):
             )
 
         @staticmethod
-        def chiller2_return_tempv(parsed_data: dict) -> str:
+        def chiller2_return_temp_info(parsed_data: dict) -> str:
             return (
                 f"درجة حرارة العائد من المبرد رقم 2: {float(parsed_data['chiller2_return_temp'])} درجة مئوية\n"
             )
@@ -602,379 +618,392 @@ class SuezMedicalComplexConfigurator(object):
                 f"درجة حرارة العائد من المبرد رقم 3: {float(parsed_data['chiller3_return_temp'])} درجة مئوية\n"
             )
 
+
+        @staticmethod
+        def chiller3_supply_temp_info(parsed_data: dict) -> str:
+            return (
+                f"دَرَجَةُ حَرَارَةِ الإِمْدَادِ مِنَ المُبَرِّدِ رَقْمَ 3: {float(parsed_data['chiller3_supply_temp'])} دَرَجَةٌ مِئَوِيَّة\n"
+            )
+
+        @staticmethod
+        def chiller3_return_temp_info(parsed_data: dict) -> str:
+            return (
+                f"دَرَجَةُ حَرَارَةِ العَائِدِ مِنَ المُبَرِّدِ رَقْمَ 3: {float(parsed_data['chiller3_return_temp'])} دَرَجَةٌ مِئَوِيَّة\n"
+            )
+
         @staticmethod
         def chiller4_status_info(parsed_data: dict) -> str:
             return (
-                f"حالة المبرد رقم 4: {parsed_data['chiller4_status']}\n"
+                f"حَالَةُ المُبَرِّدِ رَقْمَ 4: {parsed_data['chiller4_status']}\n"
             )
 
         @staticmethod
         def chiller4_supply_temp_info(parsed_data: dict) -> str:
             return (
-                f"درجة حرارة الإمداد من المبرد رقم 4: {float(parsed_data['chiller4_supply_temp'])} درجة مئوية\n"
+                f"دَرَجَةُ حَرَارَةِ الإِمْدَادِ مِنَ المُبَرِّدِ رَقْمَ 4: {float(parsed_data['chiller4_supply_temp'])} دَرَجَةٌ مِئَوِيَّة\n"
             )
 
         @staticmethod
         def chiller4_return_temp_info(parsed_data: dict) -> str:
             return (
-                f"درجة حرارة العائد من المبرد رقم 4: {float(parsed_data['chiller4_return_temp'])} درجة مئوية\n"
+                f"دَرَجَةُ حَرَارَةِ العَائِدِ مِنَ المُبَرِّدِ رَقْمَ 4: {float(parsed_data['chiller4_return_temp'])} دَرَجَةٌ مِئَوِيَّة\n"
             )
 
         @staticmethod
         def chillers_op_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات تشغيل جميع المبردات: {float(parsed_data['chillers_op_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ تَشْغِيلِ جَمِيعِ المُبَرِّدَاتِ: {float(parsed_data['chillers_op_hours'])} سَاعَة\n"
             )
 
         @staticmethod
         def chiller1_op_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات تشغيل المبرد رقم 1: {float(parsed_data['chiller1_op_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ تَشْغِيلِ المُبَرِّدِ رَقْمَ 1: {float(parsed_data['chiller1_op_hours'])} سَاعَة\n"
             )
 
         @staticmethod
         def chiller2_op_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات تشغيل المبرد رقم 2: {float(parsed_data['chiller2_op_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ تَشْغِيلِ المُبَرِّدِ رَقْمَ 2: {float(parsed_data['chiller2_op_hours'])} سَاعَة\n"
             )
 
         @staticmethod
         def chiller3_op_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات تشغيل المبرد رقم 3: {float(parsed_data['chiller3_op_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ تَشْغِيلِ المُبَرِّدِ رَقْمَ 3: {float(parsed_data['chiller3_op_hours'])} سَاعَة\n"
             )
 
         @staticmethod
         def chiller4_op_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات تشغيل المبرد رقم 4: {float(parsed_data['chiller4_op_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ تَشْغِيلِ المُبَرِّدِ رَقْمَ 4: {float(parsed_data['chiller4_op_hours'])} سَاعَة\n"
             )
 
         @staticmethod
         def monthlyenergy_chiller1_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهري للمبرد رقم 1: {float(parsed_data['monthlyenergy_chiller1'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ استِهْلاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْمُبَرِّدِ رَقْمَ 1: {float(parsed_data['monthlyenergy_chiller1'])} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def monthlyenergy_chiller2_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهري للمبرد رقم 2: {float(parsed_data['monthlyenergy_chiller2'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ استِهْلاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْمُبَرِّدِ رَقْمَ 2: {float(parsed_data['monthlyenergy_chiller2'])} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def monthlyenergy_chiller3_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهري للمبرد رقم3: {float(parsed_data['monthlyenergy_chiller3'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ استِهْلاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْمُبَرِّدِ رَقْمَ 3: {float(parsed_data['monthlyenergy_chiller3'])} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def monthlyenergy_chiller4_info(parsed_data: dict) -> str:
             return (
-                f"معدل استهلاك الطاقة الشهري للمبرد رقم 4: {float(parsed_data['monthlyenergy_chiller4'])} كيلووات ساعة\n"
+                f"مُعَدَّلُ استِهْلاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْمُبَرِّدِ رَقْمَ 4: {float(parsed_data['monthlyenergy_chiller4'])} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def in_Patients_info(parsed_data: dict) -> str:
             return (
-                f"عدد المرضى المبيتين في المستشفي: {int(parsed_data['in-Patients'])} مريض\n"
+                f"عَدَدُ المَرْضَى الْمُبَيْتِينَ فِي المُسْتَشْفَى: {int(parsed_data['in-Patients'])} مَرِيض\n"
             )
 
         @staticmethod
         def out_Patients_info(parsed_data: dict) -> str:
             return (
-                f"عدد المرضى الغير مبيتين: {int(parsed_data['out-Patients'])} مريض\n"
+                f"عَدَدُ المَرْضَى غَيْرِ المُبَيْتِينَ: {int(parsed_data['out-Patients'])} مَرِيض\n"
             )
 
         @staticmethod
         def chillers_sys_operation_cost_info(parsed_data: dict) -> str:
             return (
-                f"تكلفة تشغيل نظام المبردات: {float(parsed_data['chillers_sys_operation_cost'])} جنيه\n"
+                f"تَكْلِفَةُ تَشْغِيلِ نِظَامِ المُبَرِّدَاتِ: {float(parsed_data['chillers_sys_operation_cost'])} جُنَيْه\n"
             )
 
         @staticmethod
         def main_temp_info(parsed_data: dict) -> str:
             return (
-                f"درجة حرارة العائد الرئيسيه من المبرد: {float(parsed_data['main_return_temp'])} درجة مئوية\n"
+                f"دَرَجَةُ حَرَارَةِ العَائِدِ الرَّئِيسِيَّةِ مِنَ المُبَرِّدِ: {float(parsed_data['main_return_temp'])} دَرَجَةٌ مِئَوِيَّة\n"
             )
 
         @staticmethod
         def main_supply_temp_info(parsed_data: dict) -> str:
             return (
-                f"درجة حرارة الإمداد الرئيسيه من المبرد: {float(parsed_data['main_supply_temp'])} درجة مئوية\n"
+                f"دَرَجَةُ حَرَارَةِ الإِمْدَادِ الرَّئِيسِيَّةِ مِنَ المُبَرِّدِ: {float(parsed_data['main_supply_temp'])} دَرَجَةٌ مِئَوِيَّة\n"
             )
 
         @staticmethod
         def chiller1_maintenance_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات صيانة المبرد رقم 1: {float(parsed_data['chiller1_maintenance_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ صِيَانَةِ المُبَرِّدِ رَقْمَ 1: {float(parsed_data['chiller1_maintenance_hours'])} سَاعَة\n"
             )
 
         @staticmethod
         def chiller2_maintenance_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات صيانة المبرد رقم 2: {float(parsed_data['chiller2_maintenance_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ صِيَانَةِ المُبَرِّدِ رَقْمَ 2: {float(parsed_data['chiller2_maintenance_hours'])} سَاعَة\n"
             )
 
         @staticmethod
         def chiller3_maintenance_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات صيانة المبرد رقم 3: {float(parsed_data['chiller3_maintenance_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ صِيَانَةِ المُبَرِّدِ رَقْمَ 3: {float(parsed_data['chiller3_maintenance_hours'])} سَاعَة\n"
             )
 
         @staticmethod
         def chiller4_maintenance_hours_info(parsed_data: dict) -> str:
             return (
-                f"عدد ساعات صيانة المبرد رقم 4: {float(parsed_data['chiller4_maintenance_hours'])} ساعات\n"
+                f"عَدَدُ سَاعَاتِ صِيَانَةِ المُبَرِّدِ رَقْمَ 4: {float(parsed_data['chiller4_maintenance_hours'])} سَاعَة\n"
             )
-        
+
         @staticmethod
         def daily_index_info(parsed_data: dict) -> str:
             return (
-                f"عدد المؤشر اليومي: {float(parsed_data['daily_index'])} \n"
+                f"عَدَدُ المُؤَشِّرِ اليَوْمِيِّ: {float(parsed_data['daily_index'])}\n"
             )
 
         @staticmethod
         def yearly_index_info(parsed_data: dict) -> str:
             return (
-                f"عدد المؤشر السنوي: {float(parsed_data['yearly_index'])} \n"
+                f"عَدَدُ المُؤَشِّرِ السَّنَوِيِّ: {float(parsed_data['yearly_index'])}\n"
             )
 
         @staticmethod
         def monthly_index_info(parsed_data: dict) -> str:
             return (
-                f"عدد المؤشر الشهري: {float(parsed_data['monthly_index'])} \n"
+                f"عَدَدُ المُؤَشِّرِ الشَّهْرِيِّ: {float(parsed_data['monthly_index'])}\n"
             )
 
         @staticmethod
         def random_MVSG_2_energy_info(parsed_data: dict) -> str:
             return (
-                f"طاقه المصدر الكهربائي الثاني العشوائيه: {float(parsed_data['random_MVSG_2_energy'])}كيلووات ساعه  \n"
+                f"طَاقَةُ المَصْدَرِ الكَهْرَبَائِيِّ الثَّانِيِّ العَشْوَائِيَّةُ: {float(parsed_data['random_MVSG_2_energy'])} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def random_MVSG_3_energy(parsed_data: dict) -> str:
             return (
-                f"طاقه المصدر الكهربائي الثالث العشوائيه: {float(parsed_data['random_MVSG_3_energy'])} كيلووات ساعه\n"
+                f"طَاقَةُ المَصْدَرِ الكَهْرَبَائِيِّ الثَّالِثِ العَشْوَائِيَّةُ: {float(parsed_data['random_MVSG_3_energy'])} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def updated_at_info(parsed_data: dict) -> str:
             return (
-                f"تاريخ التحديث: {parsed_data['updated_at']} \n"
+                f"تَارِيخُ التَّحْدِيثِ: {parsed_data['updated_at']}\n"
             )
 
         @staticmethod
         def gen2_status_info(parsed_data: dict) -> str:
             return (
-                f"حالة المولد رقم 2: {parsed_data['gen2_status']}\n"
+                f"حَالَةُ المُوَلِّدِ رَقْمَ 2: {parsed_data['gen2_status']}\n"
             )
 
         @staticmethod
         def gen2_engine_runtime_info(parsed_data: dict) -> str:
             return (
-                f"وقت تشغيل محرك المولد رقم 2: {float(parsed_data['gen2_engine_runtime'])} ساعات\n"
+                f"وَقْتُ تَشْغِيلِ مُحَرِّكِ المُوَلِّدِ رَقْمَ 2: {float(parsed_data['gen2_engine_runtime'])} سَاعَة\n"
             )
 
         @staticmethod
         def gen2_solar_info(parsed_data: dict) -> str:
             return (
-                f"مخزون الطاقه الشمسيه للمولد رقم 2: {float(parsed_data['gen2_solar'])} كيلووات\n"
+                f"مَخْزُونُ الطَّاقَةِ الشَّمْسِيَّةِ لِلْمُوَلِّدِ رَقْمَ 2: {float(parsed_data['gen2_solar'])} كِيلُووات\n"
             )
 
         @staticmethod
         def gen2_last_op_info(parsed_data: dict) -> str:
             return (
-                f"آخر عملية تشغيل للمولد رقم 2: {parsed_data['gen2_last_op']}\n"
+                f"آخِرُ عَمَلِيَّةِ تَشْغِيلٍ لِلْمُوَلِّدِ رَقْمَ 2: {parsed_data['gen2_last_op']}\n"
             )
 
         @staticmethod
         def gen2_bv_info(parsed_data: dict) -> str:
             return (
-                f"معدل جهد البطارية للمولد رقم 2: {float(parsed_data['gen2_bv'])} فولت\n"
+                f"مُعَدَّلُ جُهْدِ البَطَّارِيَّةِ لِلْمُوَلِّدِ رَقْمَ 2: {float(parsed_data['gen2_bv'])} فُولْت\n"
             )
 
         @staticmethod
         def gen2_volt_info(parsed_data: dict) -> str:
             return (
-                f"معدل جهد المولد رقم 2: {float(parsed_data['gen2_volt'])} فولت\n"
+                f"مُعَدَّلُ جُهْدِ المُوَلِّدِ رَقْمَ 2: {float(parsed_data['gen2_volt'])} فُولْت\n"
             )
 
         @staticmethod
         def gen2_curr_info(parsed_data: dict) -> str:
             return (
-                f"تيار المولد رقم 2: {float(parsed_data['gen2_curr'])} أمبير\n"
+                f"تِيَّارُ المُوَلِّدِ رَقْمَ 2: {float(parsed_data['gen2_curr'])} أَمْبِير\n"
             )
 
         @staticmethod
         def gen2_energy_info(parsed_data: dict) -> str:
             return (
-                f"طاقة المولد رقم 2: {float(parsed_data['gen2_energy'])} كيلووات ساعة\n"
+                f"طَاقَةُ المُوَلِّدِ رَقْمَ 2: {float(parsed_data['gen2_energy'])} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def gen2_object_feed1_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للدور الاول للمولد رقم 2: {parsed_data['gen2_object_feed1']}كيلووات ساعه \n"
+                f"التَّغْذِيَةُ الكَهْرَبَائِيَّةُ لِلْطَابِقِ الأَوَّلِ لِلْمُوَلِّدِ رَقْمَ 2: {parsed_data['gen2_object_feed1']} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def gen2_object_feed2_info(parsed_data: dict) -> str:
             return (
-                f"لتغذية الكربائيه للطابق الثاني للمولد رقم 2: {parsed_data['gen2_object_feed2']}كيلووات ساعه\n"
+                f"التَّغْذِيَةُ الكَهْرَبَائِيَّةُ لِلْطَابِقِ الثَّانِيِّ لِلْمُوَلِّدِ رَقْمَ 2: {parsed_data['gen2_object_feed2']} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def gen2_object_feed3_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكربائيه للطابق الثالث للمولد رقم 2: {parsed_data['gen2_object_feed3']}كيلووات ساعه\n"
+                f"التَّغْذِيَةُ الكَهْرَبَائِيَّةُ لِلْطَابِقِ الثَّالِثِ لِلْمُوَلِّدِ رَقْمَ 2: {parsed_data['gen2_object_feed3']} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def gen2_rated_feedv(parsed_data: dict) -> str:
             return (
-                f"التغذية المقدرة للمولد رقم 2: {parsed_data['gen2_rated_feed']}كيلووات ساعه\n"
+                f"التَّغْذِيَةُ المُقَدَّرَةُ لِلْمُوَلِّدِ رَقْمَ 2: {parsed_data['gen2_rated_feed']} كِيلُووات سَاعَة\n"
             )
 
         @staticmethod
         def gen2_estimated_feed_time_info(parsed_data: dict) -> str:
             return (
-                f"وقت التغذية المتوقع للمولد رقم 2: {parsed_data['gen2_estimated_feed_time']} ساعات\n"
+                f"وَقْتُ التَّغْذِيَةِ المُتَوَقَّعُ لِلْمُوَلِّدِ رَقْمَ 2: {parsed_data['gen2_estimated_feed_time']} سَاعَة\n"
             )
 
         @staticmethod
         def air_4bar_percentage_info(parsed_data: dict) -> str:
             return (
-                f"نسبه ضغط الهواء 4 بار: {float(parsed_data['air_4bar_percentage'])} % \n"
+                f"نِسْبَةُ ضَغْطِ الهَوَاءِ 4 بَار: {float(parsed_data['air_4bar_percentage'])} %\n"
             )
 
         @staticmethod
         def air_7bar_percentage_info(parsed_data: dict) -> str:
             return (
-                f"نسبه ضغط الهواء 4 بار: {float(parsed_data['air_7bar_percentage'])} % \n"
+                f"نِسْبَةُ ضَغْطِ الهَوَاءِ 7 بَار: {float(parsed_data['air_7bar_percentage'])} %\n"
             )
 
         @staticmethod
         def vaccum_percentage_info(parsed_data: dict) -> str:
             return (
-                f"نسبة ضغط السحب: {float(parsed_data['vaccum_percentage'])} % \n"
+                f"نِسْبَةُ ضَغْطِ السَّحْبِ: {float(parsed_data['vaccum_percentage'])} %\n"
             )
 
         @staticmethod
         def oxygen_percentage_info(parsed_data: dict) -> str:
             return (
-                f"نسبة ضغط الأوكسجين: {float(parsed_data['oxygen_percentage'])} % \n"
+                f"نِسْبَةُ ضَغْطِ الأُكْسِيجِينِ: {float(parsed_data['oxygen_percentage'])} %\n"
             )
 
         @staticmethod
         def no_of_surgry_month_info(parsed_data: dict) -> str:
             return (
-                f"عدد العمليات الجراحية في الشهر: {int(parsed_data['no_of_surgry_month'])}عمليات  \n"
+                f"عَدَدُ العَمَلِيَّاتِ الجِرَاحِيَّةِ فِي الشَّهْرِ: {int(parsed_data['no_of_surgry_month'])} عَمَلِيَّة\n"
             )
 
         @staticmethod
         def no_of_dialysis_month_info(parsed_data: dict) -> str:
             return (
-                f"عدد عمليات غسيل الكلى في الشهر: {int(parsed_data['no_of_dialysis_month'])}عمليات \n"
+                f"عَدَدُ عَمَلِيَّاتِ غَسِيلِ الكُلَى فِي الشَّهْرِ: {int(parsed_data['no_of_dialysis_month'])} عَمَلِيَّة\n"
             )
 
         @staticmethod
         def no_of_xrays_month_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأشعة السينية في الشهر: {int(parsed_data['no_of_xrays_month'])} اشاعات\n"
+                f"عَدَدُ الأَشِعَّةِ السِّينِيَّةِ فِي الشَّهْرِ: {int(parsed_data['no_of_xrays_month'])} أَشِعَّة\n"
             )
 
         @staticmethod
         def Inpatient_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_used_monthly'])} اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ لِلْمَرْضَى المُقِيمِينَ شَهْرِيًّا: {int(parsed_data['Inpatient_Beds_used_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def Inpatient_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة للمرضى المقيمين شهرياً: {int(parsed_data['Inpatient_Beds_unused_monthly'])}اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ لِلْمَرْضَى المُقِيمِينَ شَهْرِيًّا: {int(parsed_data['Inpatient_Beds_unused_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def ICU_CCU_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره المستخدمه بالعنايه المركزي لمرضي القلب شهرياً: {int(parsed_data['ICU_CCU_Beds_used_monthly'])}اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المُرَكَّزَةِ لِمَرْضَى القَلْبِ شَهْرِيًّا: {int(parsed_data['ICU_CCU_Beds_used_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def ICU_CCU_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الاسره الغير مستخدمه بالعنايه المركزي لمرضي القلب شهريا: {int(parsed_data['ICU_CCU_Beds_unused_monthly'])} اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المُرَكَّزَةِ لِمَرْضَى القَلْبِ شَهْرِيًّا: {int(parsed_data['ICU_CCU_Beds_unused_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def Emergency_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_used_monthly'])}اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي الطَّوَارِئِ شَهْرِيًّا: {int(parsed_data['Emergency_Beds_used_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def Emergency_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة في الطوارئ شهرياً: {int(parsed_data['Emergency_Beds_unused_monthly'])}اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي الطَّوَارِئِ شَهْرِيًّا: {int(parsed_data['Emergency_Beds_unused_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def Incubators_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة غير المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_unused_monthly'])}اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي الحَاضِنَاتِ شَهْرِيًّا: {int(parsed_data['Incubators_Beds_unused_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def Incubators_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأسرة المستخدمة في الحاضنات شهرياً: {int(parsed_data['Incubators_Beds_used_monthly'])}اسرة\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي الحَاضِنَاتِ شَهْرِيًّا: {int(parsed_data['Incubators_Beds_used_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def no_of_pepole_cam1_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأشخاص الظاهرين في الكاميرا رقم 1: {int(parsed_data['no_of_pepole_cam1'])}اشخاص \n"
+                f"عَدَدُ الأَشْخَاصِ الظَّاهِرِينَ فِي الكَامِيرَا رَقْمَ 1: {int(parsed_data['no_of_pepole_cam1'])} شَخْص\n"
             )
 
         @staticmethod
         def no_of_pepole_cam2_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأشخاص الظاهرين في الكاميرا رقم 2: {int(parsed_data['no_of_pepole_cam2'])}اشخاص \n"
+                f"عَدَدُ الأَشْخَاصِ الظَّاهِرِينَ فِي الكَامِيرَا رَقْمَ 2: {int(parsed_data['no_of_pepole_cam2'])} شَخْص\n"
             )
 
         @staticmethod
         def no_of_pepole_cam3_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأشخاص  الظاهرين في الكاميرا رقم 3: {int(parsed_data['no_of_pepole_cam3'])} اشخاص\n"
+                f"عَدَدُ الأَشْخَاصِ الظَّاهِرِينَ فِي الكَامِيرَا رَقْمَ 3: {int(parsed_data['no_of_pepole_cam3'])} شَخْص\n"
             )
 
         @staticmethod
         def no_of_pepole_cam4_info(parsed_data: dict) -> str:
             return (
-                f"عدد الأشخاص الظاهرين في الكاميرا رقم 4: {int(parsed_data['no_of_pepole_cam4'])}اشخاص \n"
+                f"عَدَدُ الأَشْخَاصِ الظَّاهِرِينَ فِي الكَامِيرَا رَقْمَ 4: {int(parsed_data['no_of_pepole_cam4'])} شَخْص\n"
             )
 
         @staticmethod
         def daily_carbon_foot_print_info(parsed_data: dict) -> str:
             return (
-                f"البصمة الكربونية اليومية: {float(parsed_data['daily_carbon_foot_print'])} كيلوجرام /متر مربع\n"
+                f"البَصْمَةُ الكَرْبُونِيَّةُ اليَوْمِيَّةُ: {float(parsed_data['daily_carbon_foot_print'])} كِيلُوجرام/مِتْر مُرَبَّع\n"
             )
 
         @staticmethod
         def monthly_carbon_foot_print_info(parsed_data: dict) -> str:
             return (
-                f"البصمة الكربونية الشهرية: {float(parsed_data['daily_carbon_foot_print'])} كيلوجرام / متر مربع\n"
+                f"البَصْمَةُ الكَرْبُونِيَّةُ الشَّهْرِيَّةُ: {float(parsed_data['monthly_carbon_foot_print'])} كِيلُوجرام/مِتْر مُرَبَّع\n"
             )
-        
+
         @staticmethod
         def invoices_information_info(parsed_data: dict) -> str:
             return (
-                f" معلومات الفواتير الشهريه:\n"
-                f" تكلفه المياه الشهريه  : {int(float(parsed_data['monthly_water_cost']))} جنيها\n"
-                f" تكلفه الاكسجين الشهريه : {int(float(parsed_data['monthly_oxygen_cost']))} جنيها\n\n"
-                f" تكلفه الكهرباء الشهريه  : {int(float(parsed_data['monthlycost_sg']))} جنيها\n\n"
+                f"مَعْلُومَاتُ الفَوَاتِيرِ الشَّهْرِيَّةِ:\n"
+                f"تَكْلِفَةُ المِيَاهِ الشَّهْرِيَّةِ: {int(float(parsed_data['monthly_water_cost']))} جُنَيْه\n"
+                f"تَكْلِفَةُ الأُكْسِيجِينِ الشَّهْرِيَّةِ: {int(float(parsed_data['monthly_oxygen_cost']))} جُنَيْه\n\n"
+                f"تَكْلِفَةُ الكَهْرَبَاءِ الشَّهْرِيَّةِ: {int(float(parsed_data['monthlycost_sg']))} جُنَيْه\n\n"
             )
 
                 
