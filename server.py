@@ -3,6 +3,7 @@ import sys
 import json
 import uvicorn
 import logging
+import argparse
 from datetime import datetime
 from dotenv import load_dotenv
 from line_profiler import profile
@@ -20,6 +21,10 @@ from ems_zeta_voice.config import StationTwoConfigurator, StationFourConfigurato
     
 
 load_dotenv()
+# Parse command-line arguments for mode
+parser = argparse.ArgumentParser(description="Run the voice handler service with specified mode.")
+parser.add_argument("--mode", type=str, default="original", choices=["original", "openai"], help="Select the mode to use: original or openai")
+args = parser.parse_args()
 
 app = FastAPI()
 app.add_middleware(
@@ -33,21 +38,19 @@ app.add_middleware(
 log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 file_handler = RotatingFileHandler('app.log', maxBytes=1024*1024, backupCount=10)
 file_handler.setFormatter(log_formatter)
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-logger.addHandler(file_handler)
 
 db_name = 'stations'
-db_uri = "mongodb://root:ZZ4P6ePRfmmL8Z()3aFk@154.176.111.41:27017/"  
+db_uri = "mongodb://root:ZZ4P6ePRfmmL8Z()3aFk@localhost:27017/"  
 station_two_collection = db.connect_to_mongodb(db_uri, db_name, '2')
 station_three_collection = db.connect_to_mongodb(db_uri, db_name, '3')
 station_four_collection = db.connect_to_mongodb(db_uri, db_name, '4')
 station_five_collection = db.connect_to_mongodb(db_uri, db_name, '5')
 station_inv_collection = db.connect_to_mongodb(db_uri, db_name, 'sewage-station-investors-ext')
-suez_medical_complex_collection = db.connect_to_mongodb(db_uri, db_name,'smc')
+suez_medical_complex_collection = db.connect_to_mongodb(db_uri,db_name, 'smc')
 
-voice_handler = VoiceHandler(language="ar")
+voice_handler = VoiceHandler(language="ar", mode=args.mode)
 
 date_classifier = ChainClassifier(classes=['date', 'no_date'], descriptions="If the input contains date of\
                                             indication to any day ratherthan today return 'date'.\
@@ -390,178 +393,117 @@ suez_medical_complex_classifier = ChainClassifier(
            "ICU_CCU_Beds_used_monthly","ICU_CCU_Beds_unused_monthly","Emergency_Beds_used_monthly","Emergency_Beds_unused_monthly",
            "Incubators_Beds_unused_monthly", "Incubators_Beds_used_monthly", "no_of_pepole_cam1","no_of_pepole_cam2", "no_of_pepole_cam3", "no_of_pepole_cam4",
            "daily_carbon_foot_print","monthly_carbon_foot_print","invoices_information" 'report', 'zeeta', 'other'
-    
-           
-
-
 
           
 
 
     ],
-    descriptions="""When asked generally about the bed occupancy rate, return 'Beds_Occupancy_Rate'.
-                    When asked about the non-Patients usage of beds or Inpatient beds used,
-                    return 'Inpatient_Beds_used'. Likewise, when asked about Inpatient beds that are not used, return 'Inpatient_Beds_unused'.
-                    When asked about Intensive care unit and Cardiac care unit beds that are used, return 'ICU_CCU_Beds_used' 
-                    when asked about Intensive care unit and Cardiac care unit beds that are unused and available, return 'ICU_CCU_Beds_unused' when
-                    When asked about Emergency beds that are used or unavailable, return 'Emergency_Beds_used'
-                    When asked about Emergency beds that are unsed or available, return 'Emergency_Beds_Unused'
-                    When asked about Incubator beds that are used or unavailable, return 'Incubators_Beds_used'
-                    When asked about Incubator beds that are unused or available, return 'Incubators_Beds_Unused'
-                    When asked generally  about all Hospital beds that are used and unavailable, return 'Total_Hospital_Beds_used'
-                    When asked generally  about all Hospital beds that are unused and available, return 'Total_Hospital_Beds_Unused'
-                    When asked about the Switch gear monthly costs , return 'monthlycost_sg'. Return 'monthly_water_cost' for Monthly Water Costs, 
-                    'monthly_oxygen_cost' for Monthly oxygen costs,
-                    When asked about hospital Occupancy rate, return 'Hospital_Occupancy_Rate'. Return 'Clinic_Occupancy_Rate' for Clinic occupancy Rate
-                    
-                    When asked about the violation of mask wearing policy in the hosbital , return 'Mask_Policy_Violations'
-                    When asked about the social distance policy ,return 'Social_Distance_Violations'
-                    When asked about the number of falls detecteed in the hospital ,return 'NuOF_Detected_Falls'
-                    When asked about  how many transformer is currently switched on ,return 'transformer_on'
-                    When asked about  how many transformer is currently switched of ,return 'transformer_Off'
-                    When asked about how many the generator is currently on or switched  ,return 'generator_on'
-                    When asked about  how many generator is currently not on switched off ,return 'generator_off'
-                    When asked about how many  Elevator is currently in opertaion ,return 'Elevator_on'
-                    When asked about how manyElevator is currently not in opertaion ,return 'Elevator_of'
-                    When asked about the total cost of the whole complex for the month ,return 'monthly_total_cost'
-                    When asked about if there is alarm on hvac system ,return 'HVAC_alarm'
-                    When asked about if there is alarm on alarms related to medical gass system system  ,return 'medical_gas_alarm'
-                    When asked about alarms if there is alarm on related to fire fighting system ,return 'fire_fighting_alarm'
-                    When asked about alarms if there is alarm on related to the transformer  ,return 'transformer_alarm'
-                    When asked about alarms if there is alarm on related to the elevator ,return 'elevator_alarm'
-                    When asked about how many air handling unit switched on ,return 'F_AHU_ON'
-                    When asked about the air handling unit switched off ,return 'F_AHU_OFF'
-                    When asked about  how many chiller in operation  ,return 'chiller_on'
-                    When asked about how many chiller not in operation  ,return 'chiller_off'
-                    When asked about the total energy consumption for Medium Voltage switch gear or the whole complex , return 'monthlyenergy_MVSG'
-                    When asked about vaccum pressure measurment, return'vaccum_press'
-                    When asked about the pressure of 4bar, return 'air_4bar_press'
-                    When asked about the pressure of 7bar ,return 'air_7bar_press'
-                    When asked about the pressure of oxygen in the system, return 'oxygen_press'
-                    When asked about the daily energy consumption for MVSG or the whole complex  return, 'dailyenergy_MVSG'
-                    When asked about the incoming 2 daily energy consumption for MVSG return, 'dailyenergy_MVSG_incoming2_energy'
-                    When asked about the incoming 3 daily energy consumption for MVSG  return, 'dailyenergy_MVSG_incoming3_energy'
-                    When asked about daily energy for the hospital , return 'dailyenergy_Hospital'
-                    When asked about the daily energy consumption for the clinc, return 'dailyenergy_Clinics'
-                    When asked about the daily energy consumption for the utilities, return 'dailyenergy_Utilities'
-                    When asked about the daily energy consumption for electrical system, return 'dailyenergy_ele'
-                    When asked about the daily energy consumption for chillers, return 'dailyenergy_chillers'
-                    When asked about the daily energy consumption for the Air handling units, return 'dailyenergy_AHU'
-                    When asked about the daily energy consumption for  boilers, return 'dailyenergy_Boilers'
-                    When asked about the monthly energy consumption from incoming source 2 for MVSG, return 'monthlyenergy_MVSG_incoming2_energy'
-                    When asked about the monthly energy consumption from incoming source 3 for MVSG ,return 'monthlyenergy_MVSG_incoming3_energy'
-                    When asked about the monthly energy consumption for the hospital, return 'monthlyenergy_Hospital'
-                    When asked about the monthly energy consumption for the clinics, return 'monthlyenergy_Clinics'
-                    When asked about the monthly energy consumption for  utilities ,return 'monthlyenergy_Utilities'
-                    When asked about the monthly energy consumption for electrical system, return 'monthlyenergy_ele'
-                    When asked about the monthly energy consumption for chillers , return return 'monthlyenergy_chillers'
-                    When asked about the monthly energy consumption for the Air handling units, return 'monthlyenergy_AHU'
-                    When asked about the monthly energy consumption for  boilers, return 'monthlyenergy_Boilers'
-                    When asked about the daily cost for switch gear or the whole complex ,return 'dailycost_sg'
-                    When asked about the yearly energy consumption for MVSG, return 'yearlyenergy_MVSG'
-                    When asked about the yearly cost for switch gear, return 'yearlycost_sg'
-                    When asked about the monthly cost in the ground floor ,return 'monthlycost_g'
-                    When asked about the monthly cost in the first floor, return 'monthlycost_f'
-                    When asked about the monthly cost in the second floor, return 'monthlycost_s'
-                    When asked about the monthly cost in the third floor, return 'monthlycost_th'
-                    When asked about the monthly cost in the roof, return 'monthlycost_roof'
-                    When asked about the the monthly cost for the Hospital, return 'monthlycost_Hospital'
-                    When asked about the monthly cost for the clinic, return 'monthlycost_clinic'
-                    When asked about the monthly cost for the utilities, return 'monthlycost_Utilities'
-                    When asked about the daily water consumption, return 'daily_water_consumption'
-                    When asked about the monthly water consumption, return 'monthly_water_consumption'
-                    When asked about the daily cost of water, return 'daily_water_cost'
-                    When asked about the yearly water consumption, return 'yearly_water_consumption'
-                    When asked about the yearly cost of water, return 'yearly_water_cost'
-                    When asked about the daily oxygen consumption, return 'daily_oxygen_consumption'
-                    When asked about the monthly oxygen consumption, return 'monthly_oxygen_consumption'
-                    When asked about the daily cost of oxygen, return 'daily_oxygen_cost'
-                    When asked about the yearly oxygen consumption ,return 'yearly_oxygen_consumption'
-                    When asked about the yearly cost of oxygen ,return 'yearly_oxygen_cost'
-                    When asked about the status of generator 1 is on or of ,return 'gen1_status'
-                    When asked about the runtime of generator 1 engine,  return 'gen1_engine_runtime'
-                    When asked about the solar power input  of generator 1, return 'gen1_solar'
-                    When asked about the last opreator time  of generator 1, return 'gen1_last_op'
-                    When asked about if generator is ready or not ready of  , return 'gen1_bv'
-                    When asked about the voltage of generator 1, return 'gen1_volt'
-                    When asked about the current of generator 1 ,return 'gen1_curr'
-                    When asked about the energy output of generator 1, return 'gen1_energy'
-                    When asked about the object feed of generator 1, return 'gen1_object_feed1'and'gen1_object_feed2'and'gen1_object_feed3'
-                    When asked about the rated feed of generator 1, return 'gen1_rated_feed'
-                    When asked about the feed time of generator 1,  return 'gen1_estimated_feed_time'
-                    When asked about the status of chiller 1,  return 'chiller1_status'
-                    When asked about the supply temperature of chiller 1,  return 'chiller1_supply_temp'
-                    When asked about the return temperature of chiller 1, return 'chiller1_return_temp'
-                    When asked about the status of chiller 2 , return 'chiller2_status'
-                    When asked about the supply temperature of chiller 2 ,return 'chiller2_supply_temp'
-                    When asked about the return temperature of chiller 2  ,return 'chiller2_return_temp'
-                    When asked about the status of chiller 3, return 'chiller3_status'
-                    When asked about the supply temperature of chiller 3, return 'chiller3_supply_temp'
-                    When asked about the return temperature of chiller 3, return 'chiller3_return_temp'
-                    When asked about the status of chiller 4 , return 'chiller4_status'
-                    When asked about the supply temperature of chiller 4, return 'chiller4_supply_temp'
-                    When asked about the return temperature of chiller 4, return 'chiller4_return_temp'
-                    When asked about the operational hours of chillers, return 'chillers_op_hours'
-                    When asked about the operational hours of chiller 1, return 'chiller1_op_hours'
-                    When asked about the operational hours of chiller 2,  return 'chiller2_op_hours'
-                    When asked about the operational hours of chiller 3, return 'chiller3_op_hours'
-                    When asked about the operational hours of chiller 4, return 'chiller4_op_hours'
-                    When asked about the monthly energy consumption of chiller 1, return 'monthlyenergy_chiller1'
-                    When asked about the monthly energy consumption of chiller 2, return 'monthlyenergy_chiller2'
-                    When asked about the monthly energy consumption of chiller 3, return 'monthlyenergy_chiller3'
-                    When asked about the monthly energy consumption of chiller 4, return 'monthlyenergy_chiller4'
-                    When asked about the number of patients that will stay over the night , return 'in-Patients'
-                    When asked about the number of number of patients that will leave and not stay over the night, return 'out-Patients'
-                    When asked about the operation cost of the chiller system, return 'chillers_sys_operation_cost'
-                    When asked about the main return temperature return 'main_return_temp'
-                    When asked about the supply temperature, return  'main_supply_temp'
-                    When asked about the maintenance hours for chiller 1, return 'chiller1_maintenance_hours'
-                    When asked about the maintenance hours for chiller 2, return 'chiller2_maintenance_hours'
-                    When asked about the maintenance hours for chiller 3, return 'chiller3_maintenance_hours'
-                    When asked about the maintenance hours for chiller 4, return 'chiller4_maintenance_hours'
+    descriptions="""عند السؤال بشكل عام عن نسبة إشغال الأسرة، ارجع 'Beds_Occupancy_Rate'.  
+            عند السؤال عن استخدام الأسرة من قبل غير المرضى أو الأسرة المستخدمة للمرضى الداخليين، ارجع 'Inpatient_Beds_used'. وبالمثل، عند السؤال عن الأسرة الداخلية غير المستخدمة، ارجع 'Inpatient_Beds_unused'.  
+            عند السؤال عن الأسرة المستخدمة في وحدة العناية المركزة ووحدة العناية القلبية، ارجع 'ICU_CCU_Beds_used'.  
+            عند السؤال عن الأسرة غير المستخدمة والمتاحة في وحدة العناية المركزة ووحدة العناية القلبية، ارجع 'ICU_CCU_Beds_unused'.  
+            عند السؤال عن الأسرة المستخدمة أو غير المتاحة في الطوارئ، ارجع 'Emergency_Beds_used'.  
+            عند السؤال عن الأسرة غير المستخدمة أو المتاحة في الطوارئ، ارجع 'Emergency_Beds_Unused'.  
+            عند السؤال عن الأسرة المستخدمة أو غير المتاحة في الحاضنات، ارجع 'Incubators_Beds_used'.  
+            عند السؤال عن الأسرة غير المستخدمة أو المتاحة في الحاضنات، ارجع 'Incubators_Beds_Unused'.  
+            عند السؤال بشكل عام عن جميع الأسرة المستخدمة وغير المتاحة في المستشفى، ارجع 'Total_Hospital_Beds_used'.  
+            عند السؤال بشكل عام عن جميع الأسرة غير المستخدمة والمتاحة في المستشفى، ارجع 'Total_Hospital_Beds_Unused'.  
+            عند السؤال عن تكلفة معدات التحويل الشهرية، ارجع 'monthlycost_sg'.  
+            ارجع 'monthly_water_cost' لتكاليف المياه الشهرية، 'monthly_oxygen_cost' لتكاليف الأكسجين الشهرية،  
+            عند السؤال عن نسبة إشغال المستشفى، ارجع 'Hospital_Occupancy_Rate'.  
+            ارجع 'Clinic_Occupancy_Rate' لنسبة إشغال العيادة.  
 
-                    When asked about the Status of generator 2, return 'gen2_status'
-                    When asked about the Runtime of generator 2, return 'gen2_engine_runtime'
-                    When asked about the solar power input  of generator 2, return 'gen2_solar'
-                    When asked about the last opreator time  of generator 2, return 'gen2_last_op'
-                    When asked about the  battery voltage if its ready or not ready of generator 2 , return 'gen2_bv'
-                    When asked about the voltage of generator 2, return 'gen2_volt'
-                    When asked about the current of generator 2 ,return 'gen2_curr'
-                    When asked about the energy output of generator 2, return 'gen2_energy'
-                    When asked about the object feed of generator 2, return 'gen2_object_feed1' and 'gen2_object_feed2'and gen2_object_feed3'
-                    When asked about the feed time of generator 1,  return 'gen1_estimated_feed_time'
-                    When asked about the 4 bar air pressure percentage , return air_4bar_percentage'
-                    When asked about the 7 bar air pressure percentage , return air_7bar_percentage'
-                    When asked about the vaccum pressure percentage , return 'vaccum_percentage'   
-                    When asked about the Oxygen pressure percentage , return 'oxygen_percentage'   
-                    When asked about the number off surgeries preformed in a month , return 'no_of_surgry_month'  
-                    When asked about the number off dialysis operaions preformed in a month , return 'no_of_surgry_month'  
-                    When asked about the number of x rays taken in a month, return 'no_of_xrays_month'
-                    When asked about the non-Patients usage of beds or Inpatient beds used in a month,
-                    return 'Inpatient_Beds_used_monthly'. Likewise, when asked about Inpatient beds that are not used in a month, return 'Inpatient_Beds_unused_monthly'.
-                    When asked about Intensive care unit and Cardiac care unit beds that are used in a month, return 'ICU_CCU_Beds_used_monthly' 
-                    when asked about Intensive care unit and Cardiac care unit beds that are unused and available in a month, return 'ICU_CCU_Beds_unused_monthly' when
-                    When asked about Emergency beds that are used or unavailable in a month, return 'Emergency_Beds_used_monthly'
-                    When asked about Emergency beds that are unsed or available in a month, return 'Emergency_Beds_Unused_monthly'
-                    When asked about Incubator beds that are used or unavailable in a monh, return 'Incubators_Beds_used_monthly'
-                    When asked about Incubator beds that are unused or available in a month, return 'Incubators_Beds_Unused_monthly'                    
-                    When asked about number of people seen by camera 1, return 'no_of_pepole_cam1'
-                    When asked about number of people seen by camera 2, return 'no_of_pepole_cam2'
-                    When asked about number of people seen by camera 3, return 'no_of_pepole_cam3'
-                    When asked about number of people seen by camera 4, return 'no_of_pepole_cam4'
-                    When asked about daily carbon footprint across the whole complex, return'daily_carbon_foot_print'
-                    When asked about Monthly carbon footprint across the whole complex, return'monthly_carbon_foot_print'
-                    when asked about invoices information,return 'invoices_information'
+            عند السؤال عن انتهاك سياسة ارتداء الكمامات في المستشفى، ارجع 'Mask_Policy_Violations'.  
+            عند السؤال عن سياسة التباعد الاجتماعي، ارجع 'Social_Distance_Violations'.  
+            عند السؤال عن عدد السقطات المكتشفة في المستشفى، ارجع 'NuOF_Detected_Falls'.  
+            عند السؤال عن عدد المحولات التي تم تشغيلها حاليًا، ارجع 'transformer_on'.  
+            عند السؤال عن عدد المحولات التي تم إيقاف تشغيلها حاليًا، ارجع 'transformer_Off'.  
+            عند السؤال عن عدد المولدات التي تعمل حاليًا أو التي تم تشغيلها، ارجع 'generator_on'.  
+            عند السؤال عن عدد المولدات التي لم يتم تشغيلها حاليًا، ارجع 'generator_off'.  
+            عند السؤال عن عدد المصاعد التي تعمل حاليًا، ارجع 'Elevator_on'.  
+            عند السؤال عن عدد المصاعد التي لا تعمل حاليًا، ارجع 'Elevator_of'.  
+            عند السؤال عن التكلفة الإجمالية للمجمع بالكامل للشهر، ارجع 'monthly_total_cost'.  
+            عند السؤال عن وجود إنذار في نظام التدفئة والتهوية وتكييف الهواء (HVAC)، ارجع 'HVAC_alarm'.  
+            عند السؤال عن وجود إنذار يتعلق بنظام الغاز الطبي، ارجع 'medical_gas_alarm'.  
+            عند السؤال عن وجود إنذار يتعلق بنظام مكافحة الحرائق، ارجع 'fire_fighting_alarm'.  
+            عند السؤال عن وجود إنذار يتعلق بالمحول الكهربائي، ارجع 'transformer_alarm'.  
+            عند السؤال عن وجود إنذار يتعلق بالمصعد، ارجع 'elevator_alarm'.  
+            عند السؤال عن عدد وحدات معالجة الهواء التي تم تشغيلها، ارجع 'F_AHU_ON'.  
+            عند السؤال عن وحدات معالجة الهواء التي تم إيقاف تشغيلها، ارجع 'F_AHU_OFF'.  
+            عند السؤال عن عدد المبردات التي تعمل، ارجع 'chiller_on'.  
+            عند السؤال عن عدد المبردات التي لا تعمل، ارجع 'chiller_off'.  
+            عند السؤال عن إجمالي استهلاك الطاقة لمعدات التحويل ذات الجهد المتوسط (MVSG) أو للمجمع بالكامل، ارجع 'monthlyenergy_MVSG'.  
+            عند السؤال عن قياس ضغط الفراغ، ارجع 'vaccum_press'.  
+            عند السؤال عن ضغط 4 بار، ارجع 'air_4bar_press'.  
+            عند السؤال عن ضغط 7 بار، ارجع 'air_7bar_press'.  
+            عند السؤال عن ضغط الأكسجين في النظام، ارجع 'oxygen_press'.  
+            عند السؤال عن استهلاك الطاقة اليومي لمعدات التحويل ذات الجهد المتوسط أو المجمع بالكامل، ارجع 'dailyenergy_MVSG'.  
+            عند السؤال عن استهلاك الطاقة اليومي للمصدر الثاني لمعدات التحويل ذات الجهد المتوسط، ارجع 'dailyenergy_MVSG_incoming2_energy'.  
+            عند السؤال عن استهلاك الطاقة اليومي للمصدر الثالث لمعدات التحويل ذات الجهد المتوسط، ارجع 'dailyenergy_MVSG_incoming3_energy'.  
+            عند السؤال عن استهلاك الطاقة اليومي للمستشفى، ارجع 'dailyenergy_Hospital'.  
+            عند السؤال عن استهلاك الطاقة اليومي للعيادة، ارجع 'dailyenergy_Clinics'.  
+            عند السؤال عن استهلاك الطاقة اليومي للمرافق، ارجع 'dailyenergy_Utilities'.  
+            عند السؤال عن استهلاك الطاقة اليومي للنظام الكهربائي، ارجع 'dailyenergy_ele'.  
+            عند السؤال عن استهلاك الطاقة اليومي للمبردات، ارجع 'dailyenergy_chillers'.  
+            عند السؤال عن استهلاك الطاقة اليومي لوحدات معالجة الهواء، ارجع 'dailyenergy_AHU'.  
+            عند السؤال عن استهلاك الطاقة اليومي للغلايات، ارجع 'dailyenergy_Boilers'.  
+            عند السؤال عن استهلاك الطاقة الشهري للمصدر الثاني لمعدات التحويل ذات الجهد المتوسط، ارجع 'monthlyenergy_MVSG_incoming2_energy'.  
+            عند السؤال عن استهلاك الطاقة الشهري للمصدر الثالث لمعدات التحويل ذات الجهد المتوسط، ارجع 'monthlyenergy_MVSG_incoming3_energy'.  
+            عند السؤال عن استهلاك الطاقة الشهري للمستشفى، ارجع 'monthlyenergy_Hospital'.  
+            عند السؤال عن استهلاك الطاقة الشهري للعيادات، ارجع 'monthlyenergy_Clinics'.  
+            عند السؤال عن استهلاك الطاقة الشهري للمرافق، ارجع 'monthlyenergy_Utilities'.  
+            عند السؤال عن استهلاك الطاقة الشهري للنظام الكهربائي، ارجع 'monthlyenergy_ele'.  
+            عند السؤال عن استهلاك الطاقة الشهري للمبردات، ارجع 'monthlyenergy_chillers'.  
+            عند السؤال عن استهلاك الطاقة الشهري لوحدات معالجة الهواء، ارجع 'monthlyenergy_AHU'.  
+            عند السؤال عن استهلاك الطاقة الشهري للغلايات، ارجع 'monthlyenergy_Boilers'.  
+            عند السؤال عن تكلفة معدات التحويل اليومية أو المجمع بالكامل، ارجع 'dailycost_sg'.  
+            عند السؤال عن استهلاك الطاقة السنوي لمعدات التحويل ذات الجهد المتوسط، ارجع 'yearlyenergy_MVSG'.  
+            عند السؤال عن تكلفة معدات التحويل السنوية، ارجع 'yearlycost_sg'.  
+            عند السؤال عن التكلفة الشهرية في الطابق الأرضي، ارجع 'monthlycost_g'.  
+            عند السؤال عن التكلفة الشهرية في الطابق الأول، ارجع 'monthlycost_f'.  
+            عند السؤال عن التكلفة الشهرية في الطابق الثاني، ارجع 'monthlycost_s'.  
+            عند السؤال عن التكلفة الشهرية في الطابق الثالث، ارجع 'monthlycost_th'.  
+            عند السؤال عن التكلفة الشهرية على السطح، ارجع 'monthlycost_roof'.  
+            عند السؤال عن التكلفة الشهرية للمستشفى، ارجع 'monthlycost_Hospital'.  
+            عند السؤال عن التكلفة الشهرية للعيادة، ارجع 'monthlycost_clinic'.  
+            عند السؤال عن التكلفة الشهرية للمرافق، ارجع 'monthlycost_Utilities'.  
+            عند السؤال عن استهلاك المياه اليومي، ارجع 'daily_water_consumption'.  
+            عند السؤال عن استهلاك المياه الشهري، ارجع 'monthly_water_consumption'.  
+            عند السؤال عن تكلفة المياه اليومية، ارجع 'daily_water_cost'.  
+            عند السؤال عن استهلاك المياه السنوي، ارجع 'yearly_water_consumption'.  
+            عند السؤال عن تكلفة المياه السنوية، ارجع 'yearly_water_cost'.  
+            عند السؤال عن استهلاك الأكسجين اليومي، ارجع 'daily_oxygen_consumption'.  
+            عند السؤال عن استهلاك الأكسجين الشهري، ارجع 'monthly_oxygen_consumption'.  
+            عند السؤال عن تكلفة الأكسجين اليومية، ارجع 'daily_oxygen_cost'.  
+            عند السؤال عن استهلاك الأكسجين السنوي، ارجع 'yearly_oxygen_consumption'.  
+            عند السؤال عن تكلفة الأكسجين السنوية، ارجع 'yearly_oxygen_cost'.  
+            عند السؤال عن حالة المولد 1، ارجع 'gen1_status'.  
+            عند السؤال عن وقت تشغيل محرك المولد 1، ارجع 'gen1_engine_runtime'.  
+            عند السؤال عن مدخل الطاقة الشمسية للمولد 1، ارجع 'gen1_solar'.  
+            عند السؤال عن آخر وقت تشغيل للمشغل للمولد 1، ارجع 'gen1_last_op'.  
+            عند السؤال عن ما إذا كان المولد جاهزًا أم لا، ارجع 'gen1_bv'.  
+            عند السؤال عن جهد المولد 1، ارجع 'gen1_volt'.  
+            عند السؤال عن تيار المولد 1، ارجع 'gen1_curr'.
 
-
-
-
-
-
-
-
- 
-                    Return 'report' when asked about a report about the The complex information.
+            
+            عند السؤال عن قدرة المولد 1، ارجع 'gen1_kw'.  
+            عند السؤال عن حالة الوقود للمولد 1، ارجع 'gen1_fuel'.  
+            عند السؤال عن حالة الزيت للمولد 1، ارجع 'gen1_oil'.  
+            عند السؤال عن حالة المياه للمولد 1، ارجع 'gen1_water'.  
+            عند السؤال عن وضع الشاحن للمولد 1، ارجع 'gen1_charge'.  
+            عند السؤال عن حالة المولد 2، ارجع 'gen2_status'.  
+            عند السؤال عن وقت تشغيل محرك المولد 2، ارجع 'gen2_engine_runtime'.  
+            عند السؤال عن مدخل الطاقة الشمسية للمولد 2، ارجع 'gen2_solar'.  
+            عند السؤال عن آخر وقت تشغيل للمشغل للمولد 2، ارجع 'gen2_last_op'.  
+            عند السؤال عن ما إذا كان المولد جاهزًا أم لا، ارجع 'gen2_bv'.  
+            عند السؤال عن جهد المولد 2، ارجع 'gen2_volt'.  
+            عند السؤال عن تيار المولد 2، ارجع 'gen2_curr'.  
+            عند السؤال عن قدرة المولد 2، ارجع 'gen2_kw'.  
+            عند السؤال عن حالة الوقود للمولد 2، ارجع 'gen2_fuel'.  
+            عند السؤال عن حالة الزيت للمولد 2، ارجع 'gen2_oil'.  
+            عند السؤال عن حالة المياه للمولد 2، ارجع 'gen2_water'.  
+            عند السؤال عن وضع الشاحن للمولد 2، ارجع 'gen2_charge'.
+            عند السؤال عن الفواتير الشهريه للمستشفي 2، ارجع 'invoices_information'.
                     """,
     llm=ChatOpenAI,
     llm_kwds={}
@@ -734,8 +676,8 @@ suez_medical_complex_mapper = {
     'daily_carbon_foot_print': SuezMedicalComplexConfigurator.Home.daily_carbon_foot_print_info,
     'monthly_carbon_foot_print': SuezMedicalComplexConfigurator.Home.monthly_carbon_foot_print_info,
     'invoices_information' :SuezMedicalComplexConfigurator.Home.invoices_information_info,
+   
 
-    
 
     'report': SuezMedicalComplexConfigurator.Home.return_complex_report_info,
     'zeeta': CommonConfigurator.zeeta_info, 
@@ -759,87 +701,127 @@ id_collections_mapper = {
     'sewage-station-investors-ext': station_inv_collection
 }
 
+import asyncio
+import json
+from datetime import datetime
+import os
+import logging
+
+logger = logging.getLogger(__name__)
+
 @profile
 async def suez_request_handler(complex_data, voice_file):
-    complex_data = json.loads(complex_data)
-    transcript = await voice_handler.speech_to_text(audio_file=voice_file.file)
-    print(transcript)
-    dated_request = await date_classifier.ainvoke({'input': transcript})
-    dated_request = ''.join(e for e in dated_request if e.isalnum() or e == '_')    
-    if dated_request == 'date':
-        dates = await date_extraction.ainvoke({'input': transcript})
-        print(dates)
-        start_date = dates.get('start_date', str(datetime.now().strftime("%Y-%m-%d")))
-        collection = suez_medical_complex_collection
-        if dates.get('end_date') == None:
-            end_date = start_date
+    try:
+        complex_data = json.loads(complex_data)
+
+        # Asynchronously perform speech-to-text and classify the request in parallel
+        transcript = await voice_handler.speech_to_text(audio_file=voice_file.file)
+        dated_request = await date_classifier.ainvoke({'input': transcript})
+        
+        logger.info(f'Transcription is: {transcript}')
+        dated_request = ''.join(e for e in dated_request if e.isalnum() or e == '_')
+
+        if dated_request == 'date':
+            dates = await date_extraction.ainvoke({'input': transcript})
+            date = dates.get('date', str(datetime.now().strftime("%Y-%m-%d")))
+            logger.info(f'The request date is: {date}')
+            collection = suez_medical_complex_collection
+            logger.info(f'Data collection is: {collection}')
+            complex_data = db.get_last_document_for_date(collection, date)
         else:
-            end_date = dates.get('end_date')
-        print("Data collection is: ", collection)
-        complex_data = db.calculate_sums(db.get_documents_between_dates(collection, start_date, end_date))
-    else:
-        complex_data = complex_data
-    
-    classifier = suez_medical_complex_classifier
-    selected_data = await classifier.ainvoke({'input': transcript})
-    selected_data = ''.join(e for e in selected_data if e.isalnum() or e == '_')
-    print(selected_data)
-    output_text = suez_medical_complex_mapper[selected_data](complex_data)
-    print(output_text)
-    if dated_request == 'date':
-        _, audio_data = await voice_handler.text_to_speech(text_data = "المعلومات التالية في الفترة الزمنية المطلوبة " + output_text + "\n شكرا لاستخدامك منصة زِيتَا \n")
-    else:
-        _, audio_data = await voice_handler.text_to_speech(text_data = output_text + "\n شكرا لاستخدامك منصة زِيتَا \n")
-    os.remove(_)
-    return audio_data
+            complex_data = complex_data
+        
+        selected_data = await suez_medical_complex_classifier.ainvoke({'input': transcript})
+        
+        selected_data = ''.join(e for e in selected_data if e.isalnum() or e == '_')
+
+        # Map the selected data to the appropriate output
+        output_text = suez_medical_complex_mapper.get(selected_data, lambda x: "لم يتم العثور على البيانات المطلوبة")(complex_data)
+        logger.info(f'Final output is: {output_text}')
+
+        # Add prefix for date requests and generate audio output
+        if dated_request == 'date':
+            _, audio_data = await voice_handler.text_to_speech(
+                text_data="المعلومات التالية في الفترة الزمنية المطلوبة " + output_text + "\n شكرا لاستخدامك منصة زِيتَا \n"
+            )
+        else:
+            _, audio_data = await voice_handler.text_to_speech(
+                text_data=output_text + "\n شكرا لاستخدامك منصة زِيتَا \n"
+            )
+
+        # Cleanup temporary file
+        os.remove(_)
+        return audio_data
+    except Exception as e:
+        logger.error(f'Error in suez_request_handler: {e}')
+        return await voice_handler.text_to_speech(text_data="حدث خطأ أثناء معالجة الطلب")
 
 @profile
-async def request_handler(stations_data, voice_file):
-    payload = json.loads(stations_data)
-    current_station_id = payload.get("current_index")
-    stations_data = payload.get("stations_data", {})
-    transcript = await voice_handler.speech_to_text(audio_file=voice_file.file)
-    print(transcript)
-    station_id = await station_classifier.ainvoke({'input': transcript})
-    station_id = ''.join(e for e in station_id if e.isalnum() or e == '-')
-    if station_id == 'current':
-        station_id = current_station_id
+async def station_request_handler(stations_data, voice_file):
+    try:
+        payload = json.loads(stations_data)
+        current_station_id = payload.get("current_index")
+        stations_data = payload.get("stations_data", {})
+        # Asynchronously fetch both transcript and station ID in parallel
+        transcript = await voice_handler.speech_to_text(audio_file=voice_file.file)
+        station_id = await station_classifier.ainvoke({'input': transcript})
+        print(transcript)
+        station_id = ''.join(e for e in station_id if e.isalnum() or e == '-')
+        logger.info(f'Station ID: {station_id}, Transcription: {transcript}')
 
-    print("STATION IS: ", station_id)
-    dated_request = await date_classifier.ainvoke({'input': transcript})
-    dated_request = ''.join(e for e in dated_request if e.isalnum() or e == '_')    
-    if dated_request == 'date':
-        dates = await date_extraction.ainvoke({'input': transcript})
-        print(dates)
-        start_date = dates.get('start_date', str(datetime.now().strftime("%Y-%m-%d")))
-        collection = id_collections_mapper[station_id]
-        if dates.get('end_date') == None:
-            end_date = start_date
+        if station_id == 'current':
+            station_id = current_station_id
+
+        # Process date extraction concurrently with previous tasks
+        dated_request = await date_classifier.ainvoke({'input': transcript})
+        dated_request = ''.join(e for e in dated_request if e.isalnum() or e == '_')
+
+        if dated_request == 'date':
+            dates = await date_extraction.ainvoke({'input': transcript})
+            date = dates.get('date', str(datetime.now().strftime("%Y-%m-%d")))
+            collection = id_collections_mapper.get(station_id)
+            station_data = db.get_last_document_for_date(collection, date)
+            logger.info(f'Request date: {date}, Data collection: {collection}')
         else:
-            end_date = dates.get('end_date')
-        print("Data collection is: ", collection)
-        station_data = db.get_last_document_for_date(collection, start_date)
-    else:
-        station_data = stations_data.get(station_id, None)
-    print(station_data)
-    
-    mapper = id_classifiers_mapper[station_id][0]
-    classifier = id_classifiers_mapper[station_id][1]
-    selected_data = await classifier.ainvoke({'input': transcript})
-    selected_data = ''.join(e for e in selected_data if e.isalnum() or e == '_')
-    print(selected_data)
-    output_text = mapper[selected_data](station_data)
-    if dated_request == 'date':
-        _, audio_data = await voice_handler.text_to_speech(text_data = "المعلومات التالية في الفترة الزمنية المطلوبة " + output_text + "\n شكرا لاستخدامك منصة زِيتَا \n")
-    else:
-        _, audio_data = await voice_handler.text_to_speech(text_data = output_text + "\n شكرا لاستخدامك منصة زِيتَا \n")
-    os.remove(_)
-    return audio_data
+            station_data = stations_data.get(station_id)
+
+        if station_data is None:
+            logger.warning(f'No data found for station ID: {station_id}')
+            return await voice_handler.text_to_speech(
+                text_data="لم يتم العثور على البيانات المطلوبة"
+            )
+
+        # Classify the request type and fetch the output
+        selected_data = await id_classifiers_mapper.get(station_id, [None, None])[1].ainvoke({'input': transcript})
+        
+        selected_data = ''.join(e for e in selected_data if e.isalnum() or e == '_')
+
+        mapper = id_classifiers_mapper.get(station_id, [None, None])[0]
+        output_text = mapper.get(selected_data, lambda x: "لم يتم العثور على البيانات المطلوبة")(station_data)
+        logger.info(f'Final output for station ID {station_id}: {output_text}')
+
+        # Add prefix for date requests
+        if dated_request == 'date':
+            output_text = "المعلومات التالية في الفترة الزمنية المطلوبة " + output_text
+
+        # Generate the audio output
+        _, audio_data = await voice_handler.text_to_speech(
+            text_data=output_text + "\n شكرا لاستخدامك منصة زِيتَا \n"
+        )
+
+        # Cleanup temporary file
+        print(output_text)
+        os.remove(_)
+        return audio_data
+    except Exception as e:
+        logger.error(f'Error in station_request_handler: {e}')
+        return await voice_handler.text_to_speech(text_data="حدث خطأ أثناء معالجة الطلب")
+
 
 
 @app.post("/voice/main")
 async def voice_endpoint(upload_file: UploadFile = File(...), stations_data: str = Form(...)):
-    audio_data = await request_handler(stations_data, upload_file) 
+    audio_data = await station_request_handler(stations_data, upload_file) 
     return Response(content=audio_data, media_type="audio/mp3")
 
 @app.post("/voice/suez")
