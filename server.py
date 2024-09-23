@@ -351,10 +351,10 @@ station_inv_classifier = ChainClassifier(classes=['transformers', 'working_trans
 
 suez_medical_complex_classifier = ChainClassifier(
     classes=[
-        "date", "Beds_Occupancy_Rate", "Inpatient_Beds_used", "Inpatient_Beds_unused", "ICU_CCU_Beds_used",
+         "any_alarm","date", "complex_Occupancy_Rate", "Inpatient_Beds_used", "Inpatient_Beds_unused", "ICU_CCU_Beds_used",
           "ICU_CCU_Beds_unused", "Emergency_Beds_used", "Emergency_Beds_Unused", "Incubators_Beds_used", 
           "Incubators_Beds_unused", "Total_Hospital_Beds_used", "Total_Hospital_Beds_unused", "monthlycost_sg", 
-          "monthly_water_cost", "monthly_oxygen_cost", "Hospital_Occupancy_Rate", "Clinic_Occupancy_Rate", 
+          "monthly_water_cost", "monthly_oxygen_cost", "Hospital_Occupancy_Rate", "Clinic_Occupancy_Rate", "monthly_gas_system", "carbon_foot_Hospital", "carbon_foot_Clinics", "carbon_foot_Utilites",
           #update 2
           "Mask_Policy_Violations","Social_Distance_Violations","NuOF_Detected_Falls",
           "transformer_on","transformer_Off","generator_on","generator_off",
@@ -383,7 +383,7 @@ suez_medical_complex_classifier = ChainClassifier(
           "chiller2_return_temp","chiller3_status","chiller3_supply_temp","chiller3_return_temp","chiller4_status",
           "chiller4_supply_temp","chiller4_return_temp","chillers_op_hours","chiller1_op_hours","chiller2_op_hours",
           "chiller3_op_hours","chiller4_op_hours","monthlyenergy_chiller1","monthlyenergy_chiller2","monthlyenergy_chiller3",
-          "monthlyenergy_chiller4","in-Patients","out-Patients","chillers_sys_operation_cost","main_return_temp",
+          "monthlyenergy_chiller4","in_Patients","out_Patients","chillers_sys_operation_cost","main_return_temp",
           "main_supply_temp","chiller1_maintenance_hours","chiller2_maintenance_hours","chiller3_maintenance_hours","chiller4_maintenance_hours",
           #Update 3
           "daily_index", "yearly_index","monthly_index","random_MVSG_2_energy","random_MVSG_3_energy","updated_at",  "gen2_status", 
@@ -392,36 +392,53 @@ suez_medical_complex_classifier = ChainClassifier(
            "vaccum_percentage","oxygen_percentage", "no_of_surgry_month","no_of_dialysis_month", "no_of_xrays_month","Inpatient_Beds_used_monthly","Inpatient_Beds_unused_monthly",
            "ICU_CCU_Beds_used_monthly","ICU_CCU_Beds_unused_monthly","Emergency_Beds_used_monthly","Emergency_Beds_unused_monthly",
            "Incubators_Beds_unused_monthly", "Incubators_Beds_used_monthly", "no_of_pepole_cam1","no_of_pepole_cam2", "no_of_pepole_cam3", "no_of_pepole_cam4",
-           "daily_carbon_foot_print","monthly_carbon_foot_print","invoices_information" 'report', 'zeeta', 'other'
+           "daily_carbon_foot_print","monthly_carbon_foot_print","invoices_information" ,"temp_outside","temp_inside","total_complex_doctor","total_complex_staff","total_complex_nurse",'report', 'zeeta', 'other'
 
           
 
 
     ],
-    descriptions="""عند السؤال بشكل عام عن نسبة إشغال الأسرة، ارجع 'Beds_Occupancy_Rate'.  
-            عند السؤال عن استخدام الأسرة من قبل غير المرضى أو الأسرة المستخدمة للمرضى الداخليين، ارجع 'Inpatient_Beds_used'. وبالمثل، عند السؤال عن الأسرة الداخلية غير المستخدمة، ارجع 'Inpatient_Beds_unused'.  
-            عند السؤال عن الأسرة المستخدمة في وحدة العناية المركزة ووحدة العناية القلبية، ارجع 'ICU_CCU_Beds_used'.  
-            عند السؤال عن الأسرة غير المستخدمة والمتاحة في وحدة العناية المركزة ووحدة العناية القلبية، ارجع 'ICU_CCU_Beds_unused'.  
-            عند السؤال عن الأسرة المستخدمة أو غير المتاحة في الطوارئ، ارجع 'Emergency_Beds_used'.  
-            عند السؤال عن الأسرة غير المستخدمة أو المتاحة في الطوارئ، ارجع 'Emergency_Beds_Unused'.  
-            عند السؤال عن الأسرة المستخدمة أو غير المتاحة في الحاضنات، ارجع 'Incubators_Beds_used'.  
-            عند السؤال عن الأسرة غير المستخدمة أو المتاحة في الحاضنات، ارجع 'Incubators_Beds_Unused'.  
-            عند السؤال بشكل عام عن جميع الأسرة المستخدمة وغير المتاحة في المستشفى، ارجع 'Total_Hospital_Beds_used'.  
-            عند السؤال بشكل عام عن جميع الأسرة غير المستخدمة والمتاحة في المستشفى، ارجع 'Total_Hospital_Beds_Unused'.  
-            عند السؤال عن تكلفة معدات التحويل الشهرية، ارجع 'monthlycost_sg'.  
-            ارجع 'monthly_water_cost' التكاليف المياه الشهرية، 'monthly_oxygen_cost' التكاليف الأكسجين الشهرية،  
-            عند السؤال عن نسبة إشغال المستشفى او معدل الاشغال في المستفش، ارجع 'Hospital_Occupancy_Rate'.  
-            ارجع 'Clinic_Occupancy_Rate' نسبة إشغال العيادة او معدل الاشغال في العياده.  
+    descriptions="""عند السؤال بشكل عام عن نسبة الاشغال الشهري في المجمع او  نِسْبَةِ الاشْغَالِ الشَّهْرِي فِي الْمُجَمَّعِ ، ارجع 'complex_Occupancy_Rate'.  
+            عند السؤال هل يوجود إنذار او تنبيه في اي نظام في المجمع او  هَلْ يُوجَدُ إِنْذَارٌ أَوْ تَنْبِيهٌ فِي أَيِّ نِظَامٍ فِي الْمُجَمَّعِ ، ارجع 'any_alarm'.  
+            عند السؤال عن البصمه الكربونيه اليوميه للمستشفي او  الْبَصْمَةِ الْكَرْبُونِيَّةِ الْيَوْمِيَّةِ لِلْمُسْتَشْفَى ، ارجع 'carbon_foot_Hospital'.  
+            عند السؤال عن البصمه الكربونيه اليوميه للاماكن الخدميه او  الْبَصْمَةِ الْكَرْبُونِيَّةِ الْيَوْمِيَّةِ لِلْأَمَاكِنِ الْخِدْمِيَّةِ ، ارجع 'carbon_foot_Utilites'.  
+            عند السؤال عن البصمه الكربونيه اليوميه للعيادات او  الْبَصْمَةِ الْكَرْبُونِيَّةِ الْيَوْمِيَّةِ لِلْعِيَادَاتِ ، ارجع 'carbon_foot_Clinics'.  
+            عند السؤال عن عدد المرضي المقيمين الشهري في المجمع او  عَدَدِ الْمَرْضَى الْمُقِيمِينَ الشَّهْرِي فِي الْمُجَمَّعِ ، ارجع 'in_Patients'.  
+            عند السؤال عن عدد المرضي الغيرمقيمين الشهري في المجمع او  عَدَدِ الْمَرْضَى غَيْرِ الْمُقِيمِينَ الشَّهْرِي فِي الْمُجَمَّعِ ، ارجع 'out_Patients'.  
+            عند السؤال عن عدد المرضي الشهري في كل قسم في المجمع او  عَدَدِ الْمَرْضَى الشَّهْرِي فِي كُلِّ قِسْمٍ فِي الْمُجَمَّعِ ، ارجع 'every_department'.  
+            عند السؤال عن استخدام الأسرة من قبل غير المرضى أو الأسرة المستخدمة للمرضى الداخليين او  اسْتِخْدَامِ الْأَسِرَّةِ مِنْ قِبَلِ غَيْرِ الْمَرْضَى أَوِ الْأَسِرَّةِ الْمُسْتَخْدَمَةِ لِلْمَرْضَى الدَّاخِلِيِّينَ ، ارجع 'Inpatient_Beds_used_monthly'.  
+            عند السؤال عن الأسرة الداخلية غير المستخدمة او  الْأَسِرَّةِ الدَّاخِلِيَّةِ غَيْرِ الْمُسْتَخْدَمَةِ ، ارجع 'Inpatient_Beds_unused'.  
+            عند السؤال عن الأسرة المستخدمة في وحدة العناية المركزة ووحدة العناية القلبية او  الْأَسِرَّةِ الْمُسْتَخْدَمَةِ فِي وَحْدَةِ الْعِنَايَةِ الْمُرَكَّزَةِ وَوَحْدَةِ الْعِنَايَةِ الْقَلْبِيَّةِ ، ارجع 'ICU_CCU_Beds_used_monthly'.  
+            عند السؤال عن الأسرة غير المستخدمة والمتاحة في وحدة العناية المركزة ووحدة العناية القلبية او  الْأَسِرَّةِ غَيْرِ الْمُسْتَخْدَمَةِ وَالْمُتَاحَةِ فِي وَحْدَةِ الْعِنَايَةِ الْمُرَكَّزَةِ وَوَحْدَةِ الْعِنَايَةِ الْقَلْبِيَّةِ ، ارجع 'ICU_CCU_Beds_unused'.  
+            عند السؤال عن الأسرة المستخدمة أو غير المتاحة في الطوارئ او  الْأَسِرَّةِ الْمُسْتَخْدَمَةِ أَوْ غَيْرِ الْمُتَاحَةِ فِي الطَّوَارِئِ ، ارجع 'Emergency_Beds_used_monthly'.  
+            عند السؤال عن الأسرة غير المستخدمة أو المتاحة في الطوارئ او  الْأَسِرَّةِ غَيْرِ الْمُسْتَخْدَمَةِ أَوِ الْمُتَاحَةِ فِي الطَّوَارِئِ ، ارجع 'Emergency_Beds_unused_monthly'.  
+            عند السؤال عن الأسرة المستخدمة أو غير المتاحة في الحاضنات او  الْأَسِرَّةِ الْمُسْتَخْدَمَةِ أَوْ غَيْرِ الْمُتَاحَةِ فِي الْحَاضِنَاتِ ، ارجع 'Incubators_Beds_used_monthly'.  
+            عند السؤال عن الأسرة غير المستخدمة أو المتاحة في الحاضنات او  الْأَسِرَّةِ غَيْرِ الْمُسْتَخْدَمَةِ أَوِ الْمُتَاحَةِ فِي الْحَاضِنَاتِ ، ارجع 'Incubators_Beds_unused_monthly'.  
+            عند السؤال بشكل عام عن جميع الأسرة المستخدمة وغير المتاحة في المستشفى او  جَمِيعِ الْأَسِرَّةِ الْمُسْتَخْدَمَةِ وَغَيْرِ الْمُتَاحَةِ فِي الْمُسْتَشْفَى ، ارجع 'Total_Hospital_Beds_used_monthly'.  
+            عند السؤال بشكل عام عن جميع الأسرة غير المستخدمة والمتاحة في المستشفى او  جَمِيعِ الْأَسِرَّةِ غَيْرِ الْمُسْتَخْدَمَةِ وَالْمُتَاحَةِ فِي الْمُسْتَشْفَى ، ارجع 'Total_Hospital_Beds_unused_monthly'.  
+            عند السؤال عن تكلفةاستهلاك الكهرباء الشهرية في المجمع او  تَكْلِفَةِ اسْتِهْلَاكِ الْكَهْرَبَاءِ الشَّهْرِيَّةِ فِي الْمُجَمَّعِ ، ارجع 'monthlycost_sg'.  
+            عند السؤال عن تكلفةاستهلاك المياه الشهرية في المجمع او  تَكْلِفَةِ اسْتِهْلَاكِ الْمِيَاهِ الشَّهْرِيَّةِ فِي الْمُجَمَّعِ ، ارجع 'monthly_water_cost'.  
+            عند السؤال عن تكلفةاستهلاك الاكسجين الشهرية في المجمع او  تَكْلِفَةِ اسْتِهْلَاكِ الْأُكْسِجِينِ الشَّهْرِيَّةِ فِي الْمُجَمَّعِ ، ارجع 'monthly_oxygen_cost'.  
+            عند السؤال عن معلومات نظام الغازات في المجمع او  مَعْلُومَاتِ نِظَامِ الْغَازَاتِ فِي الْمُجَمَّعِ ، ارجع 'monthly_gas_system'.  
+            عند السؤال عن نسبة إشغال المستشفى او معدل الاشغال في المستفش او  نِسْبَةِ إِشْغَالِ الْمُسْتَشْفَى أَوْ مُعَدَّلِ الْإِشْغَالِ فِي الْمُسْتَشْفَى ، ارجع 'Hospital_Occupancy_Rate'.  
+            ارجع 'Clinic_Occupancy_Rate' نسبة إشغال العيادة او معدل الاشغال في العياده او  نِسْبَةَ إِشْغَالِ الْعِيَادَةِ أَوْ مُعَدَّلَ الْإِشْغَالِ فِي الْعِيَادَةِ .
 
+            عند السؤال عن درجه الحراره داخل  الْمُجَمَّعِ ، ارجع 'temp_inside'. 
+            عند السؤال عن  درجه الحراره خارج  الْمُجَمَّعِ ، ارجع 'temp_outside'. 
+            عند السؤال عن عدد الاطباء والممرضين المتواجدين في  المستشفي ، ارجع 'total_complex_staff'. 
+            عند السؤال عن الاطباء المتواجدين في  المستشفي او عدد الدكاتره او عَدَدُ الأَطِبَّاءِالمتَوَاجِدِينَ في المَسْتَشْفَى ، ارجع 'total_complex_doctor'. 
+            عند السؤال عن عدد الممرضين المتواجدين في  المستشفي او عدد الممرضين او عَدَدُ المُمَرِّضِينَ المتَوَاجِدَاتِين في المُسْتَشْفَى  ، ارجع 'total_complex_nurse'. 
+
+                                                          
             عند السؤال عن انتهاك سياسة ارتداء الكمامات في المستشفى او السؤال عن الكمامات ، ارجع 'Mask_Policy_Violations'.  
             عند السؤال عن سياسة التباعد الاجتماعي او السؤال عن المسافات الامنه بين المرضي، ارجع 'Social_Distance_Violations'.  
             عند السؤال عن عدد السقطات المكتشفة في المستشفى او السؤال عن الاشخاص الملقون علي الارض، ارجع 'NuOF_Detected_Falls'.  
-            عند السؤال عن عدد المحولات التي تم تشغيلها حاليًا، ارجع 'transformer_on'.  
-            عند السؤال عن عدد المحولات التي تم إيقاف تشغيلها حاليًا، ارجع 'transformer_Off'.  
-            عند السؤال عن عدد المولدات التي تعمل حاليًا أو التي تم تشغيلها، ارجع 'generator_on'.  
-            عند السؤال عن عدد المولدات التي لم يتم تشغيلها حاليًا، ارجع 'generator_off'.  
-            عند السؤال عن عدد المصاعد التي تعمل حاليًا، ارجع 'Elevator_on'.  
-            عند السؤال عن عدد المصاعد التي لا تعمل حاليًا، ارجع 'Elevator_of'.  
+            عند السؤال عن عدد المحولات العامله حاليًا، ارجع 'transformer_on'.  
+            عند السؤال عن عدد المحولات الغير عامله حاليًا، ارجع 'transformer_Off'.  
+            عند السؤال عن عدد المولدات العامله حاليا، ارجع 'generator_on'.  
+            عند السؤال عن عدد المولدات الغير العامله حاليًا، ارجع 'generator_off'.  
+            عند السؤال عن عدد المصاعد العامله حاليًا، ارجع 'Elevator_on'.  
+            عند السؤال عن عدد المصاعد الغير عامله حاليًا، ارجع 'Elevator_of'.  
             عند السؤال عن التكلفة الإجمالية للمجمع بالكامل للشهر او التكلفه الشهريه الاجماليه للمجمع كاملا، ارجع 'monthly_total_cost'.  
             عند السؤال عن وجود إنذار في نظام التدفئة والتهوية وتكييف الهواء (HVAC)، ارجع 'HVAC_alarm'.  
             عند السؤال عن وجود إنذار يتعلق بنظام الغاز الطبي، ارجع 'medical_gas_alarm'.  
@@ -432,11 +449,11 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن وحدات معالجة الهواء التي تم إيقاف تشغيلها، ارجع 'F_AHU_OFF'.  
             عند السؤال عن عدد المبردات التي تعمل، ارجع 'chiller_on'.  
             عند السؤال عن عدد المبردات التي لا تعمل، ارجع 'chiller_off'.  
-            عند السؤال عن إجمالي استهلاك الطاقة لمعدات التحويل ذات الجهد المتوسط (MVSG) أو للمجمع بالكامل، ارجع 'monthlyenergy_MVSG'.  
+            عند السؤال عن استهلاك الكهرباء الشهري في المجمع، ارجع 'monthlyenergy_MVSG'.  
             عند السؤال عن قياس ضغط الفراغ، ارجع 'vaccum_press'.  
             عند السؤال عن ضغط 4 بار، ارجع 'air_4bar_press'.  
             عند السؤال عن ضغط 7 بار، ارجع 'air_7bar_press'.  
-            عند السؤال عن ضغط الأكسجين في النظام، ارجع 'oxygen_press'.  
+            عند السؤال عن ضغط الأكسجين في النظا م، ارجع 'oxygen_press'.  
             عند السؤال عن استهلاك الطاقة اليومي لمعدات التحويل ذات الجهد المتوسط أو المجمع بالكامل، ارجع 'dailyenergy_MVSG'.  
             عند السؤال عن استهلاك الطاقة اليومي للمصدر الثاني لمعدات التحويل ذات الجهد المتوسط، ارجع 'dailyenergy_MVSG_incoming2_energy'.  
             عند السؤال عن استهلاك الطاقة اليومي للمصدر الثالث لمعدات التحويل ذات الجهد المتوسط، ارجع 'dailyenergy_MVSG_incoming3_energy'.  
@@ -468,12 +485,12 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن التكلفة الشهرية للعيادة، ارجع 'monthlycost_clinic'.  
             عند السؤال عن التكلفة الشهرية للمرافق، ارجع 'monthlycost_Utilities'.  
             عند السؤال عن استهلاك المياه اليومي، ارجع 'daily_water_consumption'.  
-            عند السؤال عن استهلاك المياه الشهري، ارجع 'monthly_water_consumption'.  
+            عند السؤال عن استهلاك المياه الشهري في المجمع، ارجع 'monthly_water_consumption'.  
             عند السؤال عن تكلفة المياه اليومية، ارجع 'daily_water_cost'.  
             عند السؤال عن استهلاك المياه السنوي، ارجع 'yearly_water_consumption'.  
             عند السؤال عن تكلفة المياه السنوية، ارجع 'yearly_water_cost'.  
             عند السؤال عن استهلاك الأكسجين اليومي، ارجع 'daily_oxygen_consumption'.  
-            عند السؤال عن استهلاك الأكسجين الشهري، ارجع 'monthly_oxygen_consumption'.  
+            عند السؤال عن استهلاك الأكسجين الشهري في المجمع، ارجع 'monthly_oxygen_consumption'.  
             عند السؤال عن تكلفة الأكسجين اليومية، ارجع 'daily_oxygen_cost'.  
             عند السؤال عن استهلاك الأكسجين السنوي، ارجع 'yearly_oxygen_consumption'.  
             عند السؤال عن تكلفة الأكسجين السنوية، ارجع 'yearly_oxygen_cost'.  
@@ -510,20 +527,30 @@ suez_medical_complex_classifier = ChainClassifier(
 ).init_chain()
 
 suez_medical_complex_mapper = {
-    'Beds_Occupancy_Rate': SuezMedicalComplexConfigurator.Home.return_Beds_occupancy_rate_info,
-    'Inpatient_Beds_used': SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_used_info,
+    'temp_inside': SuezMedicalComplexConfigurator.Home.temp_inside_info,
+    'temp_outside': SuezMedicalComplexConfigurator.Home.temp_outside_info,
+    'total_complex_staff': SuezMedicalComplexConfigurator.Home.total_complex_staff_info,
+    'total_complex_doctor': SuezMedicalComplexConfigurator.Home.total_complex_doctor_info,
+    'total_complex_nurse': SuezMedicalComplexConfigurator.Home.total_complex_nurse_info,
+    'any_alarm': SuezMedicalComplexConfigurator.Home.any_alarm_info,
+    'complex_Occupancy_Rate': SuezMedicalComplexConfigurator.Home.return_Beds_occupancy_rate_info,
+    'Inpatient_Beds_used_monthly': SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_used_info,
     'Inpatient_Beds_Unused': SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_Unused_info,
-    'ICU_CCU_Beds_used': SuezMedicalComplexConfigurator.Home.return_ICU_CCU_Beds_used_info,
+    'ICU_CCU_Beds_used_monthly': SuezMedicalComplexConfigurator.Home.return_ICU_CCU_Beds_used_info,
     'ICU_CCU_Beds_Unused': SuezMedicalComplexConfigurator.Home.return_ICU_CCU_Beds_Unused_info,
-    'Emergency_Beds_used': SuezMedicalComplexConfigurator.Home.return_Emergency_Beds_used_info,
-    'Emergency_Beds_Unused': SuezMedicalComplexConfigurator.Home.return_Emergency_Beds_Unused_info,
-    'Incubators_Beds_used': SuezMedicalComplexConfigurator.Home.return_Incubators_Beds_used_info,
-    'Incubators_Beds_unused': SuezMedicalComplexConfigurator.Home.return_Incubators_Beds_unused_info,
-    'Total_Hospital_Beds_used': SuezMedicalComplexConfigurator.Home.return_Total_Hospital_Beds_used_info,
-    'Total_Hospital_Beds_unused': SuezMedicalComplexConfigurator.Home.return_Total_Hospital_Beds_unused_info,
+    'Emergency_Beds_used_monthly': SuezMedicalComplexConfigurator.Home.return_Emergency_Beds_used_info,
+    'Emergency_Beds_unused_monthly': SuezMedicalComplexConfigurator.Home.return_Emergency_Beds_Unused_info,
+    'Incubators_Beds_used_monthly': SuezMedicalComplexConfigurator.Home.return_Incubators_Beds_used_info,
+    'Incubators_Beds_unused_monthly': SuezMedicalComplexConfigurator.Home.return_Incubators_Beds_unused_info,
+    'Total_Hospital_Beds_used_monthly': SuezMedicalComplexConfigurator.Home.return_Total_Hospital_Beds_used_info,
+    'Total_Hospital_Beds_unused_monthly': SuezMedicalComplexConfigurator.Home.return_Total_Hospital_Beds_unused_info,
     'monthlycost_sg': SuezMedicalComplexConfigurator.Home.return_monthlycost_sg_info,
     'monthly_water_cost': SuezMedicalComplexConfigurator.Home.return_monthly_water_cost_info,
     'monthly_oxygen_cost': SuezMedicalComplexConfigurator.Home.return_monthly_oxygen_cost_info,
+    'monthly_gas_system': SuezMedicalComplexConfigurator.Home.return_monthly_gas_system_info,
+    'carbon_foot_Hospital': SuezMedicalComplexConfigurator.Home.return_carbon_foot_Hospital,
+    'carbon_foot_Utilites': SuezMedicalComplexConfigurator.Home.return_carbon_foot_Utilites,
+    'carbon_foot_Clinics': SuezMedicalComplexConfigurator.Home.return_carbon_foot_Clinics,
     'Hospital_Occupancy_Rate': SuezMedicalComplexConfigurator.Home.return_Hospital_Occupancy_Rate_info,
     'Clinic_Occupancy_Rate': SuezMedicalComplexConfigurator.Home.return_Clinic_Occupancy_Rate_info,
     #update 2
@@ -625,8 +652,9 @@ suez_medical_complex_mapper = {
     'monthlyenergy_chiller2': SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller2_info,
     'monthlyenergy_chiller3': SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller3_info,
     'monthlyenergy_chiller4': SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller4_info,
-    'in-Patients': SuezMedicalComplexConfigurator.Home.in_Patients_info,
-    'out-Patients': SuezMedicalComplexConfigurator.Home.out_Patients_info,
+    'in_Patients': SuezMedicalComplexConfigurator.Home.in_Patients_info,
+    'out_Patients': SuezMedicalComplexConfigurator.Home.out_Patients_info,
+    'every_department': SuezMedicalComplexConfigurator.Home.every_department_info,
     'chillers_sys_operation_cost': SuezMedicalComplexConfigurator.Home.chillers_sys_operation_cost_info,
     'main_temp': SuezMedicalComplexConfigurator.Home.main_temp_info,
     'main_supply_temp': SuezMedicalComplexConfigurator.Home.main_supply_temp_info,

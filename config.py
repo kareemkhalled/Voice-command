@@ -6,9 +6,24 @@ import requests
 class SuezMedicalComplexConfigurator(object):
     class Home:
         @staticmethod
+        def return_carbon_foot_Hospital(parsed_data: dict) -> str:
+            return (
+                f"البَصْمَةُ الكَرْبُونِيَّةُ اليَوْمِيَّةُ للمستشفي: {float(parsed_data['carbon_foot_Hospital'])} كِيلُوجرام/مِتْر مُرَبَّع\n"
+            )        
+        @staticmethod
+        def return_carbon_foot_Utilites(parsed_data: dict) -> str:
+            return (
+                f"البَصْمَةُ الكَرْبُونِيَّةُ اليَوْمِيَّةُ لِلْأَمَاكِنِ الخِدْمِيَّةِ في المُجَمَّعِ {float(parsed_data['carbon_foot_Utilites'])} كِيلُوجرام/مِتْر مُرَبَّع\n"
+            )        
+        @staticmethod
+        def return_carbon_foot_Clinics(parsed_data: dict) -> str:
+            return (
+                f"البَصْمَةُ الكَرْبُونِيَّةُ اليَوْمِيَّةُ لِلْعِيَادَاتِ: {float(parsed_data['carbon_foot_Clinics'])} كِيلُوجرام/مِتْر مُرَبَّع\n"
+            )        
+        @staticmethod
         def return_Beds_occupancy_rate_info(parsed_data: dict) -> str:
             return (
-                f"مُعَدَّلُ إِشْغَالِ الأَسِرَّةِ فِي المُسْتَشْفَى: {int(float(parsed_data['Beds_Occupancy_Rate']))} فِي المِئَةِ\n"
+                f"مُعَدَّلُ إِشْغَالِ الأَسِرَّةِ فِي المُجَمَّعِ: {int(float(parsed_data['complex_Occupancy_Rate']))} فِي المِئَةِ\n"
             )
 
         @staticmethod
@@ -26,7 +41,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def return_ICU_CCU_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ لِمَرْضَى القَلْبِ: {int(float(parsed_data['ICU_CCU_Beds_used']))} سَرِيرٍ\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ لِمَرْضَى القَلْبِ: {int(float(parsed_data['ICU_CCU_Beds_used_monthly']))} سَرِيرٍ\n"
             )
 
         @staticmethod
@@ -38,55 +53,55 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def return_Emergency_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ أَسِرَّةِ الطَّوَارِئِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Emergency_Beds_used']))} سَرِيرٍ\n"
+                f"عَدَدُ أَسِرَّةِ الطَّوَارِئِ الشهري المُسْتَخْدَمَةِ: {int(float(parsed_data['Emergency_Beds_used_monthly']))} سَرِيرٍ\n"
             )
 
         @staticmethod
         def return_Emergency_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ أَسِرَّةِ الطَّوَارِئِ غَيْرِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Emergency_Beds_Unused']))} سَرِيرٍ\n"
+                f"عَدَدُ أَسِرَّةِ الطَّوَارِئِ الشهري غَيْرِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Emergency_Beds_unused_monthly']))} سَرِيرٍ\n"
             )
 
         @staticmethod
         def return_Incubators_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ أَسِرَّةِ الحَضَّانَاتِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Incubators_Beds_used']))} سَرِيرٍ\n"
+                f"عَدَدُ أَسِرَّةِ الحَضَّانَاتِ الشهري المُسْتَخْدَمَةِ: {int(float(parsed_data['Incubators_Beds_used_monthly']))} سَرِيرٍ\n"
             )
 
         @staticmethod
         def return_Incubators_Beds_unused_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ أَسِرَّةِ الحَضَّانَاتِ غَيْرِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Incubators_Beds_unused']))} سَرِيرٍ\n"
+                f"عَدَدُ أَسِرَّةِ الحَضَّانَاتِ الشهري غَيْرِ المُسْتَخْدَمَةِ: {int(float(parsed_data['Incubators_Beds_unused_monthly']))} سَرِيرٍ\n"
             )
 
         @staticmethod
         def return_Total_Hospital_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ جَمِيعِ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي المُسْتَشْفَى: {int(float(parsed_data['Total_Hospital_Beds_used']))} سَرِيرٍ\n"
+                f"عَدَدُ جَمِيعِ الأَسِرَّةِ الشهري المُسْتَخْدَمَةِ فِي المُسْتَشْفَى: {int(float(parsed_data['Total_Hospital_Beds_used_monthly']))} سَرِيرٍ\n"
             )
 
         @staticmethod
         def return_Total_Hospital_Beds_unused_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ جَمِيعِ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي المُسْتَشْفَى: {int(float(parsed_data['Total_Hospital_Beds_unused']))} سَرِيرٍ\n"
+                f"عَدَدُ جَمِيعِ الأَسِرَّةِ الشهري الغَيْرِ المُسْتَخْدَمَةِ فِي المُسْتَشْفَى: {int(float(parsed_data['Total_Hospital_Beds_unused_monthly']))} سَرِيرٍ\n"
             )
 
         @staticmethod
         def return_monthlycost_sg_info(parsed_data: dict) -> str:
             return (
-                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْمَصْدَرِ الكَهْرَبَائِيِّ لِلْمُسْتَشْفَى: {int(float(parsed_data['monthlycost_sg']))} جُنَيْهًا\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لاستهلاك الكرباء الكُلَى في المُجَمَّعِ: {int(float(parsed_data['monthlycost_sg']))} جُنَيْهًا\n"
             )
 
         @staticmethod
         def return_monthly_water_cost_info(parsed_data: dict) -> str:
             return (
-                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ المِيَاهِ: {int(float(parsed_data['monthly_water_cost']))} جُنَيْهًا\n"
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ المِيَاهِ الكُلَى في المُجَمَّعِ: {int(float(parsed_data['monthly_water_cost']))} جُنَيْهًا\n"
             )
 
         @staticmethod
         def return_monthly_oxygen_cost_info(parsed_data: dict) -> str:
             return (
-                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ الأُكْسُجِينِ: {int(float(parsed_data['monthly_oxygen_cost']))} جُنَيْهًا\n"
+                f" التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ الأُكْسُجِينِ الكُلَى في المُجَمَّعِ: {int(float(parsed_data['monthly_oxygen_cost']))} جُنَيْهًا\n"
             )
 
         @staticmethod
@@ -104,55 +119,55 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def Mask_Policy_Violations_info(parsed_data: dict) -> str:
             return (
-                f"اِنْتِهَاكَاتُ سِيَاسَةِ اِرْتِدَاءِ الكِمَامَاتِ: {int(float(parsed_data['Mask_Policy_Violations']))} مَرَّةً\n"
+                f"اِنْتِهَاكَاتُ سِيَاسَةِ اِرْتِدَاءِ الكِمَامَاتِ: {int(float(parsed_data['Mask_Policy_Violations']))} \n"
             )
 
         @staticmethod
         def Social_Distance_Violations_info(parsed_data: dict) -> str:
             return (
-                f"اِنْتِهَاكَاتُ التَّبَاعُدِ الاِجْتِمَاعِيِّ: {int(float(parsed_data['Social_Distance_Violations']))} مَرَّةً\n"
+                f"اِنْتِهَاكَاتُ التَّبَاعُدِ الاِجْتِمَاعِيِّ: {int(float(parsed_data['Social_Distance_Violations']))} \n"
             )
 
         @staticmethod
         def NuOF_Detected_Falls_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ مَرَّاتِ السُّقُوطِ المُكْتَشَفَةِ: {int(float(parsed_data['NuOF_Detected_Falls']))} مَرَّةً\n"
+                f"عَدَدُ مَرَّاتِ السُّقُوطِ المُكْتَشَفَةِ: {int(float(parsed_data['NuOF_Detected_Falls']))}\n"
             )
 
         @staticmethod
         def transformer_on_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المُحَوِّلَاتِ العَامِلَةِ: {int(float(parsed_data['transformer_on']))} مَرَّةً\n"
+                f"عَدَدُ المُحَوِّلَاتِ الحاليه العَامِلَةِ: {int(float(parsed_data['transformer_on']))}\n"
             )
 
         @staticmethod
         def transformer_Off_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المُحَوِّلَاتِ العَامِلَةِ: {int(float(parsed_data['transformer_Off']))} مَرَّةً\n"
+                f"عَدَدُ المُحَوِّلَاتِ الحاليه الغير العَامِلَةِ: {int(float(parsed_data['transformer_Off']))}\n"
             )
 
         @staticmethod
         def generator_on_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المُوَلِّدَاتِ العَامِلَةِ: {int(float(parsed_data['generator_on']))} مَرَّةً\n"
+                f"عَدَدُ المُوَلِّدَاتِ الحاليه العَامِلَةِ: {int(float(parsed_data['generator_on']))}\n"
             )
 
         @staticmethod
         def generator_off_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المُوَلِّدَاتِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['generator_off']))} مَرَّةً\n"
+                f"عَدَدُ المُوَلِّدَاتِ الحالي الغَيْرِ العَامِلَةِ: {int(float(parsed_data['generator_off']))} \n"
             )
 
         @staticmethod
         def Elevator_on_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المَصَاعِدِ العَامِلَةِ: {int(float(parsed_data['Elevator_on']))} مَرَّةً\n"
+                f"عَدَدُ المَصَاعِدِ الحالي العَامِلَةِ: {int(float(parsed_data['Elevator_on']))} \n"
             )
 
         @staticmethod
         def Elevator_off_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المَصَاعِدِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['Elevator_off']))} مَرَّةً\n"
+                f"عَدَدُ المَصَاعِدِ الحالي غَيْرِ العَامِلَةِ: {int(float(parsed_data['Elevator_off']))} \n"
             )
 
 
@@ -161,71 +176,117 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"التَّكْلِفَةُ الشَّهْرِيَّةُ الإِجْمَالِيَّةُ: {float(parsed_data['monthly_total_cost'])} جُنَيْهٍ\n"
             )
-
+        @staticmethod
+        def any_alarm_info(parsed_data: dict) -> str:
+            if int((parsed_data['HVAC_alarm'])) == 1:
+                return "يوُجُودِ انظار فِي نِظَامِ التَّكْيِيفِ المَرْكَزِيِّ\n"
+            
+            elif int((parsed_data['medical_gas_alarm'])) == 1:
+                return "يوُجُودِ انظار فِي نظام الغَازِات الطِّبِّيِّ\n"
+            
+            elif int((parsed_data['fire_fighting_alarm'])) == 1:
+                return "يوُجُودِ انظار فِي نِظَامِ الحَرِيقِ\n"
+            
+            elif int((parsed_data['transformer_alarm'])) == 1:
+                return "يوُجُودِ انظار فِي المُحَوِّلَاتِ\n"
+            
+            elif int((parsed_data['elevator_alarm'])) == 1:
+                return "يوُجُودِ انظار فِي المَصَاعِدِ\n"
+            
+            else:
+                return "No alarms in the critical systems."
+                
+        @staticmethod
+        def temp_outside_info(parsed_data: dict) -> str:
+            return (
+                f"دَرَجةُ الحَرَارةِ خارِجَ المُجَمَّعِ.: {int(float(parsed_data['temp_outside']))} \n"
+            )
+        @staticmethod
+        def  temp_inside_info(parsed_data: dict) -> str:
+            return (
+                f"دَرَجةُ الحَرَارةِ داخِلَ المُجَمَّعِ: {int(float(parsed_data['temp_inside']))} \n"
+            )
+       
+        @staticmethod
+        def total_complex_staff_info(parsed_data: dict) -> str:
+            return (
+                f" عَدَدُ الأَطِبَّاءِ وَالمُمَرِّضِينَ المتَوَاجِدِينَ في المَسْتَشْفَى: {int(float(parsed_data['total_complex_staff']))}  شخص\n"
+            )
+        @staticmethod
+        def total_complex_doctor_info(parsed_data: dict) -> str:
+            return (
+                f"عَدَدُ الأَطِبَّاءِالمتَوَاجِدِينَ في المَسْتَشْفَى: {int(float(parsed_data['total_complex_doctor']))}طبيب \n"
+            )
+        @staticmethod
+        def total_complex_nurse_info(parsed_data: dict) -> str:
+            return (
+                f"عَدَدُ المُمَرِّضِينَ المتَوَاجِدَاتِين في المُسْتَشْفَى: {int(float(parsed_data['total_complex_nurse']))}مُمَرِّضٌ \n"
+            )
+        
         @staticmethod
         def HVAC_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي نِظَامِ التَّكْيِيفِ المَرْكَزِيِّ: {int(float(parsed_data['HVAC_alarm']))} مَرَّةً\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي نِظَامِ التَّكْيِيفِ المَرْكَزِيِّ: {int(float(parsed_data['HVAC_alarm']))} \n"
             )
 
         @staticmethod
         def medical_gas_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي الغَازِ الطِّبِّيِّ: {int(float(parsed_data['medical_gas_alarm']))} مَرَّةً\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي الغَازِ الطِّبِّيِّ: {int(float(parsed_data['medical_gas_alarm']))} \n"
             )
 
         @staticmethod
         def fire_fighting_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي نِظَامِ الحَرِيقِ: {int(float(parsed_data['fire_fighting_alarm']))} مَرَّةً\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي نِظَامِ الحَرِيقِ: {int(float(parsed_data['fire_fighting_alarm']))} \n"
             )
 
         @staticmethod
         def transformer_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي المُحَوِّلَاتِ: {int(float(parsed_data['transformer_alarm']))} مَرَّةً\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي المُحَوِّلَاتِ: {int(float(parsed_data['transformer_alarm']))} \n"
             )
 
         @staticmethod
         def elevator_alarm_info(parsed_data: dict) -> str:
             return (
-                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي المَصَاعِدِ: {int(float(parsed_data['elevator_alarm']))} مَرَّةً\n"
+                f"الكَشْفُ عَنْ وُجُودِ تَنْبِيهٍ فِي المَصَاعِدِ: {int(float(parsed_data['elevator_alarm']))} \n"
             )
 
         @staticmethod
         def F_AHU_ON_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ وَحْدَاتِ مُنَاوَلَةِ الهَوَاءِ العَامِلَةِ: {int(float(parsed_data['F_AHU_ON']))} مَرَّةً\n"
+                f"عَدَدُ وَحْدَاتِ مُنَاوَلَةِ الهَوَاءِ العَامِلَةِ: {int(float(parsed_data['F_AHU_ON']))} \n"
             )
 
         @staticmethod
         def F_AHU_OFF_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ وَحْدَاتِ مُنَاوَلَةِ الهَوَاءِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['F_AHU_OFF']))} مَرَّةً\n"
+                f"عَدَدُ وَحْدَاتِ مُنَاوَلَةِ الهَوَاءِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['F_AHU_OFF']))} \n"
             )
 
         @staticmethod
         def chiller_on_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المُبَرِّدَاتِ المَرْكَزِيَّةِ العَامِلَةِ: {int(float(parsed_data['chiller_on']))} مَرَّةً\n"
+                f"عَدَدُ المُبَرِّدَاتِ المَرْكَزِيَّةِ العَامِلَةِ: {int(float(parsed_data['chiller_on']))} \n"
             )
 
         @staticmethod
         def chiller_off_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المُبَرِّدَاتِ المَرْكَزِيَّةِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['chiller_off']))} مَرَّةً\n"
+                f"عَدَدُ المُبَرِّدَاتِ المَرْكَزِيَّةِ غَيْرِ العَامِلَةِ: {int(float(parsed_data['chiller_off']))} \n"
             )
 
         @staticmethod
         def monthlyenergy_MVSG_info(parsed_data: dict) -> str:
             return (
-                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْقِيمَةِ الرَّئِيسِيَّةِ لِلْمَصْدَرِ الكَهْرَبَائِيِّ: {float(parsed_data['monthlyenergy_MVSG'])} كِيلُو وَاتِّ سَاعَةٍ\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ المُجَمَّعِ: {float(parsed_data['monthlyenergy_MVSG'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
         def vaccum_press_info(parsed_data: dict) -> str:
             return (
-                f"مِقْيَاسُ الضَّغْطِ وَالشَّفْطِ: {float(parsed_data['vaccum_press'])} بَارٍ\n"
+                f" الضَّغْطِ شَّفْطِ: {float(parsed_data['vaccum_press'])} بَارٍ\n"
             )
 
         @staticmethod
@@ -435,7 +496,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def monthly_water_consumption_info(parsed_data: dict) -> str:
             return (
-                f"مُعَدَّلُ اِسْتِهْلَاكِ المِيَاهِ الشَّهْرِيِّ: {float(parsed_data['monthly_water_consumption'])} مِتْرٍ مُكَعَّبٍ\n"
+                f"مُعَدَّلُ اِسْتِهْلَاكِ المِيَاهِ الشَّهْرِيِّ في المُجَمَّعِ: {float(parsed_data['monthly_water_consumption'])} مِتْرٍ مُكَعَّبٍ\n"
             )
 
         @staticmethod
@@ -459,31 +520,31 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def daily_oxygen_consumption_info(parsed_data: dict) -> str:
             return (
-                f"مُعدَّل استهلاك الأكسجين اليومي: {float(parsed_data['daily_oxygen_consumption'])} متر مكعب\n"
+                f"مُعدَّل اسْتِهْلَاكِ الْأُكْسِجِينِ اليومي: {float(parsed_data['daily_oxygen_consumption'])} متر مكعب\n"
             )
 
         @staticmethod
         def monthly_oxygen_consumption_info(parsed_data: dict) -> str:
             return (
-                f"مُعدَّل استهلاك الأكسجين الشهري: {float(parsed_data['monthly_oxygen_consumption'])} متر مكعب\n"
+                f"مُعدَّل اسْتِهْلَاكِ الْأُكْسِجِينِ الشَّهْرِيَّ في الْمُجَمَّعِ: {float(parsed_data['monthly_oxygen_consumption'])} متر مكعب\n"
             )
 
         @staticmethod
         def daily_oxygen_cost_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة اليومية للأكسجين: {float(parsed_data['daily_oxygen_cost'])} جنيه\n"
+                f"التَّكْلِفَةُ اليومية للْأُكْسِجِينِ: {float(parsed_data['daily_oxygen_cost'])} جنيه\n"
             )
 
         @staticmethod
         def yearly_oxygen_consumption_info(parsed_data: dict) -> str:
             return (
-                f"مُعدَّل استهلاك الأكسجين السنوي: {float(parsed_data['yearly_oxygen_consumption'])} متر مكعب\n"
+                f"مُعدَّل اسْتِهْلَاكِ الْأُكْسِجِينِ السنوي: {float(parsed_data['yearly_oxygen_consumption'])} متر مكعب\n"
             )
 
         @staticmethod
         def yearly_oxygen_cost_info(parsed_data: dict) -> str:
             return (
-                f"التكلفة السنوية للأكسجين: {float(parsed_data['yearly_oxygen_cost'])} جنيه\n"
+                f"التَّكْلِفَةُ السَّنَوِيَّةُ للْأُكْسِجِينِ: {float(parsed_data['yearly_oxygen_cost'])} جنيه\n"
             )
 
         @staticmethod
@@ -537,19 +598,19 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def gen1_object_feed1_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكهربائية للمولِّد رقم 1 للطابق الأول: {parsed_data['gen1_object_feed1']} كيلووات ساعة\n"
+                f"التغذية الْكَهْرَبَائيه للمولِّد رقم 1 للطابق الأول: {parsed_data['gen1_object_feed1']} كيلووات ساعة\n"
             )
 
         @staticmethod
         def gen1_object_feed2_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكهربائية للمولِّد رقم 1 للطابق الثاني: {parsed_data['gen1_object_feed2']} كيلووات ساعة\n"
+                f"التغذية الْكَهْرَبَائيه للمولِّد رقم 1 للطابق الثاني: {parsed_data['gen1_object_feed2']} كيلووات ساعة\n"
             )
 
         @staticmethod
         def gen1_object_feed3_info(parsed_data: dict) -> str:
             return (
-                f"التغذية الكهربائية للمولِّد رقم 1 للطابق الثالث: {parsed_data['gen1_object_feed3']} كيلووات ساعة\n"
+                f"التغذية الْكَهْرَبَائيه للمولِّد رقم 1 للطابق الثالث: {parsed_data['gen1_object_feed3']} كيلووات ساعة\n"
             )
 
         @staticmethod
@@ -706,15 +767,31 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def in_Patients_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المَرْضَى الْمُبَيْتِينَ فِي المُسْتَشْفَى: {int(parsed_data['in-Patients'])} مَرِيض\n"
+                f"عَدَدُ المَرْضَى المقيمين الشهري  فِي المجمع: {int(parsed_data['in_Patients'])} مَرِيض\n"
             )
 
         @staticmethod
         def out_Patients_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ المَرْضَى غَيْرِ المُبَيْتِينَ: {int(parsed_data['out-Patients'])} مَرِيض\n"
+                f"عَدَدُ المَرْضَى الشهري الغير مقيمين في المُجَمَّعِ: {int(parsed_data['out_Patients'])} مَرِيض\n"
             )
-
+        @staticmethod
+        def every_department_info(parsed_data: dict) -> str:
+            return (
+                f"مَعْلُومَاتُ عن عدد المرضي الشهري في كل قسم في المُجَمَّعِ:\n"
+                f"عَدَدُ الأَسِرَّةِ الشهري المُسْتَخْدَمَةِ لِغَيْرِ المَرْضَى: {int(float(parsed_data['Inpatient_Beds_used_monthly']))} سَرِيرٍ\n"
+                f"عَدَدُ الأَسِرَّةِ الشهري المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ لِمَرْضَى القَلْبِ: {int(float(parsed_data['ICU_CCU_Beds_used_monthly']))} سَرِيرٍ\n"
+                f"عَدَدُ أَسِرَّةِ الطَّوَارِئِ الشهري المُسْتَخْدَمَةِ: {int(float(parsed_data['Emergency_Beds_used_monthly']))} سَرِيرٍ\n"
+                f"عَدَدُ أَسِرَّةِ الحَضَّانَاتِ الشهري المُسْتَخْدَمَةِ: {int(float(parsed_data['Incubators_Beds_used_monthly']))} سَرِيرٍ\n"
+            )
+        def return_monthly_gas_system_info(parsed_data: dict) -> str:
+            return (
+                f"مَعْلُومَاتُ عن  نظام الغازات في المُجَمَّعِال:\n"
+                f"ضَغْطُ الأُكْسُجِينِ: {float(parsed_data['oxygen_press'])} بَارٍ\n"
+                f"ضَغْطُ الهَوَاءِ 7 بَارٍ: {float(parsed_data['air_7bar_press'])} بَارٍ\n"
+                f"ضَغْطُ الهَوَاءِ 4 بَارٍ: {float(parsed_data['air_4bar_press'])} بَارٍ\n"
+                f" ضَغْطُ هَوَاءِالشَّفْطِ: {float(parsed_data['vaccum_press'])} بَارٍ\n"
+            )
         @staticmethod
         def chillers_sys_operation_cost_info(parsed_data: dict) -> str:
             return (
@@ -1046,6 +1123,7 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.generator_off_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Elevator_on_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthly_total_cost_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.any_alarm_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.HVAC_alarm_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.medical_gas_alarm_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.fire_fighting_alarm_info(parsed_data)
@@ -1178,6 +1256,16 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.daily_carbon_foot_print_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthly_carbon_foot_print_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.invoices_information_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.every_department_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.return_carbon_foot_Hospital(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.return_monthly_gas_system_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.return_carbon_foot_Utilites(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.return_carbon_foot_Clinics(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.temp_inside_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.temp_outside_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.total_complex_staff_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.total_complex_doctor_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.total_complex_nurse_info(parsed_data)
 
 
 
