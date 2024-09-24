@@ -97,11 +97,21 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ المِيَاهِ الكُلَى في المُجَمَّعِ: {int(float(parsed_data['monthly_water_cost']))} جُنَيْهًا\n"
             )
+        @staticmethod
+        def return_monthly_water_cost_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ المِيَاهِ الكُلَى في المُسْتَشْفَى: {int(float(parsed_data['monthly_water_cost_hospital']))} جُنَيْهًا\n"
+            )
 
         @staticmethod
         def return_monthly_oxygen_cost_info(parsed_data: dict) -> str:
             return (
                 f" التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ الأُكْسُجِينِ الكُلَى في المُجَمَّعِ: {int(float(parsed_data['monthly_oxygen_cost']))} جُنَيْهًا\n"
+            )
+        @staticmethod
+        def return_monthly_oxygen_cost_hospital_info(parsed_data: dict) -> str:
+            return (
+                f" التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ الأُكْسُجِينِ الكُلَى في المُسْتَشْفَى: {int(float(parsed_data['monthly_oxygen_cost_hospital']))} جُنَيْهًا\n"
             )
 
         @staticmethod
@@ -330,6 +340,16 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ اليَوْمِيِّ لِلْمُسْتَشْفَى: {float(parsed_data['dailyenergy_Hospital'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
+        @staticmethod
+        def dailyenergy_Hospital_GF_info(parsed_data: dict) -> str:
+            return (
+                f"  مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ اليَوْمِيِّ للطابق الارضي لْلمُسْتَشْفَى: {float(parsed_data['dailyenergy_Hospital_GF'])} كِيلُو وَاتِّ سَاعَةٍ\n"
+            )
+        @staticmethod
+        def dailyenergy_Hospital_cost_info(parsed_data: dict) -> str:
+            return (
+                f"  تَّكْلِفَةُ الطَّاقَةِ اليوميه  لْلمُسْتَشْفَى: {float(parsed_data['dailyenergy_Hospital_cost'])} كِيلُو وَاتِّ سَاعَةٍ\n"
+            )
 
         @staticmethod
         def dailyenergy_Clinics_info(parsed_data: dict) -> str:
@@ -384,11 +404,21 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْمُسْتَشْفَى: {float(parsed_data['monthlyenergy_Hospital'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
+        @staticmethod
+        def monthlyenergy_Hospital_GF_info(parsed_data: dict) -> str:
+            return (
+                f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ  للطابق الارضي في الْمُسْتَشْفَى: {float(parsed_data['monthlyenergy_Hospital_GF'])} كِيلُو وَاتِّ سَاعَةٍ\n"
+            )
 
         @staticmethod
         def monthlyenergy_Clinics_info(parsed_data: dict) -> str:
             return (
                 f"مُعَدَّلُ اِسْتِهْلَاكِ الطَّاقَةِ الشَّهْرِيِّ لِلْعِيَادَاتِ: {float(parsed_data['monthlyenergy_Clinics'])} كِيلُو وَاتِّ سَاعَةٍ\n"
+            )
+        @staticmethod
+        def monthlyenergy_cost_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"تَّكْلِفَةُ الطَّاقَةِ الشَّهْرِيِّة لِلْمُسْتَشْفَى: {float(parsed_data['monthlyenergy_cost_hospital'])} كِيلُو وَاتِّ سَاعَةٍ\n"
             )
 
         @staticmethod
@@ -498,6 +528,11 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"مُعَدَّلُ اِسْتِهْلَاكِ المِيَاهِ الشَّهْرِيِّ في المُجَمَّعِ: {float(parsed_data['monthly_water_consumption'])} مِتْرٍ مُكَعَّبٍ\n"
             )
+        @staticmethod
+        def monthly_water_consumption_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"مُعَدَّلُ اِسْتِهْلَاكِ المِيَاهِ الشَّهْرِيِّ في المُسْتَشْفَى: {float(parsed_data['monthly_water_consumption_hospital'])} مِتْرٍ مُكَعَّبٍ\n"
+            )
 
         @staticmethod
         def daily_water_cost_info(parsed_data: dict) -> str:
@@ -522,13 +557,40 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"مُعدَّل اسْتِهْلَاكِ الْأُكْسِجِينِ اليومي: {float(parsed_data['daily_oxygen_consumption'])} متر مكعب\n"
             )
+       
+        @staticmethod
+        def daily_oxygen_cost_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"   تَّكْلِفَةُ الْأُكْسِجِينِ اليومي لِلْمُسْتَشْفَى: {float(parsed_data['daily_oxygen_cost_hospital'])} جُنَيْهٍ \n"
+            )
+        @staticmethod
+        def daily_water_cost_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"   تَّكْلِفَةُ المِيَاهِ اليوميه لِلْمُسْتَشْفَى: {float(parsed_data['daily_water_cost_hospital'])} جُنَيْهٍ \n"
+            )
+        @staticmethod
+        def daily_water_consumption_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"   مُعدَّل اسْتِهْلَاكِ  المِيَاهِ اليومي لِلْمُسْتَشْفَى: {float(parsed_data['daily_water_consumption_hospital'])} متر مكعب\n"
+            )
+        @staticmethod
+        def daily_oxygen_consumption_hospital_info(parsed_data: dict) -> str:
+            return (
+                f" مُعدَّل اسْتِهْلَاكِ الْأُكْسِجِينِ اليومي لِلْمُسْتَشْفَى: {float(parsed_data['daily_oxygen_consumption_hospital'])} متر مكعب\n"
+            )
+        @staticmethod
+        def monthly_oxygen_consumption_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"مُعدَّل اسْتِهْلَاكِ الْأُكْسِجِينِ الشَّهْرِيَّ في الْمُسْتَشْفَى: {float(parsed_data['monthly_oxygen_consumption_hospital'])} متر مكعب\n"
+            )
+
 
         @staticmethod
         def monthly_oxygen_consumption_info(parsed_data: dict) -> str:
             return (
                 f"مُعدَّل اسْتِهْلَاكِ الْأُكْسِجِينِ الشَّهْرِيَّ في الْمُجَمَّعِ: {float(parsed_data['monthly_oxygen_consumption'])} متر مكعب\n"
             )
-
+       
         @staticmethod
         def daily_oxygen_cost_info(parsed_data: dict) -> str:
             return (
@@ -769,11 +831,21 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"عَدَدُ المَرْضَى المقيمين الشهري  فِي المجمع: {int(parsed_data['in_Patients'])} مَرِيض\n"
             )
+        @staticmethod
+        def in_Patients_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"عَدَدُ المَرْضَى المقيمين الشهري  فِي الْمُسْتَشْفَى: {int(parsed_data['in_Patients_hospital'])} مَرِيض\n"
+            )
 
         @staticmethod
         def out_Patients_info(parsed_data: dict) -> str:
             return (
                 f"عَدَدُ المَرْضَى الشهري الغير مقيمين في المُجَمَّعِ: {int(parsed_data['out_Patients'])} مَرِيض\n"
+            )
+        @staticmethod
+        def out_Patients_hospital_info(parsed_data: dict) -> str:
+            return (
+                f"عَدَدُ المَرْضَى الشهري الغير مقيمين في الْمُسْتَشْفَى: {int(parsed_data['out_Patients_hospital'])} مَرِيض\n"
             )
         @staticmethod
         def every_department_info(parsed_data: dict) -> str:
@@ -1111,7 +1183,9 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.return_Total_Hospital_Beds_unused_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_monthlycost_sg_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_monthly_water_cost_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.return_monthly_water_cost_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_monthly_oxygen_cost_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.return_monthly_oxygen_cost_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_Hospital_Occupancy_Rate_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_Clinic_Occupancy_Rate_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Mask_Policy_Violations_info(parsed_data)
@@ -1142,6 +1216,8 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.dailyenergy_MVSG_incoming2_energy_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.dailyenergy_MVSG_incoming3_energy_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.dailyenergy_Hospital_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.dailyenergy_Hospital_GF_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.dailyenergy_Hospital_cost_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.dailyenergy_Clinics_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.dailyenergy_Utilities_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.dailyenergy_ele_info(parsed_data)
@@ -1151,6 +1227,8 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.monthlyenergy_MVSG_incoming2_energy_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthlyenergy_MVSG_incoming3_energy_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthlyenergy_Hospital_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthlyenergy_Hospital_GF_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthlyenergy_cost_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthlyenergy_Clinics_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthlyenergy_Utilities_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthlyenergy_ele_info(parsed_data)
@@ -1170,11 +1248,17 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.monthlycost_Utilities_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.daily_water_consumption_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthly_water_consumption_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthly_water_consumption_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.daily_water_cost_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.yearly_water_consumption_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.yearly_water_cost_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.daily_oxygen_consumption_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.daily_oxygen_consumption_hospital_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.daily_water_consumption_hospital_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.daily_oxygen_cost_hospital_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.daily_water_cost_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthly_oxygen_consumption_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthly_oxygen_consumption_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.daily_oxygen_cost_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.yearly_oxygen_consumption_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.yearly_oxygen_cost_info(parsed_data)
@@ -1213,7 +1297,9 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller3_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthlyenergy_chiller4_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.in_Patients_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.in_Patients_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.out_Patients_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.out_Patients_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.chillers_sys_operation_cost_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.main_temp_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.main_supply_temp_info(parsed_data)
