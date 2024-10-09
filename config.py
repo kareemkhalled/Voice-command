@@ -180,7 +180,6 @@ class SuezMedicalComplexConfigurator(object):
                 f"عَدَدُ المَصَاعِدِ الحالي غَيْرِ العَامِلَةِ: {int(float(parsed_data['Elevator_off']))} \n"
             )
 
-
         @staticmethod
         def monthly_total_cost_info(parsed_data: dict) -> str:
             return (
@@ -1145,6 +1144,76 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"البَصْمَةُ الكَرْبُونِيَّةُ الشَّهْرِيَّةُ: {float(parsed_data['monthly_carbon_foot_print'])} كِيلُوجرام/مِتْر مُرَبَّع\n"
             )
+        @staticmethod
+        def in_patients_GF_info(parsed_data: dict) -> str:
+            return (
+                f"عَدَدُ المَرْضَى المُقِيمِينَ في الطَّابِقِ الأَرْضِيِّ لِلْمُسْتَشْفَى: {float(parsed_data['in_patients_GF'])} مريض \n"
+            )
+        @staticmethod
+        def out_patients_GF_info(parsed_data: dict) -> str:
+            return (
+                f"عَدَدُ المَرْضَى غَيْرِ المُقِيمِينَ في الطَّابِقِ الأَرْضِيِّ لِلْمُسْتَشْفَى: {float(parsed_data['out_patients_GF'])} مريض\n"
+            )
+        @staticmethod
+        def monthlyenergy_g_info(parsed_data: dict) -> str:
+            return (
+                f"اِسْتِهْلَاكُ الكَهْرَبَاءِ الشَّهْرِي بِالطَّابِقِ الأَرْضِيِّ لِلْمُسْتَشْفَى : {float(parsed_data['monthlyenergy_g'])} كِيلُووات سَاعَة\n"
+            )
+        @staticmethod
+        def energy_dental_xray_info(parsed_data: dict) -> str:
+            return (
+                f"اِسْتِهْلَاكُ الكَهْرَبَاءِ الشَّهْرِيُّ في قِسْمِ الأَشِعَّةِ السِّينِيَّةِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['energy_dental_xray'])} كِيلُووات سَاعَة\n"
+            )
+        @staticmethod
+        def cost_dental_xray_info(parsed_data: dict) -> str:
+            return (
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْكَهْرَبَاءِ في قِسْمِ الأَشِعَّةِ السِّينِيَّةِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['cost_dental_xray'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def energy_radiology_lab_info(parsed_data: dict) -> str:
+            return (
+                f"اِسْتِهْلَاكُ الكَهْرَبَاءِ الشَّهْرِيُّ في قِسْمِ الأَشِعَّةِ وَالمُخْتَبَرِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['energy_radiology_lab'])} كِيلُووات سَاعَة\n"
+            )
+        @staticmethod
+        def cost_radiology_lab_info(parsed_data: dict) -> str:
+            return (
+                f"لتَّكْلِفَةُ الشَّهْرِيَّةُ لِلْكَهْرَبَاءِ في قِسْمِ الأَشِعَّةِ وَالمُخْتَبَرِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['cost_radiology_lab'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def energy_bio_tanks_info(parsed_data: dict) -> str:
+            return (
+                f"اِسْتِهْلَاكُ الكَهْرَبَاءِ الشَّهْرِيُّ في قِسْمِ الخَزَّانَاتِ وَالمُعِدَّاتِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['energy_bio_tanks'])}كِيلُووات سَاعَة\n"
+            )
+        @staticmethod
+        def cost_bio_tanks_info(parsed_data: dict) -> str:
+            return (
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْكَهْرَبَاءِ في قِسْمِ الخَزَّانَاتِ وَالمُعِدَّاتِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['cost_bio_tanks'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def energy_triage_info(parsed_data: dict) -> str:
+            return (
+                f"اِسْتِهْلَاكُ الكَهْرَبَاءِ الشَّهْرِيُّ في قِسْمِ الطَّوَارِئِ وَالإِنْعَاشِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['energy_triage'])} كِيلُووات سَاعَة\n"
+            )
+        @staticmethod
+        def cost_triage_info(parsed_data: dict) -> str:
+            return (
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْكَهْرَبَاءِ في قِسْمِ الطَّوَارِئِ وَالإِنْعَاشِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['cost_triage'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def energy_administration_info(parsed_data: dict) -> str:
+            return (
+                f"اِسْتِهْلَاكُ الكَهْرَبَاءِ الشَّهْرِيُّ في قِسْمِ الإِدَارَةِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['energy_administration'])} كِيلُووات سَاعَة\n"
+            )
+        @staticmethod
+        def cost_administration_info(parsed_data: dict) -> str:
+            return (
+                f"التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْكَهْرَبَاءِ في قِسْمِ الإِدَارَةِ التَّكْلِفَةُ الشَّهْرِيَّةُ لِلْكَهْرَبَاءِ في قِسْمِ الإِدَارَةِ بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['cost_administration'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def carbon_foot_print_GF_info(parsed_data: dict) -> str:
+            return (
+                f" البَصْمَةُ الكَرْبُونِيَّةُ الشَّهْرِيَّة  بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['carbon_foot_print_GF'])} كِيلُوجرام/مِتْر مُرَبَّع\n"
+            )
 
         @staticmethod
         def invoices_information_info(parsed_data: dict) -> str:
@@ -1350,9 +1419,21 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.temp_inside_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.temp_outside_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.total_complex_staff_info(parsed_data)
-            report += SuezMedicalComplexConfigurator.Home.total_complex_doctor_info(parsed_data)
-            report += SuezMedicalComplexConfigurator.Home.total_complex_nurse_info(parsed_data)
-
+            report += SuezMedicalComplexConfigurator.Home.in_patients_GF_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.out_patients_GF_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthlyenergy_g_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.cost_dental_xray_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.energy_dental_xray_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.energy_radiology_lab_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.cost_radiology_lab_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.energy_bio_tanks_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.cost_bio_tanks_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.energy_triage_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.cost_triage_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.energy_administration_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.cost_administration_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.carbon_foot_print_GF_info(parsed_data)
+            
 
 
             return report
