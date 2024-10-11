@@ -397,7 +397,21 @@ suez_medical_complex_classifier = ChainClassifier(
            "daily_oxygen_consumption_hospital" ,"invoices_information" ,"temp_outside","temp_inside","total_complex_doctor","total_complex_staff","total_complex_nurse",
            #groundfloor ubdate
            "in_patients_GF","out_patients_GF","monthlyenergy_g","energy_dental_xray","cost_dental_xray","energy_radiology_lab","cost_radiology_lab",
-           "energy_bio_tanks","cost_bio_tanks","energy_triage","cost_triage","energy_administration","cost_administration","carbon_foot_print_GF",'report', 'zeeta', 'other'
+           "energy_bio_tanks","cost_bio_tanks","energy_triage","cost_triage","energy_administration","cost_administration","carbon_foot_print_GF",
+
+           #boilers ubdate
+           "Hospital_Boiler_1_Status","Hospital_Boiler_1_Alarm","Hospital_Boiler_1_Hot_Water_Temperature","Hospital_Boiler_1_BC_Sequence_Time",
+           ,"Hospital_Boiler_1_Operation_Time","Hospital_Boiler_1_Hot_Water_Volume",
+           "Hospital_Boiler_1_Gas_Consumption_Month","Hospital_Boiler_1_Gas_Invoice_Month",
+           "Hospital_Boiler_2_Status","Hospital_Boiler_2_Alarm","Hospital_Boiler_2_Hot_Water_Temperature"
+           ,"Hospital_Boiler_2_BC_Sequence_Time","Hospital_Boiler_2_Operation_Time","Hospital_Boiler_2_Hot_Water_Volume",
+           "Hospital_Boiler_2_Gas_Consumption_Month","Hospital_Boiler_2_Gas_Invoice_Month",
+           "Primary_Pump_1_Status","Primary_Pump_2_Status","Primary_Pump_3_Status",
+           "secondry_Pump_1_Status","secondry_Pump_2_Status","secondry_Pump_3_Status",
+
+           
+           
+           ,'report', 'zeeta', 'other'
 
           
 
@@ -450,8 +464,38 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن استهلاك الكهرباء الشهري في قسم الاداره    ، ارجع 'energy_administration'. 
             عند السؤال عن تكلفه الكهرباء الشهريه في قسم الاداره    ، ارجع 'cost_administration'. 
 
+            #boilers ubdate
 
-                                                          
+                                            
+            عند السؤال عن حاله الغلايه الاولي او حاله الغلايه رقم 1 ، ارجع 'Hospital_Boiler_1_Status'.  
+            عند السؤال عن وجود انزار في الغلايه الاولي او وجود انزار في الغلايه رقم 1 ، ارجع 'Hospital_Boiler_1_Alarm'.  
+            عند السؤال عن درجه حراره المياه في الغلايه الاولي او درجه حراره المياه في الغلايه رقم 1 ، ارجع 'Hospital_Boiler_1_Hot_Water_Temperature'.  
+            عند السؤال عن عدد ساعات تشغيل الغلايه الاولي في الشهر او عدد ساعات تشغيل الغلايه رقم 1 في الشهر ، ارجع 'Hospital_Boiler_1_Operation_Time'.  
+            عند السؤال عن حجم المياه او سعه المياه في الغلايه  الاولي او حجم او سعه المياه في الغلايه رقم 1 ، ارجع 'Hospital_Boiler_1_Hot_Water_Volume'.  
+            عند السؤال عن الغاز المستهلك للغلايه الاولي شهريا او الغاز المستهلك للغلايه رقم 1 شهريا ، ارجع 'Hospital_Boiler_1_Gas_Consumption_Month'.  
+            عند السؤال عن تكلفه الغاز المستهلك للغلايه الاولي شهريا او تكلفه الغاز المستهلك للغلايه رقم 1 شهريا ، ارجع 'Hospital_Boiler_1_Gas_Invoice_Month'.  
+            عند السؤال عن حاله الغلايه الثانيه او حاله الغلايه رقم 2  ، ارجع 'Hospital_Boiler_2_Status'.  
+            عند السؤال عن وجود انزار في الغلايه الثانيه او وجود انزار في الغلايه رقم 2 ، ارجع 'Hospital_Boiler_2_Alarm'.  
+            عند السؤال عن درجه حراره المياه في الغلايه الثانيه او درجه حراره المياه في الغلايه رقم 2، ارجع 'Hospital_Boiler_2_Hot_Water_Temperature'.  
+            عند السؤال عن عدد ساعات تشغيل الغلايه الثانيه في الشهر او عدد ساعات تشغيل الغلايه رقم2  في الشهر ، ارجع 'Hospital_Boiler_2_Operation_Time'.  
+            عند السؤال عن حجم المياه او سعه المياه في الغلايه  الثانيه او حجم او سعه المياه في الغلايه رقم 2 ، ارجع 'Hospital_Boiler_2_Hot_Water_Volume'.  
+            عند السؤال عن الغاز المستهلك للغلايه الثانيه شهريا او الغاز المستهلك للغلايه رقم 2 شهريا ، ارجع 'Hospital_Boiler_2_Gas_Consumption_Month'.  
+            عند السؤال عن تكلفه الغاز المستهلك للغلايه الثانيه شهريا او تكلفه الغاز المستهلك للغلايه رقم 2 شهريا ، ارجع 'Hospital_Boiler_2_Gas_Invoice_Month'.
+
+            #pumps ubdate
+
+            عند السؤال عن حاله المضخه الاولي في المجموعه الاولي ، ارجع 'Primary_Pump_1_Status'.
+            عند السؤال عن عن حاله المضخه الثانيه في المجموعه الاولي ، ارجع 'Primary_Pump_2_Status'.
+            عند السؤال عن عن حاله المضخه الثالثه في المجموعه الاولي ، ارجع 'Primary_Pump_3_Status'.
+            عند السؤال عن عن حاله المضخه الاولي في المجموعه الثانيه ، ارجع 'secondry_Pump_1_Status'.
+            عند السؤال عن عن حاله المضخه الثانيه في المجموعه الثانيه ، ارجع 'secondry_Pump_2_Status'.
+            عند السؤال عن عن حاله المضخه الثالثه في المجموعه الثالثه ، ارجع 'secondry_Pump_3_Status'.
+
+
+
+
+
+
             عند السؤال عن انتهاك سياسة ارتداء الكمامات في المستشفى او السؤال عن الكمامات ، ارجع 'Mask_Policy_Violations'.  
             عند السؤال عن سياسة التباعد الاجتماعي او السؤال عن المسافات الامنه بين المرضي، ارجع 'Social_Distance_Violations'.  
             عند السؤال عن عدد السقطات المكتشفة في المستشفى او السؤال عن الاشخاص الملقون علي الارض، ارجع 'NuOF_Detected_Falls'.  
@@ -548,6 +592,33 @@ suez_medical_complex_classifier = ChainClassifier(
 ).init_chain()
 
 suez_medical_complex_mapper = {
+
+#boilers and pump ubdate
+
+    'Hospital_Boiler_1_Status': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Status_info,
+    'Hospital_Boiler_1_Alarm': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Alarm_info,
+    'Hospital_Boiler_1_Hot_Water_Temperature': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Hot_Water_Temperature_info,
+    'Hospital_Boiler_1_Operation_Time': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Operation_Time_info,
+    'Hospital_Boiler_1_Hot_Water_Volume': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Hot_Water_Volume_info,
+    'Hospital_Boiler_1_Gas_Consumption_Month': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Gas_Consumption_Month_info,
+    'Hospital_Boiler_1_Gas_Invoice_Month': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Gas_Invoice_Month_info,
+    'Hospital_Boiler_2_Status': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Status_info,
+    'Hospital_Boiler_2_Alarm': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Alarm_info,
+    'Hospital_Boiler_2_Hot_Water_Temperature': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Hot_Water_Temperature_info,
+    'Hospital_Boiler_2_Operation_Time': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Operation_Time_info,
+    'Hospital_Boiler_2_Hot_Water_Volume': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Hot_Water_Volume_info,
+    'Hospital_Boiler_2_Gas_Consumption_Month': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Gas_Consumption_Month_info,
+    'Hospital_Boiler_2_Gas_Invoice_Month': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Gas_Invoice_Month_info,
+    'Primary_Pump_1_Status': SuezMedicalComplexConfigurator.Home.Primary_Pump_1_Status_info,
+    'Primary_Pump_2_Status': SuezMedicalComplexConfigurator.Home.Primary_Pump_2_Status_info,
+    'Primary_Pump_3_Status': SuezMedicalComplexConfigurator.Home.Primary_Pump_3_Status_info,
+    'secondry_Pump_1_Status': SuezMedicalComplexConfigurator.Home.secondry_Pump_1_Status_info,
+    'secondry_Pump_2_Status': SuezMedicalComplexConfigurator.Home.secondry_Pump_2_Status_info,
+    'secondry_Pump_3_Status': SuezMedicalComplexConfigurator.Home.secondry_Pump_3_Status_info,
+
+
+#home and hospital and gf ubdates
+
     'in_patients_GF': SuezMedicalComplexConfigurator.Home.in_patients_GF_info,
     'out_patients_GF': SuezMedicalComplexConfigurator.Home.out_patients_GF_info,
     'monthlyenergy_g': SuezMedicalComplexConfigurator.Home.monthlyenergy_g_info,
@@ -571,6 +642,8 @@ suez_medical_complex_mapper = {
     'total_complex_doctor': SuezMedicalComplexConfigurator.Home.total_complex_doctor_info,
     'total_complex_nurse': SuezMedicalComplexConfigurator.Home.total_complex_nurse_info,
     'any_alarm': SuezMedicalComplexConfigurator.Home.any_alarm_info,
+
+    
     'complex_Occupancy_Rate': SuezMedicalComplexConfigurator.Home.return_Beds_occupancy_rate_info,
     'Inpatient_Beds_used_monthly': SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_used_info,
     'Inpatient_Beds_Unused': SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_Unused_info,
