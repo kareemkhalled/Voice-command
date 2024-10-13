@@ -190,16 +190,16 @@ class SuezMedicalComplexConfigurator(object):
             if int((parsed_data['HVAC_alarm'])) == 1:
                 return "يوُجُودِ انظار فِي نِظَامِ التَّكْيِيفِ المَرْكَزِيِّ\n"
             
-            elif int((parsed_data['medical_gas_alarm'])) == 1:
+            if int((parsed_data['medical_gas_alarm'])) == 1:
                 return "يوُجُودِ انظار فِي نظام الغَازِات الطِّبِّيِّ\n"
             
-            elif int((parsed_data['fire_fighting_alarm'])) == 1:
+            if int((parsed_data['fire_fighting_alarm'])) == 1:
                 return "يوُجُودِ انظار فِي نِظَامِ الحَرِيقِ\n"
             
-            elif int((parsed_data['transformer_alarm'])) == 1:
+            if int((parsed_data['transformer_alarm'])) == 1:
                 return "يوُجُودِ انظار فِي المُحَوِّلَاتِ\n"
             
-            elif int((parsed_data['elevator_alarm'])) == 1:
+            if int((parsed_data['elevator_alarm'])) == 1:
                 return "يوُجُودِ انظار فِي المَصَاعِدِ\n"
             
             else:
@@ -219,7 +219,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def total_complex_staff_info(parsed_data: dict) -> str:
             return (
-                f" عَدَدُ الأَطِبَّاءِ وَالمُمَرِّضِينَ المتَوَاجِدِينَ في المَسْتَشْفَى: {int(float(parsed_data['total_complex_staff']))}  شخص\n"
+                f" عَدَدُ الأَطِبَّاءِ وَالمُمَرِّضِينَ المتَوَاجِدِينَ في الْمُجَمَّعِ: {int(float(parsed_data['total_complex_staff']))}  شخص\n"
             )
         @staticmethod
         def total_complex_doctor_info(parsed_data: dict) -> str:
