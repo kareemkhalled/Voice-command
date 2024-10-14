@@ -1217,15 +1217,16 @@ class SuezMedicalComplexConfigurator(object):
         
 
 
-
 #boiler ubdate
 
 
         @staticmethod
         def Hospital_Boiler_1_Status_info(parsed_data: dict) -> str:
-            return (
-                f"  حَالَةُ الغَلَّايَةِ الأُولَى : {float(parsed_data['Hospital_Boiler_1_Status'])}  \n"
-            )
+             if int((parsed_data[' Hospital_Boiler_1_Status'])) == 1:
+                return " حَالَةُ الغَلَّايَةِ الأُولَى قيد التشغيل\n"
+             else:
+                 return " حَالَةُ الغَلَّايَةِ الأُولَى قيد الايقاف "
+                        
         @staticmethod
         def Hospital_Boiler_1_Alarm_info(parsed_data: dict) -> str:
             return (
@@ -1257,10 +1258,17 @@ class SuezMedicalComplexConfigurator(object):
                 f" تَكْلِفَةُ الغَازِ المُسْتَهْلَكِ لِلْغَلَّايَةِ الأُولَى شَهْرِيًّا: {float(parsed_data['Hospital_Boiler_1_Gas_Invoice_Month'])} جنيه\n"
             )
         @staticmethod
-        def Hospital_Boiler_2_Status_info(parsed_data: dict) -> str:
+        def Last_Operation_Boiler1_info(parsed_data: dict) -> str:
             return (
-                f" حَالَةُ الغَلَّايَةِ الثَّانِيَة: {float(parsed_data['Hospital_Boiler_2_Status'])} \n"
+                f" آخِرُ عَمَلِيَّةِ تَشْغِيلٍ لِلْغَلَّايَةِ الأُولَى بِتَارِيخِ: {float(parsed_data['Last_Operation_Boiler1'])} جنيه\n"
             )
+        @staticmethod
+        def Hospital_Boiler_2_Status_info(parsed_data: dict) -> str:
+             if int((parsed_data[' Hospital_Boiler_2_Status'])) == 1:
+                return " حَالَةُ الغَلَّايَةِ الثَّانِيَة قيد التشغيل\n"
+             else:
+                 return "حَالَةُ الغَلَّايَةِ الثَّانِيَة قيد الايقاف "
+                       
         @staticmethod
         def Hospital_Boiler_2_Alarm_info(parsed_data: dict) -> str:
             return (
@@ -1279,7 +1287,7 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def Hospital_Boiler_2_Hot_Water_Volume_info(parsed_data: dict) -> str:
             return (
-                f"سِعَةُ المِيَاهِ فِي الغَلَّايَةِ الأُولَى : {float(parsed_data['Hospital_Boiler_2_Hot_Water_Volume'])} لتر\n"
+                f"سِعَةُ المِيَاهِ فِي الغَلَّايَةِ الثَّانِيَة : {float(parsed_data['Hospital_Boiler_2_Hot_Water_Volume'])} لتر\n"
             )
         @staticmethod
         def Hospital_Boiler_2_Gas_Consumption_Month_info(parsed_data: dict) -> str:
@@ -1289,7 +1297,12 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def Hospital_Boiler_2_Gas_Invoice_Month_info(parsed_data: dict) -> str:
             return (
-                f"تَكْلِفَةُ الغَازِ المُسْتَهْلَكِ لِلْغَلَّايَةِ الأُولَى شَهْرِيًّا: {float(parsed_data['Hospital_Boiler_2_Gas_Invoice_Month'])} جنيه\n"
+                f"تَكْلِفَةُ الغَازِ المُسْتَهْلَكِ لِلْغَلَّايَةِ الثَّانِيَة شَهْرِيًّا: {float(parsed_data['Hospital_Boiler_2_Gas_Invoice_Month'])} جنيه\n"
+            )
+        @staticmethod
+        def Last_Operation_Boiler2_info(parsed_data: dict) -> str:
+            return (
+                f" آخِرُ عَمَلِيَّةِ تَشْغِيلٍ لِلْغَلَّايَةِ الثَّانِيَة بِتَارِيخِ: {float(parsed_data['Last_Operation_Boiler2'])} جنيه\n"
             )
         @staticmethod
         def Primary_Pump_1_Status_info(parsed_data: dict) -> str:
@@ -1556,6 +1569,8 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Operation_Time_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Hot_Water_Volume_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Gas_Consumption_Month_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.Last_Operation_Boiler1_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.Last_Operation_Boiler2_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Gas_Invoice_Month_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Primary_Pump_1_Status_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Primary_Pump_2_Status_info(parsed_data)

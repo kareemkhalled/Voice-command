@@ -351,10 +351,10 @@ station_inv_classifier = ChainClassifier(classes=['transformers', 'working_trans
 
 suez_medical_complex_classifier = ChainClassifier(
     classes=[
-         "any_alarm","date", "complex_Occupancy_Rate", "Inpatient_Beds_used", "Inpatient_Beds_unused", "ICU_CCU_Beds_used",
+        "date", "Beds_Occupancy_Rate", "Inpatient_Beds_used", "Inpatient_Beds_unused", "ICU_CCU_Beds_used",
           "ICU_CCU_Beds_unused", "Emergency_Beds_used", "Emergency_Beds_Unused", "Incubators_Beds_used", 
           "Incubators_Beds_unused", "Total_Hospital_Beds_used", "Total_Hospital_Beds_unused", "monthlycost_sg", 
-          "monthly_water_cost","daily_water_cost_hospital", "monthly_oxygen_cost", "Hospital_Occupancy_Rate", "Clinic_Occupancy_Rate", "monthly_gas_system", "carbon_foot_Hospital", "carbon_foot_Clinics", "carbon_foot_Utilites",
+          "monthly_water_cost", "monthly_oxygen_cost", "Hospital_Occupancy_Rate", "Clinic_Occupancy_Rate", 
           #update 2
           "Mask_Policy_Violations","Social_Distance_Violations","NuOF_Detected_Falls",
           "transformer_on","transformer_Off","generator_on","generator_off",
@@ -383,7 +383,7 @@ suez_medical_complex_classifier = ChainClassifier(
           "chiller2_return_temp","chiller3_status","chiller3_supply_temp","chiller3_return_temp","chiller4_status",
           "chiller4_supply_temp","chiller4_return_temp","chillers_op_hours","chiller1_op_hours","chiller2_op_hours",
           "chiller3_op_hours","chiller4_op_hours","monthlyenergy_chiller1","monthlyenergy_chiller2","monthlyenergy_chiller3",
-          "monthlyenergy_chiller4","in_Patients","out_Patients","chillers_sys_operation_cost","main_return_temp",
+          "monthlyenergy_chiller4","in-Patients","out-Patients","chillers_sys_operation_cost","main_return_temp",
           "main_supply_temp","chiller1_maintenance_hours","chiller2_maintenance_hours","chiller3_maintenance_hours","chiller4_maintenance_hours",
           #Update 3
           "daily_index", "yearly_index","monthly_index","random_MVSG_2_energy","random_MVSG_3_energy","updated_at",  "gen2_status", 
@@ -401,17 +401,17 @@ suez_medical_complex_classifier = ChainClassifier(
 
            #boilers ubdate
            "Hospital_Boiler_1_Status","Hospital_Boiler_1_Alarm","Hospital_Boiler_1_Hot_Water_Temperature","Hospital_Boiler_1_BC_Sequence_Time",
-           ,"Hospital_Boiler_1_Operation_Time","Hospital_Boiler_1_Hot_Water_Volume",
+           "Hospital_Boiler_1_Operation_Time","Hospital_Boiler_1_Hot_Water_Volume",
            "Hospital_Boiler_1_Gas_Consumption_Month","Hospital_Boiler_1_Gas_Invoice_Month",
            "Hospital_Boiler_2_Status","Hospital_Boiler_2_Alarm","Hospital_Boiler_2_Hot_Water_Temperature"
            ,"Hospital_Boiler_2_BC_Sequence_Time","Hospital_Boiler_2_Operation_Time","Hospital_Boiler_2_Hot_Water_Volume",
            "Hospital_Boiler_2_Gas_Consumption_Month","Hospital_Boiler_2_Gas_Invoice_Month",
            "Primary_Pump_1_Status","Primary_Pump_2_Status","Primary_Pump_3_Status",
-           "secondry_Pump_1_Status","secondry_Pump_2_Status","secondry_Pump_3_Status",
+           "secondry_Pump_1_Status","secondry_Pump_2_Status","secondry_Pump_3_Status","Last_Operation_Boiler1","Last_Operation_Boiler2",
 
            
            
-           ,'report', 'zeeta', 'other'
+           'report', 'zeeta', 'other'
 
           
 
@@ -448,7 +448,7 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن الاطباء المتواجدين في  المستشفي او عدد الدكاتره او عَدَدُ الأَطِبَّاءِالمتَوَاجِدِينَ في المَسْتَشْفَى ، ارجع 'total_complex_doctor'. 
             عند السؤال عن عدد الممرضين المتواجدين في  الْمُجَمَّعِ او عدد الممرضين او عَدَدُ المُمَرِّضِينَ المتَوَاجِدَاتِين في الْمُجَمَّعِ  ، ارجع 'total_complex_nurse'.
 
-            #groundfloor ubdate
+            
 
             عند السؤال عن عدد المرضي المقيمين في الطابق الارضي للمستشفي  او عَدَدُ المرضي المقيمين في الطابق الارضي للمُسْتَشْفَى  ، ارجع 'in_patients_GF'. 
             عند السؤال عن عدد المرضي الغير مقيمين في الطابق الارضي للمستشفي  او عَدَدُ المرضي الغير مقيمين في الطابق الارضي للمُسْتَشْفَى  ، ارجع 'out_patients_GF'. 
@@ -464,7 +464,7 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن استهلاك الكهرباء الشهري في قسم الاداره    ، ارجع 'energy_administration'. 
             عند السؤال عن تكلفه الكهرباء الشهريه في قسم الاداره    ، ارجع 'cost_administration'. 
 
-            #boilers ubdate
+            
 
                                             
             عند السؤال عن حاله الغلايه الاولي او حاله الغلايه رقم 1 ، ارجع 'Hospital_Boiler_1_Status'.  
@@ -481,8 +481,10 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن حجم المياه او سعه المياه في الغلايه  الثانيه او حجم او سعه المياه في الغلايه رقم 2 ، ارجع 'Hospital_Boiler_2_Hot_Water_Volume'.  
             عند السؤال عن الغاز المستهلك للغلايه الثانيه شهريا او الغاز المستهلك للغلايه رقم 2 شهريا ، ارجع 'Hospital_Boiler_2_Gas_Consumption_Month'.  
             عند السؤال عن تكلفه الغاز المستهلك للغلايه الثانيه شهريا او تكلفه الغاز المستهلك للغلايه رقم 2 شهريا ، ارجع 'Hospital_Boiler_2_Gas_Invoice_Month'.
+            عند السؤال عن اخر عمليه تشغيل للغلايه الاولي ، ارجع 'Last_Operation_Boiler1'.
+            عند السؤال عن اخر عمليه تشغيل للغلايه الثانيه ، ارجع 'Last_Operation_Boiler2'.
 
-            #pumps ubdate
+            
 
             عند السؤال عن حاله المضخه الاولي في المجموعه الاولي ، ارجع 'Primary_Pump_1_Status'.
             عند السؤال عن عن حاله المضخه الثانيه في المجموعه الاولي ، ارجع 'Primary_Pump_2_Status'.
@@ -586,12 +588,14 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن حالة المياه للمولد 2، ارجع 'gen2_water'.  
             عند السؤال عن وضع الشاحن للمولد 2، ارجع 'gen2_charge'.
             عند السؤال عن الفواتير الشهريه للمستشفي او الفواتير الشهريه او الاستهلاك الشهري للمستشفي او تفاصيل الفواتير الشهريه او تكلفه الفواتير الشهريه 2، ارجع 'invoices_information'.
+
+                   Return 'report' when asked about a report about the The complex information.
                     """,
     llm=ChatOpenAI,
     llm_kwds={}
 ).init_chain()
 
-suez_medical_complex_mapper = {
+suez_medical_complex_mapper ={
 
 #boilers and pump ubdate
 
@@ -609,6 +613,8 @@ suez_medical_complex_mapper = {
     'Hospital_Boiler_2_Hot_Water_Volume': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Hot_Water_Volume_info,
     'Hospital_Boiler_2_Gas_Consumption_Month': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Gas_Consumption_Month_info,
     'Hospital_Boiler_2_Gas_Invoice_Month': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_2_Gas_Invoice_Month_info,
+    'Last_Operation_Boiler1': SuezMedicalComplexConfigurator.Home.Last_Operation_Boiler1_info,
+    'Last_Operation_Boiler2': SuezMedicalComplexConfigurator.Home.Last_Operation_Boiler2_info,
     'Primary_Pump_1_Status': SuezMedicalComplexConfigurator.Home.Primary_Pump_1_Status_info,
     'Primary_Pump_2_Status': SuezMedicalComplexConfigurator.Home.Primary_Pump_2_Status_info,
     'Primary_Pump_3_Status': SuezMedicalComplexConfigurator.Home.Primary_Pump_3_Status_info,
