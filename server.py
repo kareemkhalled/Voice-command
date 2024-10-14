@@ -383,8 +383,10 @@ suez_medical_complex_classifier = ChainClassifier(
           "chiller2_return_temp","chiller3_status","chiller3_supply_temp","chiller3_return_temp","chiller4_status",
           "chiller4_supply_temp","chiller4_return_temp","chillers_op_hours","chiller1_op_hours","chiller2_op_hours",
           "chiller3_op_hours","chiller4_op_hours","monthlyenergy_chiller1","monthlyenergy_chiller2","monthlyenergy_chiller3",
-          "monthlyenergy_chiller4","in-Patients","out-Patients","chillers_sys_operation_cost","main_return_temp",
+          "monthlyenergy_chiller4","in-Patients","out-Patients","monthlycost_chillers","main_return_temp",
           "main_supply_temp","chiller1_maintenance_hours","chiller2_maintenance_hours","chiller3_maintenance_hours","chiller4_maintenance_hours",
+          "chiller1_maintenance_days","chiller2_maintenance_days","chiller3_maintenance_days","chiller4_maintenance_days","chillers_maintenance_information",
+          "chiller1_op_hours","chiller2_op_hours","chiller3_op_hours","chiller4_op_hours"
           #Update 3
           "daily_index", "yearly_index","monthly_index","random_MVSG_2_energy","random_MVSG_3_energy","updated_at",  "gen2_status", 
           "gen2_engine_runtime", "gen2_solar", "gen2_last_op",  "index","gen2_bv","gen2_volt","gen2_curr","gen2_energy",
@@ -449,7 +451,7 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن عدد الممرضين المتواجدين في  الْمُجَمَّعِ او عدد الممرضين او عَدَدُ المُمَرِّضِينَ المتَوَاجِدَاتِين في الْمُجَمَّعِ  ، ارجع 'total_complex_nurse'.
 
             
-
+#hospital gf
             عند السؤال عن عدد المرضي المقيمين في الطابق الارضي للمستشفي  او عَدَدُ المرضي المقيمين في الطابق الارضي للمُسْتَشْفَى  ، ارجع 'in_patients_GF'. 
             عند السؤال عن عدد المرضي الغير مقيمين في الطابق الارضي للمستشفي  او عَدَدُ المرضي الغير مقيمين في الطابق الارضي للمُسْتَشْفَى  ، ارجع 'out_patients_GF'. 
             عند السؤال عن استهلاك الكهرباء الشهري في الطابق الارضي للمستشفي  ، ارجع 'monthlyenergy_g'. 
@@ -465,7 +467,7 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن تكلفه الكهرباء الشهريه في قسم الاداره    ، ارجع 'cost_administration'. 
 
             
-
+#boilers
                                             
             عند السؤال عن حاله الغلايه الاولي او حاله الغلايه رقم 1 ، ارجع 'Hospital_Boiler_1_Status'.  
             عند السؤال عن وجود انزار في الغلايه الاولي او وجود انزار في الغلايه رقم 1 ، ارجع 'Hospital_Boiler_1_Alarm'.  
@@ -484,7 +486,7 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن اخر عمليه تشغيل للغلايه الاولي ، ارجع 'Last_Operation_Boiler1'.
             عند السؤال عن اخر عمليه تشغيل للغلايه الثانيه ، ارجع 'Last_Operation_Boiler2'.
 
-            
+#pumps      
 
             عند السؤال عن حاله المضخه الاولي في المجموعه الاولي ، ارجع 'Primary_Pump_1_Status'.
             عند السؤال عن عن حاله المضخه الثانيه في المجموعه الاولي ، ارجع 'Primary_Pump_2_Status'.
@@ -494,6 +496,32 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن عن حاله المضخه الثالثه في المجموعه الثالثه ، ارجع 'secondry_Pump_3_Status'.
 
 
+
+#chillers
+
+            عند السؤال عن عدد ساعات صيانه المبرد الاول ، ارجع 'chiller1_maintenance_hours'.
+            عند السؤال عن عدد ساعات صيانه المبرد الثاني ، ارجع 'chiller2_maintenance_hours'.
+            عند السؤال عن عدد ساعات صيانه المبرد الثالث ، ارجع 'chiller3_maintenance_hours'.
+            عند السؤال عن عدد ساعات صيانه المبرد الرابع ، ارجع 'chiller4_maintenance_hours'.
+            عند السؤال عن عدد ايام صيانه المبرد الرابع ، ارجع 'chiller1_maintenance_days'.
+            عند السؤال عن عدد ايام صيانه المبرد الرابع ، ارجع 'chiller2_maintenance_days'.
+            عند السؤال عن عدد ايام صيانه المبرد الرابع ، ارجع 'chiller3_maintenance_days'.
+            عند السؤال عن عدد ايام صيانه المبرد الرابع ، ارجع 'chiller4_maintenance_days'.
+            عند السؤال عن حاله المبرد الاول او حاله المبرد رقم 1 ، ارجع 'chiller1_status'.
+            عند السؤال عن حاله المبرد الثاني او حاله المبرد رقم 2 ، ارجع 'chiller2_status'.
+            عند السؤال عن حاله المبرد الثالث او حاله المبرد رقم 3 ، ارجع 'chiller3_status'.
+            عند السؤال عن حاله المبرد الرابع او حاله المبرد رقم 4 ، ارجع 'chiller4_status'.
+            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chillers_op_hours'.
+            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chiller1_op_hours'.
+            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chiller2_op_hours'.
+            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chiller3_op_hours'.
+            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chiller4_op_hours'.
+            عند السؤال صيانه المبردات بشكل عام او متبقي علي صيانه المبردات ، ارجع 'chillers_maintenance_information'.
+            عند السؤال عن التكلفه الشهريه  لي نظام المبردات او التكلفه الشهريه للتكيفات او تكلفه المبردات الشهريه ، ارجع 'monthlycost_chillers'.
+            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الاول او التكلفه الشهريه للمبرد الاول او التكلفه الشهريه للمبرد رقم 1 ، ارجع 'monthlyenergy_chiller1'.
+            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الثاني او التكلفه الشهريه للمبرد الثاني او التكلفه الشهريه للمبرد رقم 2 ، ارجع 'monthlyenergy_chiller2'.
+            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الثالث او التكلفه الشهريه للمبرد الثالث او التكلفه الشهريه للمبرد رقم 3 ، ارجع 'monthlyenergy_chiller3'.
+            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الرابع او التكلفه الشهريه للمبرد الرابع او التكلفه الشهريه للمبرد رقم 4 ، ارجع 'monthlyenergy_chiller4'.
 
 
 
@@ -598,7 +626,6 @@ suez_medical_complex_classifier = ChainClassifier(
 suez_medical_complex_mapper ={
 
 #boilers and pump ubdate
-
     'Hospital_Boiler_1_Status': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Status_info,
     'Hospital_Boiler_1_Alarm': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Alarm_info,
     'Hospital_Boiler_1_Hot_Water_Temperature': SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Hot_Water_Temperature_info,
@@ -622,9 +649,7 @@ suez_medical_complex_mapper ={
     'secondry_Pump_2_Status': SuezMedicalComplexConfigurator.Home.secondry_Pump_2_Status_info,
     'secondry_Pump_3_Status': SuezMedicalComplexConfigurator.Home.secondry_Pump_3_Status_info,
 
-
 #home and hospital and gf ubdates
-
     'in_patients_GF': SuezMedicalComplexConfigurator.Home.in_patients_GF_info,
     'out_patients_GF': SuezMedicalComplexConfigurator.Home.out_patients_GF_info,
     'monthlyenergy_g': SuezMedicalComplexConfigurator.Home.monthlyenergy_g_info,
@@ -648,8 +673,22 @@ suez_medical_complex_mapper ={
     'total_complex_doctor': SuezMedicalComplexConfigurator.Home.total_complex_doctor_info,
     'total_complex_nurse': SuezMedicalComplexConfigurator.Home.total_complex_nurse_info,
     'any_alarm': SuezMedicalComplexConfigurator.Home.any_alarm_info,
+#chillers
 
-    
+    'chiller1_maintenance_hours': SuezMedicalComplexConfigurator.chiller1_maintenance_hours_info,
+    'chiller2_maintenance_hours': SuezMedicalComplexConfigurator.chiller2_maintenance_hours_info,
+    'chiller3_maintenance_hours': SuezMedicalComplexConfigurator.chiller3_maintenance_hours_info,
+    'chiller4_maintenance_hours': SuezMedicalComplexConfigurator.chiller4_maintenance_hours_info,
+    'chiller1_maintenance_hours': SuezMedicalComplexConfigurator.chiller1_maintenance_days_info,
+    'chiller2_maintenance_hours': SuezMedicalComplexConfigurator.chiller2_maintenance_days_info,
+    'chiller3_maintenance_hours': SuezMedicalComplexConfigurator.chiller3_maintenance_days_info,
+    'chiller4_maintenance_hours': SuezMedicalComplexConfigurator.chiller4_maintenance_days_info,
+    'chillers_maintenance_information': SuezMedicalComplexConfigurator.chillers_maintenance_information_info,
+    'chiller1_op_hours': SuezMedicalComplexConfigurator.chiller1_op_hours_info,
+    'chiller2_op_hours': SuezMedicalComplexConfigurator.chiller2_op_hours_info,
+    'chiller3_op_hours': SuezMedicalComplexConfigurator.chiller3_op_hours_info,
+    'chiller4_op_hours': SuezMedicalComplexConfigurator.chiller4_op_hours_info,
+
     'complex_Occupancy_Rate': SuezMedicalComplexConfigurator.Home.return_Beds_occupancy_rate_info,
     'Inpatient_Beds_used_monthly': SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_used_info,
     'Inpatient_Beds_Unused': SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_Unused_info,
@@ -782,7 +821,7 @@ suez_medical_complex_mapper ={
     'out_Patients': SuezMedicalComplexConfigurator.Home.out_Patients_info,
     'out_Patients_hospital': SuezMedicalComplexConfigurator.Home.out_Patients_hospital_info,
     'every_department': SuezMedicalComplexConfigurator.Home.every_department_info,
-    'chillers_sys_operation_cost': SuezMedicalComplexConfigurator.Home.chillers_sys_operation_cost_info,
+    'monthlycost_chillers': SuezMedicalComplexConfigurator.Home.monthlycost_chillers_cost_info,
     'main_temp': SuezMedicalComplexConfigurator.Home.main_temp_info,
     'main_supply_temp': SuezMedicalComplexConfigurator.Home.main_supply_temp_info,
     'chiller1_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller1_maintenance_hours_info,
