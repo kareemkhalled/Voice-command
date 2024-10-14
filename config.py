@@ -686,11 +686,7 @@ class SuezMedicalComplexConfigurator(object):
                 f"وقت التغذية المتوقع للمولِّد رقم 1: {parsed_data['gen1_estimated_feed_time']} ساعات\n"
             )
 
-        @staticmethod
-        def chiller1_status_info(parsed_data: dict) -> str:
-            return (
-                f"حالة المبرد رقم 1: {parsed_data['chiller1_status']}\n"
-            )
+       
 
         @staticmethod
         def chiller1_supply_temp_info(parsed_data: dict) -> str:
@@ -704,12 +700,7 @@ class SuezMedicalComplexConfigurator(object):
                 f"درجة حرارة العائد من المبرد رقم 1: {float(parsed_data['chiller1_return_temp'])} درجة مئوية\n"
             )
 
-        @staticmethod
-        def chiller2_status_info(parsed_data: dict) -> str:
-            return (
-                f"حالة المبرد رقم 2: {parsed_data['chiller2_status']}\n"
-            )
-
+        
         @staticmethod
         def chiller2_supply_temp_info(parsed_data: dict) -> str:
             return (
@@ -722,11 +713,7 @@ class SuezMedicalComplexConfigurator(object):
                 f"درجة حرارة العائد من المبرد رقم 2: {float(parsed_data['chiller2_return_temp'])} درجة مئوية\n"
             )
 
-        @staticmethod
-        def chiller3_status_info(parsed_data: dict) -> str:
-            return (
-                f"حالة المبرد رقم 3: {parsed_data['chiller3_status']}\n"
-            )
+        
 
         @staticmethod
         def chiller3_supply_temp_info(parsed_data: dict) -> str:
@@ -753,11 +740,7 @@ class SuezMedicalComplexConfigurator(object):
                 f"دَرَجَةُ حَرَارَةِ العَائِدِ مِنَ المُبَرِّدِ رَقْمَ 3: {float(parsed_data['chiller3_return_temp'])} دَرَجَةٌ مِئَوِيَّة\n"
             )
 
-        @staticmethod
-        def chiller4_status_info(parsed_data: dict) -> str:
-            return (
-                f"حَالَةُ المُبَرِّدِ رَقْمَ 4: {parsed_data['chiller4_status']}\n"
-            )
+       
 
         @staticmethod
         def chiller4_supply_temp_info(parsed_data: dict) -> str:
@@ -864,9 +847,9 @@ class SuezMedicalComplexConfigurator(object):
                 f" ضَغْطُ هَوَاءِالشَّفْطِ: {float(parsed_data['vaccum_press'])} بَارٍ\n"
             )
         @staticmethod
-        def chillers_sys_operation_cost_info(parsed_data: dict) -> str:
+        def monthlycost_chillers_info(parsed_data: dict) -> str:
             return (
-                f"تَكْلِفَةُ تَشْغِيلِ نِظَامِ المُبَرِّدَاتِ: {float(parsed_data['chillers_sys_operation_cost'])} جُنَيْه\n"
+                f"  تَكْلِفَةُ تَشْغِيلِ نِظَامِ المُبَرِّدَاتِ شهريا:   {float(parsed_data['monthlycost_chillers'])} جُنَيْه\n"
             )
 
         @staticmethod
@@ -884,26 +867,85 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def chiller1_maintenance_hours_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ سَاعَاتِ صِيَانَةِ المُبَرِّدِ رَقْمَ 1: {float(parsed_data['chiller1_maintenance_hours'])} سَاعَة\n"
+                f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1 : {int(float(parsed_data['chiller1_maintenance_hours']))} سَاعَة\n"
             )
 
         @staticmethod
         def chiller2_maintenance_hours_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ سَاعَاتِ صِيَانَةِ المُبَرِّدِ رَقْمَ 2: {float(parsed_data['chiller2_maintenance_hours'])} سَاعَة\n"
+                f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_hours']))} سَاعَة\n"
             )
 
         @staticmethod
         def chiller3_maintenance_hours_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ سَاعَاتِ صِيَانَةِ المُبَرِّدِ رَقْمَ 3: {float(parsed_data['chiller3_maintenance_hours'])} سَاعَة\n"
+                f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_hours']))} سَاعَة\n"
             )
 
         @staticmethod
         def chiller4_maintenance_hours_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ سَاعَاتِ صِيَانَةِ المُبَرِّدِ رَقْمَ 4: {float(parsed_data['chiller4_maintenance_hours'])} سَاعَة\n"
+                f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_hours']))} سَاعَة\n"
             )
+        @staticmethod
+        def chiller1_maintenance_days_info(parsed_data: dict) -> str:
+            return (
+                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1 : {int(float(parsed_data['chiller1_maintenance_days']))} سَاعَة\n"
+            )
+        @staticmethod
+        def chiller2_maintenance_days_info(parsed_data: dict) -> str:
+            return (
+                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_days']))} سَاعَة\n"
+            )
+        @staticmethod
+        def chiller3_maintenance_days_info(parsed_data: dict) -> str:
+            return (
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_days']))} سَاعَة\n"
+            )
+        @staticmethod
+        def chiller4_maintenance_days_info(parsed_data: dict) -> str:
+            return (
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_days_']))} سَاعَة\n"
+            )
+        @staticmethod
+        def chillers_maintenance_information_info(parsed_data: dict) -> str:
+             return (
+                f"مَعْلُومَاتُ صِيَانَةِ المُبَرِّدِات:\n"
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1: {int(float(parsed_data['chiller1_maintenance_days']))} سَاعَة\n"
+                f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1 : {int(float(parsed_data['chiller1_maintenance_hours']))} سَاعَة\n"
+                f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_hours']))} سَاعَة\n"
+                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_days']))} سَاعَة\n"
+                f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_hours']))} سَاعَة\n"
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_days']))} سَاعَة\n"
+                f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_hours']))} سَاعَة\n"
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_days_']))} سَاعَة\n"
+            )
+        
+        @staticmethod
+        def chiller1_status_info(parsed_data: dict) -> str:
+             if int((parsed_data[' chiller1_status'])) == 1:
+                return " حَالَةُ المُبَرِّدِ الأُولَ قيد التشغيل\n"
+             else:
+                 return " حَالَةُ المُبَرِّدِ الأُولَ قيد الايقاف "
+        @staticmethod
+        def chiller2_status_info(parsed_data: dict) -> str:
+             if int((parsed_data[' chiller2_status'])) == 1:
+                return " حَالَةُ المُبَرِّدِ الثَّانِي قيد التشغيل\n"
+             else:
+                 return " حَالَةُ المُبَرِّدِ الثَّانِي قيد الايقاف "
+        @staticmethod
+        def chiller3_status_info(parsed_data: dict) -> str:
+             if int((parsed_data[' chiller3_status'])) == 1:
+                return " حَالَةُ المُبَرِّدِ الثالث قيد التشغيل\n"
+             else:
+                 return " حَالَةُ المُبَرِّدِ الثلث قيد الايقاف "
+        @staticmethod
+        def chiller4_status_info(parsed_data: dict) -> str:
+             if int((parsed_data[' chiller4_status'])) == 1:
+                return " حَالَةُ المُبَرِّدِ الرابع قيد التشغيل\n"
+             else:
+                 return " حَالَةُ المُبَرِّدِ الرابع قيد الايقاف "
+        
 
         @staticmethod
         def daily_index_info(parsed_data: dict) -> str:
@@ -1214,12 +1256,9 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f" البَصْمَةُ الكَرْبُونِيَّةُ الشَّهْرِيَّة  بِالطَّابِقِ الأَرْضِيِّ: {float(parsed_data['carbon_foot_print_GF'])} كِيلُوجرام/مِتْر مُرَبَّع\n"
             )
+
+        #boiler ubdate
         
-
-
-#boiler ubdate
-
-
         @staticmethod
         def Hospital_Boiler_1_Status_info(parsed_data: dict) -> str:
              if int((parsed_data[' Hospital_Boiler_1_Status'])) == 1:
@@ -1489,7 +1528,7 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.in_Patients_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.out_Patients_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.out_Patients_hospital_info(parsed_data)
-            report += SuezMedicalComplexConfigurator.Home.chillers_sys_operation_cost_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthlycost_chillers_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.main_temp_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.main_supply_temp_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.chiller1_maintenance_hours_info(parsed_data)
@@ -1553,9 +1592,6 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.energy_administration_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.cost_administration_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.carbon_foot_print_GF_info(parsed_data)
-
-
-
             report += SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Status_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Alarm_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Hospital_Boiler_1_Hot_Water_Temperature_info(parsed_data)
@@ -1578,6 +1614,11 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.secondry_Pump_1_Status_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.secondry_Pump_2_Status_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.secondry_Pump_3_Status_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.chiller1_maintenance_days_info     
+            report += SuezMedicalComplexConfigurator.Home.chiller2_maintenance_days_info     
+            report += SuezMedicalComplexConfigurator.Home.chiller3_maintenance_days_info     
+            report += SuezMedicalComplexConfigurator.Home.chiller4_maintenance_days_info     
+            report += SuezMedicalComplexConfigurator.Home.chillers_maintenance_information_info     
             
 
 
