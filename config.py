@@ -2,6 +2,8 @@ import json
 import string
 import random
 import requests
+from datetime import datetime
+
 
 class SuezMedicalComplexConfigurator(object):
     class Home:
@@ -41,13 +43,13 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def return_ICU_CCU_Beds_used_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ لِمَرْضَى القَلْبِ: {int(float(parsed_data['ICU_CCU_Beds_used_monthly']))} سَرِيرٍ\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ  : {int(float(parsed_data['ICU_CCU_Beds_used_monthly']))} سَرِيرٍ\n"
             )
 
         @staticmethod
         def return_ICU_CCU_Beds_Unused_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ لِمَرْضَى القَلْبِ: {int(float(parsed_data['ICU_CCU_Beds_unused']))} سَرِيرٍ\n"
+                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ  : {int(float(parsed_data['ICU_CCU_Beds_unused']))} سَرِيرٍ\n"
             )
 
         @staticmethod
@@ -109,7 +111,7 @@ class SuezMedicalComplexConfigurator(object):
                 f" التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ الأُكْسُجِينِ الكُلَى في المُجَمَّعِ: {int(float(parsed_data['monthly_oxygen_cost']))} جُنَيْهًا\n"
             )
         @staticmethod
-        def return_monthly_oxygen_cost_hospital_info(parsed_data: dict) -> str:
+        def monthly_oxygen_cost_hospital_info(parsed_data: dict) -> str:
             return (
                 f" التَّكْلِفَةُ الشَّهْرِيَّةُ لِاِسْتِهْلَاكِ الأُكْسُجِينِ الكُلَى في المُسْتَشْفَى: {int(float(parsed_data['monthly_oxygen_cost_hospital']))} جُنَيْهًا\n"
             )
@@ -834,7 +836,7 @@ class SuezMedicalComplexConfigurator(object):
             return (
                 f"مَعْلُومَاتُ عن عدد المرضي الشهري في كل قسم في المُجَمَّعِ:\n"
                 f"عَدَدُ الأَسِرَّةِ الشهري المُسْتَخْدَمَةِ لِغَيْرِ المَرْضَى: {int(float(parsed_data['Inpatient_Beds_used_monthly']))} سَرِيرٍ\n"
-                f"عَدَدُ الأَسِرَّةِ الشهري المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ لِمَرْضَى القَلْبِ: {int(float(parsed_data['ICU_CCU_Beds_used_monthly']))} سَرِيرٍ\n"
+                f"عَدَدُ الأَسِرَّةِ الشهري المُسْتَخْدَمَةِ فِي العِنَايَةِ المَرْكَزِيَّةِ  : {int(float(parsed_data['ICU_CCU_Beds_used_monthly']))} سَرِيرٍ\n"
                 f"عَدَدُ أَسِرَّةِ الطَّوَارِئِ الشهري المُسْتَخْدَمَةِ: {int(float(parsed_data['Emergency_Beds_used_monthly']))} سَرِيرٍ\n"
                 f"عَدَدُ أَسِرَّةِ الحَضَّانَاتِ الشهري المُسْتَخْدَمَةِ: {int(float(parsed_data['Incubators_Beds_used_monthly']))} سَرِيرٍ\n"
             )
@@ -850,6 +852,26 @@ class SuezMedicalComplexConfigurator(object):
         def monthlycost_chillers_info(parsed_data: dict) -> str:
             return (
                 f"  تَكْلِفَةُ تَشْغِيلِ نِظَامِ المُبَرِّدَاتِ شهريا:   {float(parsed_data['monthlycost_chillers'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def monthlycost_chiller1_info(parsed_data: dict) -> str:
+            return (
+                f"  تَكْلِفَةُ تَشْغِيلِ المُبَرِّدِ رَقْمَ 1 شهريا:   {float(parsed_data['monthlycost_chiller1'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def monthlycost_chiller2_info(parsed_data: dict) -> str:
+            return (
+                f"  تَكْلِفَةُ تَشْغِيلِ المُبَرِّدِ رَقْمَ 2 شهريا:   {float(parsed_data['monthlycost_chiller2'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def monthlycost_chiller3_info(parsed_data: dict) -> str:
+            return (
+                f"  تَكْلِفَةُ تَشْغِيلِ المُبَرِّدِ رَقْمَ 3 شهريا:   {float(parsed_data['monthlycost_chiller3'])} جُنَيْه\n"
+            )
+        @staticmethod
+        def monthlycost_chiller4_info(parsed_data: dict) -> str:
+            return (
+                f"  تَكْلِفَةُ تَشْغِيلِ المُبَرِّدِ رَقْمَ 4 شهريا:   {float(parsed_data['monthlycost_chiller4'])} جُنَيْه\n"
             )
 
         @staticmethod
@@ -890,58 +912,58 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def chiller1_maintenance_days_info(parsed_data: dict) -> str:
             return (
-                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1 : {int(float(parsed_data['chiller1_maintenance_days']))} سَاعَة\n"
+                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1 : {int(float(parsed_data['chiller1_maintenance_days']))} يوم\n"
             )
         @staticmethod
         def chiller2_maintenance_days_info(parsed_data: dict) -> str:
             return (
-                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_days']))} سَاعَة\n"
+                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_days']))} يوم\n"
             )
         @staticmethod
         def chiller3_maintenance_days_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_days']))} سَاعَة\n"
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_days']))} يوم\n"
             )
         @staticmethod
         def chiller4_maintenance_days_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_days_']))} سَاعَة\n"
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_days_']))} يوم\n"
             )
         @staticmethod
         def chillers_maintenance_information_info(parsed_data: dict) -> str:
              return (
                 f"مَعْلُومَاتُ صِيَانَةِ المُبَرِّدِات:\n"
-                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1: {int(float(parsed_data['chiller1_maintenance_days']))} سَاعَة\n"
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1: {int(float(parsed_data['chiller1_maintenance_days']))} يوم\n"
                 f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 1 : {int(float(parsed_data['chiller1_maintenance_hours']))} سَاعَة\n"
                 f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_hours']))} سَاعَة\n"
-                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_days']))} سَاعَة\n"
+                f" عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 2: {int(float(parsed_data['chiller2_maintenance_days']))} يوم\n"
                 f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_hours']))} سَاعَة\n"
-                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_days']))} سَاعَة\n"
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 3: {int(float(parsed_data['chiller3_maintenance_days']))} يوم\n"
                 f" عَدَدُ سَاعَاتِ التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_hours']))} سَاعَة\n"
-                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_days_']))} سَاعَة\n"
+                f"عَدَدُ ايام التشغيل المُتَبَقِّيَةُ لصِيَانَةِ المُبَرِّدِ رَقْمَ 4: {int(float(parsed_data['chiller4_maintenance_days_']))} يوم\n"
             )
         
         @staticmethod
         def chiller1_status_info(parsed_data: dict) -> str:
-             if int((parsed_data[' chiller1_status'])) == 1:
+             if int((parsed_data['chiller1_status'])) == 1:
                 return " حَالَةُ المُبَرِّدِ الأُولَ قيد التشغيل\n"
              else:
                  return " حَالَةُ المُبَرِّدِ الأُولَ قيد الايقاف "
         @staticmethod
         def chiller2_status_info(parsed_data: dict) -> str:
-             if int((parsed_data[' chiller2_status'])) == 1:
+             if int((parsed_data['chiller2_status'])) == 1:
                 return " حَالَةُ المُبَرِّدِ الثَّانِي قيد التشغيل\n"
              else:
                  return " حَالَةُ المُبَرِّدِ الثَّانِي قيد الايقاف "
         @staticmethod
         def chiller3_status_info(parsed_data: dict) -> str:
-             if int((parsed_data[' chiller3_status'])) == 1:
+             if int((parsed_data['chiller3_status'])) == 1:
                 return " حَالَةُ المُبَرِّدِ الثالث قيد التشغيل\n"
              else:
                  return " حَالَةُ المُبَرِّدِ الثلث قيد الايقاف "
         @staticmethod
         def chiller4_status_info(parsed_data: dict) -> str:
-             if int((parsed_data[' chiller4_status'])) == 1:
+             if int((parsed_data['chiller4_status'])) == 1:
                 return " حَالَةُ المُبَرِّدِ الرابع قيد التشغيل\n"
              else:
                  return " حَالَةُ المُبَرِّدِ الرابع قيد الايقاف "
@@ -1118,13 +1140,13 @@ class SuezMedicalComplexConfigurator(object):
         @staticmethod
         def ICU_CCU_Beds_used_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المُرَكَّزَةِ لِمَرْضَى القَلْبِ شَهْرِيًّا: {int(parsed_data['ICU_CCU_Beds_used_monthly'])} سَرِير\n"
+                f"عَدَدُ الأَسِرَّةِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المُرَكَّزَةِ  شَهْرِيًّا: {int(parsed_data['ICU_CCU_Beds_used_monthly'])} سَرِير\n"
             )
 
         @staticmethod
         def ICU_CCU_Beds_unused_monthly_info(parsed_data: dict) -> str:
             return (
-                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المُرَكَّزَةِ لِمَرْضَى القَلْبِ شَهْرِيًّا: {int(parsed_data['ICU_CCU_Beds_unused_monthly'])} سَرِير\n"
+                f"عَدَدُ الأَسِرَّةِ غَيْرِ المُسْتَخْدَمَةِ فِي العِنَايَةِ المُرَكَّزَةِ   شَهْرِيًّا: {int(parsed_data['ICU_CCU_Beds_unused_monthly'])} سَرِير\n"
             )
 
         @staticmethod
@@ -1261,16 +1283,18 @@ class SuezMedicalComplexConfigurator(object):
         
         @staticmethod
         def Hospital_Boiler_1_Status_info(parsed_data: dict) -> str:
-             if int((parsed_data[' Hospital_Boiler_1_Status'])) == 1:
+             if int((parsed_data['Hospital_Boiler_1_Status'])) == 1:
                 return " حَالَةُ الغَلَّايَةِ الأُولَى قيد التشغيل\n"
              else:
                  return " حَالَةُ الغَلَّايَةِ الأُولَى قيد الايقاف "
                         
         @staticmethod
         def Hospital_Boiler_1_Alarm_info(parsed_data: dict) -> str:
-            return (
-                f" يُوجَدُ إِنْذَارٌ فِي الغَلَّايَةِ الأُولَى: {float(parsed_data['Hospital_Boiler_1_Alarm'])} \n"
-            )
+            if int((parsed_data['Hospital_Boiler_1_Alarm'])) == 1:
+                return " يُوجَدُ إِنْذَارٌ فِي الغَلَّايَةِ الأُولَى\n"
+            else:
+                 return "لا يُوجَدُ إِنْذَارٌ فِي الغَلَّايَةِ الأُولَى "
+                        
         @staticmethod
         def Hospital_Boiler_1_Hot_Water_Temperature_info(parsed_data: dict) -> str:
             return (
@@ -1278,8 +1302,38 @@ class SuezMedicalComplexConfigurator(object):
             )
         @staticmethod
         def Hospital_Boiler_1_Operation_Time_info(parsed_data: dict) -> str:
+        
+            def convert_decimal_to_time(decimal_hours: float) -> str:
+                hours = int(decimal_hours) 
+                minutes = int((decimal_hours - hours) * 60)  
+
+
+                if hours > 1:
+                    hour_str = f"{hours} ساعات"
+                elif hours == 1:
+                    hour_str = "ساعة"
+                else:
+                    hour_str = ""
+                
+                if minutes > 0:
+                    if minutes == 15:
+                        minute_str = "وربع"
+                    elif minutes == 30:
+                        minute_str = "ونصف"
+                    elif minutes == 45:
+                        minute_str = "إلا ربع"
+                    else:
+                        minute_str = f"و {minutes} دقيقة"
+                else:
+                    minute_str = ""
+
+                return f"{hour_str} {minute_str}".strip()
+
+            # استدعاء دالة تحويل الرقم العشري إلى صيغة زمنية
+            operation_time_str = convert_decimal_to_time(float(parsed_data['Hospital_Boiler_1_Operation_Time']))
+
             return (
-                f" عَدَدُ سَاعَاتِ تَشْغِيلِ الغَلَّايَةِ الأُولَى فِي الشَّهْرِ: {float(parsed_data['Hospital_Boiler_1_Operation_Time'])}ساعه \n"
+                f" عَدَدُ سَاعَاتِ تَشْغِيلِ الغَلَّايَةِ الأُولَى فِي الشَّهْرِ: {operation_time_str} \n"
             )
         @staticmethod
         def Hospital_Boiler_1_Hot_Water_Volume_info(parsed_data: dict) -> str:
@@ -1298,21 +1352,26 @@ class SuezMedicalComplexConfigurator(object):
             )
         @staticmethod
         def Last_Operation_Boiler1_info(parsed_data: dict) -> str:
-            return (
-                f" آخِرُ عَمَلِيَّةِ تَشْغِيلٍ لِلْغَلَّايَةِ الأُولَى بِتَارِيخِ: {float(parsed_data['Last_Operation_Boiler1'])} جنيه\n"
-            )
+                last_operation_date_str = parsed_data['Last_Operation_Boiler1']  
+                last_operation_date = datetime.strptime(last_operation_date_str, "%d/%m/%Y")  
+                return (
+                    f" آخِرُ عَمَلِيَّةِ تَشْغِيلٍ لِلْغَلَّايَةِ الأُولَى بِتَارِيخِ: {last_operation_date.strftime('%d/%m/%Y')}\n"  
+
+                )
         @staticmethod
         def Hospital_Boiler_2_Status_info(parsed_data: dict) -> str:
-             if int((parsed_data[' Hospital_Boiler_2_Status'])) == 1:
+             if int((parsed_data['Hospital_Boiler_2_Status'])) == 1:
                 return " حَالَةُ الغَلَّايَةِ الثَّانِيَة قيد التشغيل\n"
              else:
                  return "حَالَةُ الغَلَّايَةِ الثَّانِيَة قيد الايقاف "
                        
         @staticmethod
         def Hospital_Boiler_2_Alarm_info(parsed_data: dict) -> str:
-            return (
-                f" يُوجَدُ إِنْذَارٌ فِي الغَلَّايَةِ الثَّانِيَة: {float(parsed_data['Hospital_Boiler_2_Alarm'])} \n"
-            )
+            if int((parsed_data['Hospital_Boiler_2_Alarm'])) == 1:
+                return " يُوجَدُ إِنْذَارٌ فِي الغَلَّايَةِ الثَّانِيَة\n"
+            else:
+                 return "لا يُوجَدُ إِنْذَارٌ فِي الغَلَّايَةِ الثَّانِيَة "
+                        
         @staticmethod
         def Hospital_Boiler_2_Hot_Water_Temperature_info(parsed_data: dict) -> str:
             return (
@@ -1340,40 +1399,52 @@ class SuezMedicalComplexConfigurator(object):
             )
         @staticmethod
         def Last_Operation_Boiler2_info(parsed_data: dict) -> str:
-            return (
-                f" آخِرُ عَمَلِيَّةِ تَشْغِيلٍ لِلْغَلَّايَةِ الثَّانِيَة بِتَارِيخِ: {float(parsed_data['Last_Operation_Boiler2'])} جنيه\n"
-            )
+                last_operation_date_str = parsed_data['Last_Operation_Boiler2']  
+                last_operation_date = datetime.strptime(last_operation_date_str, "%d/%m/%Y")  
+                return (
+                    f" آخِرُ عَمَلِيَّةِ تَشْغِيلٍ لِلْغَلَّايَةِ الثَّانِيَة بِتَارِيخِ: {last_operation_date.strftime('%d/%m/%Y')}\n"  
+
+                )
         @staticmethod
         def Primary_Pump_1_Status_info(parsed_data: dict) -> str:
-            return (
-                f" حَالَةُ المُضَخَّةِ الأُولَى فِي الْمَجْمُوعَةِ الأُولَى: {float(parsed_data['Primary_Pump_1_Status'])} \n"
-            )
+            if int((parsed_data['Primary_Pump_1_Status'])) == 1:
+                return "  حَالَةُ المُضَخَّةِ الأُولَى فِي الْمَجْمُوعَةِ الأُولَى قيد التشغيل\n"
+            else:
+                 return "حَالَةُ المُضَخَّةِ الأُولَى فِي الْمَجْمُوعَةِ الأُولَى قيد الايقاف"
+            
         @staticmethod
         def Primary_Pump_2_Status_info(parsed_data: dict) -> str:
-            return (
-                f" حَالَةُ المُضَخَّةِ الثَّانِيَة فِي الْمَجْمُوعَةِ الأُولَى: {float(parsed_data['Primary_Pump_2_Status'])} \n"
-            )
+            if int((parsed_data['Primary_Pump_2_Status'])) == 1:
+                return "  حَالَةُ المُضَخَّةِ الثَّانِيَة فِي الْمَجْمُوعَةِ الأُولَى قيد التشغيل\n"
+            else:
+                 return "حَالَةُ المُضَخَّةِ الثَّانِيَة فِي الْمَجْمُوعَةِ الأُولَى قيد الايقاف"
+                        
         @staticmethod
         def Primary_Pump_3_Status_info(parsed_data: dict) -> str:
-            return (
-                f" حَالَةُ المُضَخَّةِ الثالثه فِي الْمَجْمُوعَةِ الأُولَى: {float(parsed_data['Primary_Pump_3_Status'])} \n"
-            )
+            if int((parsed_data['Primary_Pump_3_Status'])) == 1:
+                return "  حَالَةُ المُضَخَّةِ الثالثه فِي الْمَجْمُوعَةِ الأُولَى قيد التشغيل\n"
+            else:
+                 return "حَالَةُ المُضَخَّةِ الثالثه فِي الْمَجْمُوعَةِ الأُولَى قيد الايقاف"
+                        
         @staticmethod
         def secondry_Pump_1_Status_info(parsed_data: dict) -> str:
-            return (
-                f" حَالَةُ المُضَخَّةِ الأُولَى فِي الْمَجْمُوعَةِ الثَّانِيَةِ: {float(parsed_data['secondry_Pump_1_Status'])} \n"
-            )
+            if int((parsed_data['secondry_Pump_1_Status'])) == 1:
+                return "  حَالَةُ المُضَخَّةِ الأُولَى فِي الْمَجْمُوعَةِ الثَّانِيَةِ قيد التشغيل\n"
+            else:
+                 return "حَالَةُ المُضَخَّةِ الأُولَى فِي الْمَجْمُوعَةِ الثَّانِيَةِ قيد الايقاف"
         @staticmethod
         def secondry_Pump_2_Status_info(parsed_data: dict) -> str:
-            return (
-                f" حَالَةُ المُضَخَّةِ الثَّانِيَةِ فِي الْمَجْمُوعَةِ الثَّانِيَةِ: {float(parsed_data['secondry_Pump_2_Status'])} \n"
-            )
+            if int((parsed_data['secondry_Pump_2_Status'])) == 1:
+                return "  حَالَةُ المُضَخَّةِ الثَّانِيَةِ فِي الْمَجْمُوعَةِ الثَّانِيَةِ قيد التشغيل\n"
+            else:
+                 return "حَالَةُ المُضَخَّةِ الثَّانِيَةِ فِي الْمَجْمُوعَةِ الثَّانِيَةِ قيد الايقاف"
         @staticmethod
         def secondry_Pump_3_Status_info(parsed_data: dict) -> str:
-            return (
-                f" حَالَةُ المُضَخَّةِ الثالثه فِي الْمَجْمُوعَةِ الثَّانِيَةِ: {float(parsed_data['secondry_Pump_3_Status'])} \n"
-            )
-
+            if int((parsed_data['secondry_Pump_3_Status'])) == 1:
+                return "  حَالَةُ المُضَخَّةِ الثالثه فِي الْمَجْمُوعَةِ الثَّانِيَةِ قيد التشغيل\n"
+            else:
+                 return "حَالَةُ المُضَخَّةِ الثالثه فِي الْمَجْمُوعَةِ الثَّانِيَةِ قيد الايقاف"
+                        
         @staticmethod
         def invoices_information_info(parsed_data: dict) -> str:
             return (
@@ -1382,7 +1453,6 @@ class SuezMedicalComplexConfigurator(object):
                 f"تَكْلِفَةُ الأُكْسِيجِينِ الشَّهْرِيَّةِ: {int(float(parsed_data['monthly_oxygen_cost']))} جُنَيْه\n\n"
                 f"تَكْلِفَةُ الكَهْرَبَاءِ الشَّهْرِيَّةِ: {int(float(parsed_data['monthlycost_sg']))} جُنَيْه\n\n"
             )
-
                 
         @staticmethod
         def return_complex_report_info(parsed_data: dict) -> str:
@@ -1413,7 +1483,7 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.return_monthly_water_cost_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_monthly_water_cost_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_monthly_oxygen_cost_info(parsed_data)
-            report += SuezMedicalComplexConfigurator.Home.return_monthly_oxygen_cost_hospital_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthly_oxygen_cost_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_Hospital_Occupancy_Rate_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.return_Clinic_Occupancy_Rate_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.Mask_Policy_Violations_info(parsed_data)
@@ -1529,6 +1599,10 @@ class SuezMedicalComplexConfigurator(object):
             report += SuezMedicalComplexConfigurator.Home.out_Patients_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.out_Patients_hospital_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.monthlycost_chillers_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthlycost_chiller1_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthlycost_chiller2_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthlycost_chiller3_info(parsed_data)
+            report += SuezMedicalComplexConfigurator.Home.monthlycost_chiller4_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.main_temp_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.main_supply_temp_info(parsed_data)
             report += SuezMedicalComplexConfigurator.Home.chiller1_maintenance_hours_info(parsed_data)
@@ -1623,8 +1697,6 @@ class SuezMedicalComplexConfigurator(object):
 
 
             return report
-        
-       
 
 
 
@@ -3381,3 +3453,1031 @@ class StationInvConfigurator(object):
                 f"{'يوجد' if int(float(parsed_data['valves_alarm'])) else 'لا يوجد'} إنذار محابس\n\n"
                 f"{'يوجد' if int(float(parsed_data['hammer_alarm'])) else 'لا يوجد'} إنذار في المطرقة\n\n"
             )
+class citycenterConfigurator(object):
+
+    class Home:
+
+        @staticmethod
+        def return_system_status_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return system status information based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the system status.
+
+            Returns:
+            str: A string containing system status information.
+            """
+            return (
+                f"{'يوجد' if int(float(parsed_data['electrical_alarm'])) else 'لا يوجد'} إنذار كهربائي\n\n"
+                f"{'يوجد' if int(float(parsed_data['pumps_alarm'])) else 'لا يوجد'} إنذار مضخات\n\n"
+                f"{'يوجد' if int(float(parsed_data['valves_alarm'])) else 'لا يوجد'} إنذار محابس\n\n"
+        )
+
+        @staticmethod
+        def return_transformers_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return information about transformers based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about transformers.
+
+            Returns:
+            str: A string containing information about transformers.
+            """
+            return (
+                f"معلومات المحولات:\n"
+                f"عَدَدُ الْمُحَوِّلَاتِ الَّتِي تَعْمَلُ : {int(float(parsed_data['transformer_on']))} محولات\n"
+                f"عَدَدُ الْمُحَوِّلَاتِ الَّتِي لا تَعْمَلُ : {int(float(parsed_data['transformer_off']))} محولات\n\n"
+            )
+    
+        @staticmethod
+        def return_working_transformers_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return information about working transformers based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about transformers.
+
+            Returns:
+            str: A string containing information about transformers.
+            """
+            return (
+                f"معلومات المحولات:\n"
+                f"عدد المحولات التي تعمل : {int(float(parsed_data['transformer_on']))} محولات\n\n"
+            )
+    
+        @staticmethod
+        def return_not_working_transformers_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return information about working transformers based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about transformers.
+
+            Returns:
+            str: A string containing information about transformers.
+            """
+            return (
+                f"معلومات المحولات:\n"
+                f"عدد المحولات التي لا تعمل : {int(float(parsed_data['transformer_off']))} محولات\n\n"
+            )
+
+        @staticmethod
+        def return_generators_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about generators based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about generators.
+
+            Returns:
+            str: A string containing information about generators.
+            """
+            return (
+                     f"مَعْلُومَاتُ ٱلْمُوَلِّدَاتِ:\n"
+                    f"عَدَدُ ٱلْمُوَلِّدَاتِ ٱلَّتِي تَعْمَلُ : {int(float(parsed_data['generator_on']))} مُوَلِّدَاتٍ\n"
+                    f"عَدَدُ ٱلْمُوَلِّدَاتِ ٱلَّتِي لَا تَعْمَلُ : {int(float(parsed_data['generator_off']))} مُوَلِّدَاتٍ\n\n"
+                    )
+        
+        @staticmethod
+        def return_working_generators_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about working generators based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about generators.
+
+            Returns:
+            str: A string containing information about working generators.
+            """
+            return (
+                f"عدد المولدات التي تعمل : {int(float(parsed_data['generator_on']))} مولدات\n\n"
+            )
+
+        @staticmethod
+        def return_not_working_generators_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about non-working generators based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about generators.
+
+            Returns:
+            str: A string containing information about non-working generators.
+            """
+            return (
+                f"عدد المولدات التي لا تعمل : {int(float(parsed_data['generator_off']))} مولدات\n\n"
+            )
+
+
+        @staticmethod
+        def return_electrical_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return information about electrical panels based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about electrical panels.
+
+            Returns:
+            str: A string containing information about electrical panels.
+            """
+            return (
+                    f"مَعْلُومَاتُ لُوَحِ ٱلْكَهرَبَاءِ:\n"
+                    f"عَدَدُ لُوَحِ ٱلْكَهرَبَاءِ ٱلَّتِي تَعْمَلُ : {int(float(parsed_data['ele_panels_on']))} لُوحَاتٍ\n"
+                    f"عَدَدُ لُوَحِ ٱلْكَهرَبَاءِ ٱلَّتِي لَا تَعْمَلُ : {int(float(parsed_data['ele_panels_off']))} لُوحَاتٍ\n\n"
+                    )
+        
+        @staticmethod
+        def return_working_electrical_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about working electrical panels based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about electrical panels.
+
+            Returns:
+            str: A string containing information about working electrical panels.
+            """
+            return (
+                f"عدد لوحات الكهرباء التي تعمل : {int(float(parsed_data['ele_panels_on']))} لوحات\n\n"
+            )
+
+        @staticmethod
+        def return_not_working_electrical_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about non-working electrical panels based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about electrical panels.
+
+            Returns:
+            str: A string containing information about non-working electrical panels.
+            """
+            return (
+                f"عدد لوحات الكهرباء التي لا تعمل : {int(float(parsed_data['ele_panels_off']))} لوحات\n\n"
+            )
+        
+        @staticmethod
+        def return_pressure_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about pressure based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pressure.
+
+            Returns:
+            str: A string containing information about pressure.
+            """
+            return (
+                    f"مَعْلُومَاتُ ٱلضَّغْطِ:\n"
+                    f"قِيمَةُ ٱلضَّغْطِ فِي ٱلْمُسْتَوَىٰ ٱلْأَوَّلِ هِيَ : {round(float(parsed_data['pressure_l1']), 1)} بَارْ\n"
+                    f"قِيمَةُ ٱلضَّغْطِ فِي ٱلْمُسْتَوَىٰ ٱلثَّانِيِ هِيَ : {round(float(parsed_data['pressure_l2']), 1)} بَارْ\n"
+                )
+        @staticmethod
+        def pressure_L1(parsed_data: dict) -> str:
+            """
+            Return information about pressure at level 1 based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pressure.
+
+            Returns:
+            str: A string containing information about pressure at line 1.
+            """
+            return f"قِيمَةُ ٱلضَّغْطِ فِي ٱلْخَطِّ ٱلْأوَّلِ هِيَ : {round(float(parsed_data['pressure_l1']), 1)} بَارْ\n"
+
+        @staticmethod
+        def pressure_L2(parsed_data: dict) -> str:
+            """
+            Return information about pressure at level 2 based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pressure.
+
+            Returns:
+            str: A string containing information about pressure at line 2.
+            """
+            return f"قِيمَةُ ٱلضَّغْطِ فِي ٱلْخَطِّ الثاني هِيَ : {round(float(parsed_data['pressure_l2']), 1)} بَارْ\n"
+
+
+        @staticmethod
+        def return_station_flow(parsed_data:dict) -> str:
+            """
+            This static method returns a string describing the flow rate of water in a station based on parsed data.
+
+            Args:
+            - parsed_data (dict): A dictionary containing parsed data.
+            
+            Returns:
+            - str: A string describing the flow rate of water in the station.
+            """
+            return f"مُعَدَّلُ تَدَفُّقِ ٱلْمِيَاهِ فِي ٱلْمَحَطَّةِ {parsed_data['flow_station']} مِتْرٌ مُكَعَّبٌ فِي ٱلسَّاعَةِ \n"
+        @staticmethod
+        def return_flow_per_day(parsed_data:dict) -> str:
+            """
+            This static method returns a string describing the flow rate of water in a station based on parsed data.
+
+            Args:
+            - parsed_data (dict): A dictionary containing parsed data.
+            
+            Returns:
+            - str: A string describing the flow rate dayli of water in the station.
+            """
+            return f"مُعَدَّلُ تَدَفُّقِ ٱلْمِيَاهِ اليوميه فِي ٱلْمَحَطَّةِ {parsed_data['flow_per_day']} متر مكعب في الساعة \n"
+        @staticmethod
+        def return_flow_per_month(parsed_data:dict) -> str:
+            """
+            This static method returns a string describing the flow rate of water in a station based on parsed data.
+
+            Args:
+            - parsed_data (dict): A dictionary containing parsed data.
+            
+            Returns:
+            - str: A string describing the flow rate monthly of water in the station.
+            """
+            return f"مُعَدَّلُ تَدَفُّقِ ٱلْمِيَاهِ الشهريه فِي ٱلْمَحَطَّةِ {parsed_data['flow_per_month']} متر مكعب في الساعة \n"
+        
+        @staticmethod
+        def flow_L1(parsed_data: dict) -> str:
+            """
+            Return information about flow at line 1200 based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about flow.
+
+            Returns:
+            str: A string containing information about flow at line 1.
+            """
+            return f"قِيمَةُ مُعَدَّلِ تَدَفُّقِ ٱلْمِيَاهِ فِي ٱلْخَطِّ ٱلْأوَّلِ هِيَ : {round(float(parsed_data['flow_l1']), 1)} متر مكعب في الساعة \n"
+
+        @staticmethod
+        def flow_L2(parsed_data: dict) -> str:
+            """
+            Return information about flow at line 800 based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about flow.
+
+            Returns:
+            str: A string containing information about flow at line 2.
+            """
+            return f"قِيمَةُ مُعَدَّلِ تَدَفُّقِ ٱلْمِيَاهِ فِي ٱلْخَطِّ الثاني هِيَ  : {round(float(parsed_data['flow_l2']), 1)} متر مكعب في الساعة \n"
+
+        @staticmethod
+        def return_pump_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about the pump based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the pump.
+
+            Returns:
+            str: A string containing information about the pump.
+        
+            """
+            TOTAL_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_on']))
+            TOTAL_NOT_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_off']))
+            TOTAL_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_on']))
+            TOTAL_NOT_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_off']))
+            return (
+                    f"مَعْلُومَاتُ ٱلْمَضَخَّاتِ:\n"
+                    f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_WORKING_GROUP_A} مُضَخَّة\n"
+                    f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْغَيْرِ عَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_NOT_WORKING_GROUP_A} مُضَخَّة\n"
+                    f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_WORKING_GROUP_B} مُضَخَّة\n"
+                    f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْغَيْرِ عَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_NOT_WORKING_GROUP_B} مُضَخَّة\n"
+                )
+
+
+        @staticmethod
+        def return_working_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pumps.
+
+            Returns:
+            str: A string containing information about pumps.
+
+            """
+            TOTAL_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_on']))
+            TOTAL_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_on']))
+            TOTAL_WORKING_ALL_GROUPS = TOTAL_WORKING_GROUP_A + TOTAL_WORKING_GROUP_B
+            print(TOTAL_WORKING_GROUP_A, TOTAL_WORKING_GROUP_B, flush=True)
+
+            return (
+                f"مَعْلُومَاتُ ٱلْمَضَخَّاتِ:\n"
+                f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَحَطَّةِ مَرْكَزِ ٱلْمَدِينَةِ : {TOTAL_WORKING_ALL_GROUPS} مُضَخَّة\n"
+                f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_WORKING_GROUP_A} مُضَخَّة\n"
+                f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_WORKING_GROUP_B} مُضَخَّة\n"
+            )
+        
+        @staticmethod
+        def return_not_working_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pumps.
+
+            Returns:
+            str: A string containing information about pumps.
+            
+            """
+            TOTAL_NOT_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_off']))
+            TOTAL_NOT_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_off']))
+            TOTAL_NOT_WORKING_ALL_GROUPS = TOTAL_NOT_WORKING_GROUP_A + TOTAL_NOT_WORKING_GROUP_B
+
+            return (
+                f"معلومات المضخات:\n"
+                f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ الغير ٱلْعَامِلَةِ فِي مَحَطَّةِ مَرْكَزِ ٱلْمَدِينَةِ : {TOTAL_NOT_WORKING_ALL_GROUPS} مضخات\n"
+                f"عدد المضخات الغير عاملة في مجموعة ا: {TOTAL_NOT_WORKING_GROUP_A} مضخة\n"
+                f"عدد المضخات الغير عاملة في مجموعة ب: {TOTAL_NOT_WORKING_GROUP_B} مضخة\n"
+            )
+        
+        @staticmethod
+        def return_group_a_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about group A pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about group A pumps.
+
+            Returns:
+            str: A string containing information about group A pumps.
+            """
+            TOTAL_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_on']))
+            TOTAL_NOT_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_off']))
+
+            return (
+                f"مَعْلُومَاتُ ٱلْمَضَخَّاتِ فِي مَجْمُوعَةِ أ:\n"
+                f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_WORKING_GROUP_A} مُضَخَّة\n"
+                f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْغَيْرِ عَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_NOT_WORKING_GROUP_A} مُضَخَّة\n"
+                    )
+        
+        @staticmethod
+        def return_group_b_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about group B pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about group B pumps.
+
+            Returns:
+            str: A string containing information about group B pumps.
+            """
+            TOTAL_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_on']))
+            TOTAL_NOT_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_off']))
+
+            return (
+                    f"مَعْلُومَاتُ ٱلْمَضَخَّاتِ فِي مَجْمُوعَةِ ب:\n"
+                    f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_WORKING_GROUP_B} مُضَخَّة\n"
+                    f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْغَيْرِ عَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_NOT_WORKING_GROUP_B} مُضَخَّة\n"
+                )
+        
+
+
+
+        @staticmethod
+        def return_sump_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about the sump based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the sump.
+
+            Returns:
+            str: A string containing information about the sump.
+            """
+            return (
+                f"مَعْلُومَاتُ مَجْمَعِ ٱلْمِيَاهِ :\n"
+                f"نِسْبَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ: {int(float(parsed_data['sump_a_level_percentage']))} % \n"
+                f"نِسْبَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب: {int(float(parsed_data['sump_b_level_percentage']))} % \n"
+                f"قِيمَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ: {int(float(parsed_data['sump_a_level']))} أَمْتَار\n"
+                f"قِيمَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب: {int(float(parsed_data['sump_b_level']))} أَمْتَار\n\n"
+                f"مُتَوَسِّطُ نِسْبَةِ مَجْمَعَاتِ ٱلْمِيَاهِ : {int(float(parsed_data['sump_level_average_percentage']))} % \n"
+                f"مُتَوَسِّطُ قِيمَةِ مَجْمَعَاتِ ٱلْمِيَاهِ : {int(float(parsed_data['sump_level_average']))} % \n"
+            )
+
+
+        
+        @staticmethod
+        def return_group_a_sumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about group A pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about group A sumps.
+
+            Returns:
+            str: A string containing information about group A sumps.
+            """
+
+            return (
+                f"مَعْلُومَاتُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ:\n"
+                f"نِسْبَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ: {int(float(parsed_data['sump_a_level_percentage']))} % \n"
+                f"قِيمَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ: {int(float(parsed_data['sump_a_level']))} أَمْتَار\n"
+            )
+        
+        @staticmethod
+        def return_group_b_sumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about group B pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about group B sumps.
+
+            Returns:
+            str: A string containing information about group B sumps.
+            """
+
+            return (
+                f"مَعْلُومَاتُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب:\n"
+                f"نِسْبَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب: {int(float(parsed_data['sump_b_level_percentage']))} % \n"
+                f"قِيمَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب: {int(float(parsed_data['sump_a_level']))} أَمْتَار\n"
+            )
+        @staticmethod
+        def return_station_report(parsed_data: dict) -> str:
+            """
+            Generate and return station report based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the station.
+
+            Returns:
+            str: A string containing the station report.
+            """
+            report = ""
+
+            report += citycenterConfigurator.Home.return_working_transformers_info(parsed_data)
+            report += citycenterConfigurator.Home.return_working_generators_info(parsed_data)
+            report += citycenterConfigurator.Home.return_working_electrical_info(parsed_data)
+            report += citycenterConfigurator.Home.return_working_pumps_info(parsed_data)
+            report += citycenterConfigurator.Home.return_sump_info(parsed_data)
+            report += citycenterConfigurator.Home.return_station_flow(parsed_data)
+            report += citycenterConfigurator.Home.return_flow_per_month(parsed_data)
+            report += citycenterConfigurator.Home.return_flow_per_day(parsed_data)
+            return report
+        
+        @staticmethod
+        def return_system_status_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return system status information based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the system status.
+
+            Returns:
+            str: A string containing system status information.
+            """
+            return (
+                f"معلومات الانظاارت:\n"
+            # f"حالة نظام النقل التلقائي: {int(float(parsed_data['ats_status']))} %\n"
+                f"{'يوجد' if int(float(parsed_data['electrical_alarm'])) else 'لا يوجد'} إنذار كهربائي\n\n"
+                f"{'يوجد' if int(float(parsed_data['pumps_alarm'])) else 'لا يوجد'} إنذار مضخات\n\n"
+                f"{'يوجد' if int(float(parsed_data['valves_alarm'])) else 'لا يوجد'} إنذار محابس\n\n"
+                f"{'يوجد' if int(float(parsed_data['hammer_alarm'])) else 'لا يوجد'} إنذار في المطرقة\n\n"
+            )
+        
+
+class southinvConfigurator(object):
+
+    class Home:
+
+        @staticmethod
+        def return_system_status_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return system status information based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the system status.
+
+            Returns:
+            str: A string containing system status information.
+            """
+            return (
+                f"{'يوجد' if int(float(parsed_data['electrical_alarm'])) else 'لا يوجد'} إنذار كهربائي\n\n"
+                f"{'يوجد' if int(float(parsed_data['pumps_alarm'])) else 'لا يوجد'} إنذار مضخات\n\n"
+                f"{'يوجد' if int(float(parsed_data['valves_alarm'])) else 'لا يوجد'} إنذار محابس\n\n"
+        )
+
+        @staticmethod
+        def return_transformers_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return information about transformers based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about transformers.
+
+            Returns:
+            str: A string containing information about transformers.
+            """
+            return (
+                f"معلومات المحولات:\n"
+                f"عَدَدُ الْمُحَوِّلَاتِ الَّتِي تَعْمَلُ : {int(float(parsed_data['transformers_on']))} محولات\n"
+                f"عَدَدُ الْمُحَوِّلَاتِ الَّتِي لا تَعْمَلُ : {int(float(parsed_data['transformers_off']))} محولات\n\n"
+            )
+    
+        @staticmethod
+        def return_working_transformers_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return information about working transformers based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about transformers.
+
+            Returns:
+            str: A string containing information about transformers.
+            """
+            return (
+                f"معلومات المحولات:\n"
+                f"عدد المحولات التي تعمل : {int(float(parsed_data['transformers_on']))} محولات\n\n"
+            )
+    
+        @staticmethod
+        def return_not_working_transformers_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return information about working transformers based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about transformers.
+
+            Returns:
+            str: A string containing information about transformers.
+            """
+            return (
+                f"معلومات المحولات:\n"
+                f"عدد المحولات التي لا تعمل : {int(float(parsed_data['transformers_off']))} محولات\n\n"
+            )
+
+        @staticmethod
+        def return_generators_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about generators based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about generators.
+
+            Returns:
+            str: A string containing information about generators.
+            """
+            return (
+                     f"مَعْلُومَاتُ ٱلْمُوَلِّدَاتِ:\n"
+                    f"عَدَدُ ٱلْمُوَلِّدَاتِ ٱلَّتِي تَعْمَلُ : {int(float(parsed_data['generators_on']))} مُوَلِّدَاتٍ\n"
+                    f"عَدَدُ ٱلْمُوَلِّدَاتِ ٱلَّتِي لَا تَعْمَلُ : {int(float(parsed_data['generators_off']))} مُوَلِّدَاتٍ\n\n"
+                    )
+        
+        @staticmethod
+        def return_working_generators_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about working generators based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about generators.
+
+            Returns:
+            str: A string containing information about working generators.
+            """
+            return (
+                f"عدد المولدات التي تعمل : {int(float(parsed_data['generators_on']))} مولدات\n\n"
+            )
+
+        @staticmethod
+        def return_not_working_generators_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about non-working generators based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about generators.
+
+            Returns:
+            str: A string containing information about non-working generators.
+            """
+            return (
+                f"عدد المولدات التي لا تعمل : {int(float(parsed_data['generators_off']))} مولدات\n\n"
+            )
+
+
+        @staticmethod
+        def return_electrical_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return information about electrical panels based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about electrical panels.
+
+            Returns:
+            str: A string containing information about electrical panels.
+            """
+            return (
+                    f"مَعْلُومَاتُ لُوَحِ ٱلْكَهرَبَاءِ:\n"
+                    f"عَدَدُ لُوَحِ ٱلْكَهرَبَاءِ ٱلَّتِي تَعْمَلُ : {int(float(parsed_data['ele_panels_on']))} لُوحَاتٍ\n"
+                    f"عَدَدُ لُوَحِ ٱلْكَهرَبَاءِ ٱلَّتِي لَا تَعْمَلُ : {int(float(parsed_data['ele_panels_off']))} لُوحَاتٍ\n\n"
+                    )
+        
+        @staticmethod
+        def return_working_electrical_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about working electrical panels based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about electrical panels.
+
+            Returns:
+            str: A string containing information about working electrical panels.
+            """
+            return (
+                f"عدد لوحات الكهرباء التي تعمل : {int(float(parsed_data['ele_panels_on']))} لوحات\n\n"
+            )
+
+        @staticmethod
+        def return_not_working_electrical_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about non-working electrical panels based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about electrical panels.
+
+            Returns:
+            str: A string containing information about non-working electrical panels.
+            """
+            return (
+                f"عدد لوحات الكهرباء التي لا تعمل : {int(float(parsed_data['ele_panels_off']))} لوحات\n\n"
+            )
+        
+        @staticmethod
+        def return_pressure_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about pressure based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pressure.
+
+            Returns:
+            str: A string containing information about pressure.
+            """
+            return (
+                    f"مَعْلُومَاتُ ٱلضَّغْطِ:\n"
+                    f"قِيمَةُ ٱلضَّغْطِ فِي ٱلْمُسْتَوَىٰ ٱلْأَوَّلِ هِيَ : {round(float(parsed_data['pressure1']), 1)} بَارْ\n"
+                    f"قِيمَةُ ٱلضَّغْطِ فِي ٱلْمُسْتَوَىٰ ٱلثَّانِيِ هِيَ : {round(float(parsed_data['pressure2']), 1)} بَارْ\n"
+                )
+        @staticmethod
+        def pressure_L1(parsed_data: dict) -> str:
+            """
+            Return information about pressure at level 1 based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pressure.
+
+            Returns:
+            str: A string containing information about pressure at line 1.
+            """
+            return f"قِيمَةُ ٱلضَّغْطِ فِي ٱلْخَطِّ ٱلْأوَّلِ هِيَ : {round(float(parsed_data['pressure1']), 1)} بَارْ\n"
+
+        @staticmethod
+        def pressure_L2(parsed_data: dict) -> str:
+            """
+            Return information about pressure at level 2 based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pressure.
+
+            Returns:
+            str: A string containing information about pressure at line 2.
+            """
+            return f"قِيمَةُ ٱلضَّغْطِ فِي ٱلْخَطِّ الثاني هِيَ : {round(float(parsed_data['pressure2']), 1)} بَارْ\n"
+
+
+        @staticmethod
+        def return_station_flow(parsed_data:dict) -> str:
+            """
+            This static method returns a string describing the flow rate of water in a station based on parsed data.
+
+            Args:
+            - parsed_data (dict): A dictionary containing parsed data.
+            
+            Returns:
+            - str: A string describing the flow rate of water in the station.
+            """
+            return f"مُعَدَّلُ تَدَفُّقِ ٱلْمِيَاهِ فِي ٱلْمَحَطَّةِ {parsed_data['total_flow_rate']} مِتْرٌ مُكَعَّبٌ فِي ٱلسَّاعَةِ \n"
+        @staticmethod
+        def return_flow_per_day(parsed_data:dict) -> str:
+            """
+            This static method returns a string describing the flow rate of water in a station based on parsed data.
+
+            Args:
+            - parsed_data (dict): A dictionary containing parsed data.
+            
+            Returns:
+            - str: A string describing the flow rate dayli of water in the station.
+            """
+            return f"مُعَدَّلُ تَدَفُّقِ ٱلْمِيَاهِ اليوميه فِي ٱلْمَحَطَّةِ {parsed_data['flow_per_day']} متر مكعب في الساعة \n"
+        @staticmethod
+        def return_flow_per_month(parsed_data:dict) -> str:
+            """
+            This static method returns a string describing the flow rate of water in a station based on parsed data.
+
+            Args:
+            - parsed_data (dict): A dictionary containing parsed data.
+            
+            Returns:
+            - str: A string describing the flow rate monthly of water in the station.
+            """
+            return f"مُعَدَّلُ تَدَفُّقِ ٱلْمِيَاهِ الشهريه فِي ٱلْمَحَطَّةِ {parsed_data['flow_per_month']} متر مكعب في الساعة \n"
+        
+        @staticmethod
+        def flow_L1(parsed_data: dict) -> str:
+            """
+            Return information about flow at line 1200 based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about flow.
+
+            Returns:
+            str: A string containing information about flow at line 1.
+            """
+            return f"قِيمَةُ مُعَدَّلِ تَدَفُّقِ ٱلْمِيَاهِ فِي ٱلْخَطِّ ٱلْأوَّلِ هِيَ : {round(float(parsed_data['flow_rate1']), 1)} متر مكعب في الساعة \n"
+
+        @staticmethod
+        def flow_L2(parsed_data: dict) -> str:
+            """
+            Return information about flow at line 800 based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about flow.
+
+            Returns:
+            str: A string containing information about flow at line 2.
+            """
+            return f"قِيمَةُ مُعَدَّلِ تَدَفُّقِ ٱلْمِيَاهِ فِي ٱلْخَطِّ الثاني هِيَ  : {round(float(parsed_data['flow_rate2']), 1)} متر مكعب في الساعة \n"
+
+        @staticmethod
+        def return_pump_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about the pump based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the pump.
+
+            Returns:
+            str: A string containing information about the pump.
+        
+            """
+            TOTAL_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_on']))
+            TOTAL_NOT_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_off']))
+            TOTAL_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_on']))
+            TOTAL_NOT_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_off']))
+            return (
+                    f"مَعْلُومَاتُ ٱلْمَضَخَّاتِ:\n"
+                    f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_WORKING_GROUP_A} مُضَخَّة\n"
+                    f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْغَيْرِ عَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_NOT_WORKING_GROUP_A} مُضَخَّة\n"
+                    f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_WORKING_GROUP_B} مُضَخَّة\n"
+                    f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْغَيْرِ عَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_NOT_WORKING_GROUP_B} مُضَخَّة\n"
+                )
+
+
+        @staticmethod
+        def return_working_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pumps.
+
+            Returns:
+            str: A string containing information about pumps.
+
+            """
+            TOTAL_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_on']))
+            TOTAL_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_on']))
+            TOTAL_WORKING_ALL_GROUPS = TOTAL_WORKING_GROUP_A + TOTAL_WORKING_GROUP_B
+            print(TOTAL_WORKING_GROUP_A, TOTAL_WORKING_GROUP_B, flush=True)
+
+            return (
+                f"مَعْلُومَاتُ ٱلْمَضَخَّاتِ:\n"
+                f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَحَطَّةِ مَرْكَزِ ٱلْمَدِينَةِ : {TOTAL_WORKING_ALL_GROUPS} مُضَخَّة\n"
+                f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_WORKING_GROUP_A} مُضَخَّة\n"
+                f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_WORKING_GROUP_B} مُضَخَّة\n"
+            )
+        
+        @staticmethod
+        def return_not_working_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pumps.
+
+            Returns:
+            str: A string containing information about pumps.
+            
+            """
+            TOTAL_NOT_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_off']))
+            TOTAL_NOT_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_off']))
+            TOTAL_NOT_WORKING_ALL_GROUPS = TOTAL_NOT_WORKING_GROUP_A + TOTAL_NOT_WORKING_GROUP_B
+
+            return (
+                f"معلومات المضخات:\n"
+                f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ الغير ٱلْعَامِلَةِ فِي مَحَطَّةِ مَرْكَزِ ٱلْمَدِينَةِ : {TOTAL_NOT_WORKING_ALL_GROUPS} مضخات\n"
+                f"عدد المضخات الغير عاملة في مجموعة ا: {TOTAL_NOT_WORKING_GROUP_A} مضخة\n"
+                f"عدد المضخات الغير عاملة في مجموعة ب: {TOTAL_NOT_WORKING_GROUP_B} مضخة\n"
+            )
+        
+        @staticmethod
+        def return_group_a_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about group A pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about group A pumps.
+
+            Returns:
+            str: A string containing information about group A pumps.
+            """
+            TOTAL_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_on']))
+            TOTAL_NOT_WORKING_GROUP_A = int(float(parsed_data['pumps_ga_off']))
+
+            return (
+                f"مَعْلُومَاتُ ٱلْمَضَخَّاتِ فِي مَجْمُوعَةِ أ:\n"
+                f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_WORKING_GROUP_A} مُضَخَّة\n"
+                f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْغَيْرِ عَامِلَةِ فِي مَجْمُوعَةِ أ: {TOTAL_NOT_WORKING_GROUP_A} مُضَخَّة\n"
+                    )
+        
+        @staticmethod
+        def return_group_b_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about group B pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about group B pumps.
+
+            Returns:
+            str: A string containing information about group B pumps.
+            """
+            TOTAL_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_on']))
+            TOTAL_NOT_WORKING_GROUP_B = int(float(parsed_data['pumps_gb_off']))
+
+            return (
+                    f"مَعْلُومَاتُ ٱلْمَضَخَّاتِ فِي مَجْمُوعَةِ ب:\n"
+                    f"إِجْمَاليُّ عَدَدِ ٱلْمَضَخَّاتِ ٱلْعَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_WORKING_GROUP_B} مُضَخَّة\n"
+                    f"عَدَدُ ٱلْمَضَخَّاتِ ٱلْغَيْرِ عَامِلَةِ فِي مَجْمُوعَةِ ب: {TOTAL_NOT_WORKING_GROUP_B} مُضَخَّة\n"
+                )
+        
+
+
+
+        @staticmethod
+        def return_sump_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about the sump based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the sump.
+
+            Returns:
+            str: A string containing information about the sump.
+            """
+            return (
+                f"مَعْلُومَاتُ مَجْمَعِ ٱلْمِيَاهِ :\n"
+                f"نِسْبَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ: {int(float(parsed_data['sump_a_percentage']))} % \n"
+                f"نِسْبَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب: {int(float(parsed_data['sump_b_percentage']))} % \n"
+                f"قِيمَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ: {int(float(parsed_data['sump_a_level']))} أَمْتَار\n"
+                f"قِيمَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب: {int(float(parsed_data['sump_b_level']))} أَمْتَار\n\n"
+                f"مُتَوَسِّطُ نِسْبَةِ مَجْمَعَاتِ ٱلْمِيَاهِ : {int(float(parsed_data['sump_level_average_percentage']))} % \n"
+                f"مُتَوَسِّطُ قِيمَةِ مَجْمَعَاتِ ٱلْمِيَاهِ : {int(float(parsed_data['sump_level_average']))} % \n"
+            )
+
+
+        
+        @staticmethod
+        def return_group_a_sumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about group A pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about group A sumps.
+
+            Returns:
+            str: A string containing information about group A sumps.
+            """
+
+            return (
+                f"مَعْلُومَاتُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ:\n"
+                f"نِسْبَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ: {int(float(parsed_data['sump_a_percentage']))} % \n"
+                f"قِيمَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ أ: {int(float(parsed_data['sump_a_level']))} أَمْتَار\n"
+            )
+        
+        @staticmethod
+        def return_group_b_sumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about group B pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about group B sumps.
+
+            Returns:
+            str: A string containing information about group B sumps.
+            """
+
+            return (
+                f"مَعْلُومَاتُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب:\n"
+                f"نِسْبَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب: {int(float(parsed_data['sump_b_percentage']))} % \n"
+                f"قِيمَةُ مَجْمَعِ ٱلْمِيَاهِ فِي مَجْمُوعَةِ ب: {int(float(parsed_data['sump_a_level']))} أَمْتَار\n"
+            )
+        
+        @staticmethod
+        def return_last_operation_pumps_info(parsed_data: dict) -> str:
+            """
+            Generate and return information about pumps based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about pumps.
+
+            Returns:
+            str: A string containing information about pumps.
+
+            """
+            last_operation_date_str = parsed_data['last_operation_pumps']  
+            last_operation_date = datetime.strptime(last_operation_date_str, "%d/%m/%Y") 
+
+            pump1_GROUP_A = int(float(parsed_data['pump1a_last_operation']))
+            pump2_GROUP_A = int(float(parsed_data['pump2a_last_operation']))
+            pump3_GROUP_A = int(float(parsed_data['pump3a_last_operation']))
+            pump4_GROUP_A = int(float(parsed_data['pump4a_last_operation']))
+            pumps1_GROUP_B = int(float(parsed_data['pump1b_last_operation']))
+            pumps2_GROUP_B = int(float(parsed_data['pump2b_last_operation']))
+            pumps3_GROUP_B = int(float(parsed_data['pump3b_last_operation']))
+            pumps4_GROUP_B = int(float(parsed_data['pump4b_last_operation']))
+        
+
+            return (
+                f"اخر عمليات تشغيل لمضخات المجموعه الاولي :\n"
+                f"اخر عمليه تشغيل للمضخه الاولي بتاريخ: {pump1_GROUP_A , last_operation_date.strftime('%d/%m/%Y')} مُضَخَّة\n"
+                f"اخر عمليه تشغيل للمضخه الثانيه بتاريخ: {pump2_GROUP_A , last_operation_date.strftime('%d/%m/%Y')} مُضَخَّة\n"
+                f"اخر عمليه تشغيل للمضخه الثالثه بتاريخ: {pump3_GROUP_A , last_operation_date.strftime('%d/%m/%Y')} مُضَخَّة\n"
+                f"اخر عمليه تشغيل للمضخه الرابعه بتاريخ: {pump4_GROUP_A , last_operation_date.strftime('%d/%m/%Y')} مُضَخَّة\n"
+                f"اخر عمليات تشغيل لمضخات المجموعه الثانيه :\n"
+                f"اخر عمليه تشغيل للمضخه الاولي بتاريخ: {pumps1_GROUP_B , last_operation_date.strftime('%d/%m/%Y')} مُضَخَّة\n"
+                f"اخر عمليه تشغيل للمضخه الثانيه بتاريخ: {pumps2_GROUP_B , last_operation_date.strftime('%d/%m/%Y')} مُضَخَّة\n"
+                f"اخر عمليه تشغيل للمضخه الثالثه بتاريخ: {pumps3_GROUP_B , last_operation_date.strftime('%d/%m/%Y')} مُضَخَّة\n"
+                f"اخر عمليه تشغيل للمضخه الرابعه بتاريخ: {pumps4_GROUP_B , last_operation_date.strftime('%d/%m/%Y')} مُضَخَّة\n"
+            )
+        
+
+        @staticmethod
+        def return_station_report(parsed_data: dict) -> str:
+            """
+            Generate and return station report based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the station.
+
+            Returns:
+            str: A string containing the station report.
+            """
+            report = ""
+
+            report += southinvConfigurator.Home.return_working_transformers_info(parsed_data)
+            report += southinvConfigurator.Home.return_working_generators_info(parsed_data)
+            report += southinvConfigurator.Home.return_working_electrical_info(parsed_data)
+            report += southinvConfigurator.Home.return_working_pumps_info(parsed_data)
+            report += southinvConfigurator.Home.return_sump_info(parsed_data)
+            report += southinvConfigurator.Home.return_station_flow(parsed_data)
+            report += southinvConfigurator.Home.return_flow_per_month(parsed_data)
+            report += southinvConfigurator.Home.return_flow_per_day(parsed_data)
+            report += southinvConfigurator.Home.return_last_operation_pumps_info(parsed_data)
+            return report
+        
+        @staticmethod
+        def return_system_status_info(parsed_data: dict) -> str:
+
+            """
+            Generate and return system status information based on the provided parsed data.
+
+            Args:
+            parsed_data (dict): A dictionary containing parsed data about the system status.
+
+            Returns:
+            str: A string containing system status information.
+            """
+            return (
+                f"معلومات الانظاارت:\n"
+            # f"حالة نظام النقل التلقائي: {int(float(parsed_data['ats_status']))} %\n"
+                f"{'يوجد' if int(float(parsed_data['electrical_alarm'])) else 'لا يوجد'} إنذار كهربائي\n\n"
+                f"{'يوجد' if int(float(parsed_data['pumps_alarm'])) else 'لا يوجد'} إنذار مضخات\n\n"
+                f"{'يوجد' if int(float(parsed_data['valves_alarm'])) else 'لا يوجد'} إنذار محابس\n\n"
+                f"{'يوجد' if int(float(parsed_data['hammer_alarm'])) else 'لا يوجد'} إنذار في المطرقة\n\n"
+            )
+        

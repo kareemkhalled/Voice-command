@@ -17,7 +17,7 @@ from ems_zeta_voice.aichains import ChainClassifier
 from ems_zeta_voice.aichains import DateExtractionChain
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, UploadFile, Response, Form
-from ems_zeta_voice.config import StationTwoConfigurator, StationFourConfigurator, StationInvConfigurator, StationFiveConfigurator, SuezMedicalComplexConfigurator, CommonConfigurator
+from ems_zeta_voice.config import StationTwoConfigurator, StationFourConfigurator, StationInvConfigurator, StationFiveConfigurator, SuezMedicalComplexConfigurator,citycenterConfigurator,southinvConfigurator, CommonConfigurator
     
 
 load_dotenv()
@@ -48,6 +48,8 @@ station_three_collection = db.connect_to_mongodb(db_uri, db_name, '3')
 station_four_collection = db.connect_to_mongodb(db_uri, db_name, '4')
 station_five_collection = db.connect_to_mongodb(db_uri, db_name, '5')
 station_inv_collection = db.connect_to_mongodb(db_uri, db_name, 'sewage-station-investors-ext')
+city_center_collection = db.connect_to_mongodb(db_uri, db_name, 'sewage-station-citycenter')
+south_investors_collection = db.connect_to_mongodb(db_uri, db_name, 'sewage-station-south-investors')
 suez_medical_complex_collection = db.connect_to_mongodb(db_uri,db_name, 'smc')
 
 voice_handler = VoiceHandler(language="ar", mode=args.mode)
@@ -60,7 +62,7 @@ date_classifier = ChainClassifier(classes=['date', 'no_date'], descriptions="If 
 date_extraction = DateExtractionChain(date=str(datetime.now().strftime("%Y-%m-%d")), day=str(datetime.now().strftime("%A"))
                                        ,llm=ChatOpenAI, llm_kwds={}).init_chain()
 
-station_classifier = ChainClassifier(classes=['2', '3', '4', '5', 'sewage-station-investors-ext','smc'], 
+station_classifier = ChainClassifier(classes=['2', '3', '4', '5', 'sewage-station-investors-ext','smc','sewage-station-citycenter','sewage-station-south-investors'], 
                                      descriptions="""Return '2' when asking about station two of water station two.
                                      Return '3' when asking about station two of water station three.
                                      Return '4' when asking about station two of water station four.
@@ -68,6 +70,8 @@ station_classifier = ChainClassifier(classes=['2', '3', '4', '5', 'sewage-statio
                                      Return '5' when asking about station two of water station five.
                                      Return 'sewage-station-investors-ext' when asking about station
                                      'الامتداد' or 'المستثمرين' of sewage 'الصرف' station two. 
+                                     Return 'sewage-station-citycenter' when asking about station 'مركز المدينه' of sewage 'الصرف' station.
+                                     Return 'sewage-station-south-investors' when asking about station 'جنوب المستثمرين' of sewage 'الصرف' station.
                                      Return 'current' if the station number is not determined in the input""",
                                      llm=ChatOpenAI, llm_kwds={}).init_chain()
 
@@ -386,7 +390,9 @@ suez_medical_complex_classifier = ChainClassifier(
           "monthlyenergy_chiller4","in-Patients","out-Patients","monthlycost_chillers","main_return_temp",
           "main_supply_temp","chiller1_maintenance_hours","chiller2_maintenance_hours","chiller3_maintenance_hours","chiller4_maintenance_hours",
           "chiller1_maintenance_days","chiller2_maintenance_days","chiller3_maintenance_days","chiller4_maintenance_days","chillers_maintenance_information",
-          "chiller1_op_hours","chiller2_op_hours","chiller3_op_hours","chiller4_op_hours"
+          "monthlycost_chiller1","monthlycost_chiller2","monthlycost_chiller3","monthlycost_chiller4",
+          
+          
           #Update 3
           "daily_index", "yearly_index","monthly_index","random_MVSG_2_energy","random_MVSG_3_energy","updated_at",  "gen2_status", 
           "gen2_engine_runtime", "gen2_solar", "gen2_last_op",  "index","gen2_bv","gen2_volt","gen2_curr","gen2_energy",
@@ -483,8 +489,8 @@ suez_medical_complex_classifier = ChainClassifier(
             عند السؤال عن حجم المياه او سعه المياه في الغلايه  الثانيه او حجم او سعه المياه في الغلايه رقم 2 ، ارجع 'Hospital_Boiler_2_Hot_Water_Volume'.  
             عند السؤال عن الغاز المستهلك للغلايه الثانيه شهريا او الغاز المستهلك للغلايه رقم 2 شهريا ، ارجع 'Hospital_Boiler_2_Gas_Consumption_Month'.  
             عند السؤال عن تكلفه الغاز المستهلك للغلايه الثانيه شهريا او تكلفه الغاز المستهلك للغلايه رقم 2 شهريا ، ارجع 'Hospital_Boiler_2_Gas_Invoice_Month'.
-            عند السؤال عن اخر عمليه تشغيل للغلايه الاولي ، ارجع 'Last_Operation_Boiler1'.
-            عند السؤال عن اخر عمليه تشغيل للغلايه الثانيه ، ارجع 'Last_Operation_Boiler2'.
+            عند السؤال عن اخر عمليه تشغيل للغلايه الاولي  او عمليه التشغيل الاخيره للغلايه رقم 1  ، ارجع 'Last_Operation_Boiler1'.
+            عند السؤال عن اخر عمليه تشغيل للغلايه الثانيه او  عمليه التشغيل الاخيره للغلايه رقم 2 ، ارجع 'Last_Operation_Boiler2'.
 
 #pumps      
 
@@ -500,28 +506,33 @@ suez_medical_complex_classifier = ChainClassifier(
 #chillers
 
             عند السؤال عن عدد ساعات صيانه المبرد الاول ، ارجع 'chiller1_maintenance_hours'.
-            عند السؤال عن عدد ساعات صيانه المبرد الثاني ، ارجع 'chiller2_maintenance_hours'.
-            عند السؤال عن عدد ساعات صيانه المبرد الثالث ، ارجع 'chiller3_maintenance_hours'.
-            عند السؤال عن عدد ساعات صيانه المبرد الرابع ، ارجع 'chiller4_maintenance_hours'.
-            عند السؤال عن عدد ايام صيانه المبرد الرابع ، ارجع 'chiller1_maintenance_days'.
-            عند السؤال عن عدد ايام صيانه المبرد الرابع ، ارجع 'chiller2_maintenance_days'.
-            عند السؤال عن عدد ايام صيانه المبرد الرابع ، ارجع 'chiller3_maintenance_days'.
-            عند السؤال عن عدد ايام صيانه المبرد الرابع ، ارجع 'chiller4_maintenance_days'.
+            عند السؤال عن عدد ساعات التشغيل المتبقيه لصيانه المبرد الاول ، ارجع 'chiller1_maintenance_days'.
             عند السؤال عن حاله المبرد الاول او حاله المبرد رقم 1 ، ارجع 'chiller1_status'.
-            عند السؤال عن حاله المبرد الثاني او حاله المبرد رقم 2 ، ارجع 'chiller2_status'.
+            عند السؤال عن عدد ساعات تشغيل المبرد الاول، ارجع 'chiller1_op_hours'.
+            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الاول او التكلفه الشهريه للمبرد الاول او التكلفه الشهريه للمبرد رقم 1 ، ارجع 'monthlycost_chiller1'.
+            عند السؤال عن استهلاك الكهرباء الشهري للمبرد الاول او الاستهلاك الشهري للكهرباء للمبرد الاول ، ارجع 'monthlyenergy_chiller1'.
+            عند السؤال عن عدد ساعات التشغيل المتبقيه لصيانه المبرد الثاني ، ارجع 'chiller2_maintenance_hours'.
+            عند السؤال عن عدد  ايام التشغيل المتبقيه لصيانه المبرد الثاني ، ارجع 'chiller2_maintenance_days'.
+            عند السؤال عن حاله المبرد الثاني او حاله المبرد رقم  2 ، ارجع 'chiller2_status'.
+            عند السؤال عن عدد ساعات تشغيل المبرد الثاني ، ارجع 'chiller2_op_hours'.
+            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الثاني او التكلفه الشهريه للمبرد الثاني او التكلفه الشهريه للمبرد رقم 2 ، ارجع 'monthlycost_chiller2'.
+            عند السؤال عن استهلاك الكهرباء الشهري للمبرد الثاني الاستهلاك الشهري للكهرباء للمبرد الثاني ، ارجع 'monthlyenergy_chiller2'.
+            عند السؤال عن  عدد ساعات التشغيل المتبقيه لصيانه المبرد الثالث ، ارجع 'chiller3_maintenance_hours'.
+            عند السؤال عن عدد  ايام التشغيل المتبقيه لصيانه المبرد الثالث ، ارجع 'chiller3_maintenance_days'.
             عند السؤال عن حاله المبرد الثالث او حاله المبرد رقم 3 ، ارجع 'chiller3_status'.
+            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الثالث او التكلفه الشهريه للمبرد الثالث او التكلفه الشهريه للمبرد رقم 3 ، ارجع 'monthlycost_chiller3'.
+            عند السؤال عن استهلاك الكهرباء الشهري للمبرد الثالث الاستهلاك الشهري للكهرباء للمبرد الثالث ، ارجع 'monthlyenergy_chiller3'.
+            عند السؤال عن عدد ساعات تشغيل المبرد الثالث ، ارجع 'chiller3_op_hours'.         
+            عند السؤال عن  عدد ساعات التشغيل المتبقيه لصيانه المبرد الرابع ، ارجع 'chiller4_maintenance_hours'.
+            عند السؤال عنعدد  ايام التشغيل المتبقيه لصيانه المبرد الرابع ، ارجع 'chiller4_maintenance_days'.
             عند السؤال عن حاله المبرد الرابع او حاله المبرد رقم 4 ، ارجع 'chiller4_status'.
+            عند السؤال عن عدد ساعات تشغيل المبرد الرابع ، ارجع 'chiller4_op_hours'.
+            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الرابع او التكلفه الشهريه للمبرد الرابع او التكلفه الشهريه للمبرد رقم 4 ، ارجع 'monthlycost_chiller4'.
+            عند السؤال عن استهلاك الكهرباء الشهري للمبرد الرابع الاستهلاك الشهري للكهرباء للمبرد الرابع ، ارجع 'monthlyenergy_chiller4'.
             عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chillers_op_hours'.
-            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chiller1_op_hours'.
-            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chiller2_op_hours'.
-            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chiller3_op_hours'.
-            عند السؤال عن عدد ساعات تشغيل جميع المبردات في المجمع ، ارجع 'chiller4_op_hours'.
             عند السؤال صيانه المبردات بشكل عام او متبقي علي صيانه المبردات ، ارجع 'chillers_maintenance_information'.
             عند السؤال عن التكلفه الشهريه  لي نظام المبردات او التكلفه الشهريه للتكيفات او تكلفه المبردات الشهريه ، ارجع 'monthlycost_chillers'.
-            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الاول او التكلفه الشهريه للمبرد الاول او التكلفه الشهريه للمبرد رقم 1 ، ارجع 'monthlyenergy_chiller1'.
-            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الثاني او التكلفه الشهريه للمبرد الثاني او التكلفه الشهريه للمبرد رقم 2 ، ارجع 'monthlyenergy_chiller2'.
-            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الثالث او التكلفه الشهريه للمبرد الثالث او التكلفه الشهريه للمبرد رقم 3 ، ارجع 'monthlyenergy_chiller3'.
-            عند السؤال عن تكلفه الكهرباء الشهريه للمبرد الرابع او التكلفه الشهريه للمبرد الرابع او التكلفه الشهريه للمبرد رقم 4 ، ارجع 'monthlyenergy_chiller4'.
+
 
 
 
@@ -674,20 +685,15 @@ suez_medical_complex_mapper ={
     'total_complex_nurse': SuezMedicalComplexConfigurator.Home.total_complex_nurse_info,
     'any_alarm': SuezMedicalComplexConfigurator.Home.any_alarm_info,
 #chillers
-
-    'chiller1_maintenance_hours': SuezMedicalComplexConfigurator.chiller1_maintenance_hours_info,
-    'chiller2_maintenance_hours': SuezMedicalComplexConfigurator.chiller2_maintenance_hours_info,
-    'chiller3_maintenance_hours': SuezMedicalComplexConfigurator.chiller3_maintenance_hours_info,
-    'chiller4_maintenance_hours': SuezMedicalComplexConfigurator.chiller4_maintenance_hours_info,
-    'chiller1_maintenance_hours': SuezMedicalComplexConfigurator.chiller1_maintenance_days_info,
-    'chiller2_maintenance_hours': SuezMedicalComplexConfigurator.chiller2_maintenance_days_info,
-    'chiller3_maintenance_hours': SuezMedicalComplexConfigurator.chiller3_maintenance_days_info,
-    'chiller4_maintenance_hours': SuezMedicalComplexConfigurator.chiller4_maintenance_days_info,
-    'chillers_maintenance_information': SuezMedicalComplexConfigurator.chillers_maintenance_information_info,
-    'chiller1_op_hours': SuezMedicalComplexConfigurator.chiller1_op_hours_info,
-    'chiller2_op_hours': SuezMedicalComplexConfigurator.chiller2_op_hours_info,
-    'chiller3_op_hours': SuezMedicalComplexConfigurator.chiller3_op_hours_info,
-    'chiller4_op_hours': SuezMedicalComplexConfigurator.chiller4_op_hours_info,
+    'chiller1_maintenance_days': SuezMedicalComplexConfigurator.Home.chiller1_maintenance_days_info,
+    'chiller2_maintenance_days': SuezMedicalComplexConfigurator.Home.chiller2_maintenance_days_info,
+    'chiller3_maintenance_days': SuezMedicalComplexConfigurator.Home.chiller3_maintenance_days_info,
+    'chiller4_maintenance_days': SuezMedicalComplexConfigurator.Home.chiller4_maintenance_days_info,
+    'chiller1_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller1_maintenance_hours_info,
+    'chiller2_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller2_maintenance_hours_info,
+    'chiller3_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller3_maintenance_hours_info,
+    'chiller4_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller4_maintenance_hours_info,
+    'chillers_maintenance_information': SuezMedicalComplexConfigurator.Home.chillers_maintenance_information_info,
 
     'complex_Occupancy_Rate': SuezMedicalComplexConfigurator.Home.return_Beds_occupancy_rate_info,
     'Inpatient_Beds_used_monthly': SuezMedicalComplexConfigurator.Home.return_Inpatient_Beds_used_info,
@@ -821,13 +827,13 @@ suez_medical_complex_mapper ={
     'out_Patients': SuezMedicalComplexConfigurator.Home.out_Patients_info,
     'out_Patients_hospital': SuezMedicalComplexConfigurator.Home.out_Patients_hospital_info,
     'every_department': SuezMedicalComplexConfigurator.Home.every_department_info,
-    'monthlycost_chillers': SuezMedicalComplexConfigurator.Home.monthlycost_chillers_cost_info,
+    'monthlycost_chillers': SuezMedicalComplexConfigurator.Home.monthlycost_chillers_info,
+    'monthlycost_chiller1': SuezMedicalComplexConfigurator.Home.monthlycost_chiller1_info,
+    'monthlycost_chiller2': SuezMedicalComplexConfigurator.Home.monthlycost_chiller2_info,
+    'monthlycost_chiller3': SuezMedicalComplexConfigurator.Home.monthlycost_chiller3_info,
+    'monthlycost_chiller4': SuezMedicalComplexConfigurator.Home.monthlycost_chiller4_info,
     'main_temp': SuezMedicalComplexConfigurator.Home.main_temp_info,
     'main_supply_temp': SuezMedicalComplexConfigurator.Home.main_supply_temp_info,
-    'chiller1_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller1_maintenance_hours_info,
-    'chiller2_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller2_maintenance_hours_info,
-    'chiller3_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller3_maintenance_hours_info,
-    'chiller4_maintenance_hours': SuezMedicalComplexConfigurator.Home.chiller4_maintenance_hours_info,
     #Update 3
     'daily_index': SuezMedicalComplexConfigurator.Home.daily_index_info,
     'yearly_index': SuezMedicalComplexConfigurator.Home.yearly_index_info,
@@ -879,13 +885,152 @@ suez_medical_complex_mapper ={
     'other': CommonConfigurator.return_other_message
 
 }
+city_center_classifier = ChainClassifier(classes=['transformers', 'working_transformers', 'not_working_transformers'
+                                , 'generator', 'working_generator', 'not_working_generator', 'electrical'
+                                , 'working_electrical', 'not_working_electrical', 'warnings_status', 'working_pumps', 'pumps'
+                                , 'not_working_pumps', 'group_a_pumps', 'group_b_pumps', 'flow_rate1', 'flow_rate2', 'pressure_l1'
+                                , 'pressure_l2', 'station_flow_rate', 'sump_a', 'sump_b','flow_per_day','flow_per_month', 'report', 'zeeta', 'other']
+
+                                , descriptions="""
+                                عند السؤال بشكل عام عن المحولات، أرجع 'transformers'.
+                                عند السؤال عن المحولات التي تعمل فقط في المحطة، أرجع 'working_transformers'.
+                                عند السؤال عن المحولات التي لا تعمل فقط، أرجع 'not_working_transformers'.
+                                عند السؤال بشكل عام عن المولدات، أرجع 'generator'.
+                                عند السؤال عن المولدات التي تعمل فقط، أرجع 'working_generator'.
+                                عند السؤال عن المولدات التي لا تعمل فقط، أرجع 'not_working_generator'.
+                                عند السؤال عن اللوحات الكهربائية بشكل عام، أرجع 'electrical'.
+                                عند السؤال عن اللوحات الكهربائية التي تعمل فقط، أرجع 'working_electrical'.
+                                عند السؤال عن اللوحات الكهربائية التي لا تعمل فقط، أرجع 'not_working_electrical'.
+                                عند السؤال عن المضخات بشكل عام، أرجع 'pumps'.
+                                عند السؤال عن المضخات التي تعمل فقط، أرجع 'working_pumps'.
+                                عند السؤال عن المضخات التي لا تعمل فقط، أرجع 'not_working_pumps'.
+                                عند السؤال عن مضخات المجموعة (أ) أو (ا)، أرجع 'group_a_pumps'.
+                                عند السؤال عن مضخات المجموعة (ب) أو (ب)، أرجع 'group_b_pumps'.
+                                عند السؤال عن معدل التدفق في المحطة، أرجع 'station_flow_rate'.
+                                عند السؤال عن معدل التدفق اليومي للمياه في المحطة، أرجع 'flow_per_day'.
+                                عند السؤال عن معدل التدفق الشهري للمياه في المحطة، أرجع 'flow_per_month'.
+                                عند السؤال عن التدفق في الخط 1، أرجع 'flow_rate1'.
+                                عند السؤال عن التدفق في الخط 2، أرجع 'flow_rate2'.
+                                عند السؤال عن الضغط في الخط 1، أرجع 'pressure_l1'.
+                                عند السؤال عن الضغط في الخط 2، أرجع 'pressure_l2'.
+                                عند السؤال عن مجمع المياه (أ)، أرجع 'sump_a'.
+                                عند السؤال عن مجمع المياه (ب)، أرجع 'sump_b'.
+                                عند السؤال عن حالة الإنذارات في المحطة، أرجع 'warnings_status'.
+                                عند السؤال عن تقرير حول المحطة أو جميع معلومات المحطة، أرجع 'report'.
+                                """
+                                , llm=ChatOpenAI, llm_kwds={}).init_chain()
+
+
+
+city_center_mapper = {
+    'transformers': citycenterConfigurator.Home.return_transformers_info,
+    'working_transformers': citycenterConfigurator.Home.return_working_transformers_info,
+    'not_working_transformers': citycenterConfigurator.Home.return_not_working_transformers_info,
+    'generator': citycenterConfigurator.Home.return_generators_info,
+    'working_generator': citycenterConfigurator.Home.return_working_generators_info,
+    'not_working_generator': citycenterConfigurator.Home.return_not_working_generators_info,
+    'electrical': citycenterConfigurator.Home.return_electrical_info,
+    'working_electrical': citycenterConfigurator.Home.return_working_electrical_info,
+    'not_working_electrical': citycenterConfigurator.Home.return_not_working_electrical_info,
+    'warnings_status': citycenterConfigurator.Home.return_system_status_info,
+    'working_pumps': citycenterConfigurator.Home.return_working_pumps_info,
+    'pumps': citycenterConfigurator.Home.return_pump_info,
+    'not_working_pumps': citycenterConfigurator.Home.return_not_working_pumps_info,
+    'group_a_pumps': citycenterConfigurator.Home.return_group_a_pumps_info,
+    'group_b_pumps': citycenterConfigurator.Home.return_group_b_pumps_info,
+    'flow_rate1': citycenterConfigurator.Home.flow_L1,
+    'flow_rate2': citycenterConfigurator.Home.flow_L2,
+    'flow_per_day': citycenterConfigurator.Home.return_flow_per_day,
+    'flow_per_month': citycenterConfigurator.Home.return_flow_per_month,
+    'pressure_l1': citycenterConfigurator.Home.pressure_L1,
+    'pressure_l2': citycenterConfigurator.Home.pressure_L2,
+    'station_flow_rate': citycenterConfigurator.Home.return_station_flow,
+    'sump_a': citycenterConfigurator.Home.return_group_a_sumps_info,
+    'sump_b': citycenterConfigurator.Home.return_group_b_sumps_info,
+    'report': citycenterConfigurator.Home.return_station_report,
+    'zeeta': CommonConfigurator.zeeta_info, 
+    'other': CommonConfigurator.return_other_message
+}
+
+
+south_investors_classifier = ChainClassifier(classes=['transformers', 'working_transformers', 'not_working_transformers'
+                                , 'generator', 'working_generator', 'not_working_generator', 'electrical'
+                                , 'working_electrical', 'not_working_electrical', 'warnings_status', 'working_pumps', 'pumps'
+                                , 'not_working_pumps', 'group_a_pumps', 'group_b_pumps', 'flow_rate1', 'flow_rate2', 'pressure_l1'
+                                , 'pressure_l2', 'station_flow_rate', 'sump_a', 'sump_b','flow_per_day','flow_per_month', 'last_operation_pumps','report', 'zeeta', 'other']
+
+                                , descriptions="""
+                                عند السؤال بشكل عام عن المحولات، أرجع 'transformers'.
+                                عند السؤال عن المحولات التي تعمل فقط في المحطة، أرجع 'working_transformers'.
+                                عند السؤال عن المحولات التي لا تعمل فقط، أرجع 'not_working_transformers'.
+                                عند السؤال بشكل عام عن المولدات، أرجع 'generator'.
+                                عند السؤال عن المولدات التي تعمل فقط، أرجع 'working_generator'.
+                                عند السؤال عن المولدات التي لا تعمل فقط، أرجع 'not_working_generator'.
+                                عند السؤال عن اللوحات الكهربائية بشكل عام، أرجع 'electrical'.
+                                عند السؤال عن اللوحات الكهربائية التي تعمل فقط، أرجع 'working_electrical'.
+                                عند السؤال عن اللوحات الكهربائية التي لا تعمل فقط، أرجع 'not_working_electrical'.
+                                عند السؤال عن المضخات بشكل عام، أرجع 'pumps'.
+                                عند السؤال عن المضخات التي تعمل فقط، أرجع 'working_pumps'.
+                                عند السؤال عن المضخات التي لا تعمل فقط، أرجع 'not_working_pumps'.
+                                عند السؤال عن مضخات المجموعة (أ) أو (ا)، أرجع 'group_a_pumps'.
+                                عند السؤال عن مضخات المجموعة (ب) أو (ب)، أرجع 'group_b_pumps'.
+                                عند السؤال عن معدل التدفق في المحطة، أرجع 'station_flow_rate'.
+                                عند السؤال عن معدل التدفق اليومي للمياه في المحطة، أرجع 'flow_per_day'.
+                                عند السؤال عن معدل التدفق الشهري للمياه في المحطة، أرجع 'flow_per_month'.
+                                عند السؤال عن التدفق في الخط 1، أرجع 'flow_rate1'.
+                                عند السؤال عن التدفق في الخط 2، أرجع 'flow_rate2'.
+                                عند السؤال عن الضغط في الخط 1، أرجع 'pressure_l1'.
+                                عند السؤال عن الضغط في الخط 2، أرجع 'pressure_l2'.
+                                عند السؤال عن مجمع المياه (أ)، أرجع 'sump_a'.
+                                عند السؤال عن مجمع المياه (ب)، أرجع 'sump_b'.
+                                عند السؤال عن حالة الإنذارات في المحطة، أرجع 'warnings_status'.
+                                عند السؤال عن اخر عمليات تشغيل للمضخات، أرجع 'last_operation_pumps'.
+                                عند السؤال عن تقرير حول المحطة أو جميع معلومات المحطة، أرجع 'report'.
+                                """
+                                , llm=ChatOpenAI, llm_kwds={}).init_chain()
+
+
+south_investors_mapper = {
+    'transformers': southinvConfigurator.Home.return_last_operation_pumps_info,
+    'transformers': southinvConfigurator.Home.return_transformers_info,
+    'working_transformers': southinvConfigurator.Home.return_working_transformers_info,
+    'not_working_transformers': southinvConfigurator.Home.return_not_working_transformers_info,
+    'generator': southinvConfigurator.Home.return_generators_info,
+    'working_generator': southinvConfigurator.Home.return_working_generators_info,
+    'not_working_generator': southinvConfigurator.Home.return_not_working_generators_info,
+    'electrical': southinvConfigurator.Home.return_electrical_info,
+    'working_electrical': southinvConfigurator.Home.return_working_electrical_info,
+    'not_working_electrical': southinvConfigurator.Home.return_not_working_electrical_info,
+    'warnings_status': southinvConfigurator.Home.return_system_status_info,
+    'working_pumps': southinvConfigurator.Home.return_working_pumps_info,
+    'pumps': southinvConfigurator.Home.return_pump_info,
+    'not_working_pumps': southinvConfigurator.Home.return_not_working_pumps_info,
+    'group_a_pumps': southinvConfigurator.Home.return_group_a_pumps_info,
+    'group_b_pumps': southinvConfigurator.Home.return_group_b_pumps_info,
+    'flow_rate1': southinvConfigurator.Home.flow_L1,
+    'flow_rate2': southinvConfigurator.Home.flow_L2,
+    'flow_per_day': southinvConfigurator.Home.return_flow_per_day,
+    'flow_per_month': southinvConfigurator.Home.return_flow_per_month,
+    'pressure_l1': southinvConfigurator.Home.pressure_L1,
+    'pressure_l2': southinvConfigurator.Home.pressure_L2,
+    'station_flow_rate': southinvConfigurator.Home.return_station_flow,
+    'sump_a': southinvConfigurator.Home.return_group_a_sumps_info,
+    'sump_b': southinvConfigurator.Home.return_group_b_sumps_info,
+    'report': southinvConfigurator.Home.return_station_report,
+    'zeeta': CommonConfigurator.zeeta_info, 
+    'other': CommonConfigurator.return_other_message
+}
+
+
 
 id_classifiers_mapper = {
     'smc': [suez_medical_complex_mapper, suez_medical_complex_classifier],
     '2': [station_two_data_mapper, station_two_classifier],
     '4': [station_four_data_mapper, station_four_classifier],
     '5': [station_five_data_mapper, station_five_classifier],
-    'sewage-station-investors-ext': [station_inv_data_mapper, station_inv_classifier]
+    'sewage-station-investors-ext': [station_inv_data_mapper, station_inv_classifier],
+    'sewage-station-citycenter': [city_center_mapper, city_center_classifier],
+    'sewage-station-south-investors': [south_investors_mapper, south_investors_classifier]
 }
 
 id_collections_mapper = {
@@ -893,7 +1038,9 @@ id_collections_mapper = {
     '2': station_two_collection,
     '4': station_four_collection,
     '5': station_five_collection,
-    'sewage-station-investors-ext': station_inv_collection
+    'sewage-station-investors-ext': station_inv_collection,
+    'sewage-station-citycenter': city_center_collection,
+    'sewage-station-south-investors': south_investors_collection
 }
 
 import asyncio
